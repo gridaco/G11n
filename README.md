@@ -1,4 +1,4 @@
-![](./branding/G11n-cover.png)
+![](./branding/g11n-cover-shaed.png)
 
 
 
