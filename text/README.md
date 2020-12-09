@@ -1,0 +1,1 @@
+# Text globalization (i18n extended)
