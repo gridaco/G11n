@@ -11,3 +11,8 @@ G11n, i18n, l10n support for bridged's internal system and as supporting other p
 ```
 yarn add @bridged.xyz/g11n
 ```
+
+
+## G11n for storybook
+
+- g11n as storybook addon for previewing localized texts / assets on components.
