@@ -41,8 +41,8 @@ export default function GamesDemoPage() {
   const demoName = router.query.name as string;
   const [demoUrl, setDemoUrl] = useState<string>(null);
 
-  const sizeKey = "embed_iphone_x_landscape";
-  const size = sizes[sizeKey];
+  const gameConfig = DEFAULT_GAMES_DEMO_REGISTRY[demoName];
+  const size = sizes[gameConfig?.device ?? "embed_iphone_x_landscape"];
 
   useEffect(() => {
     //
@@ -81,23 +81,23 @@ export default function GamesDemoPage() {
 
 const sizes: { [key: string]: { width: number; height: number } } = {
   embed_iphone_x: {
-    width: 100,
-    height: 100,
+    width: 375,
+    height: 812,
   },
   embed_iphone_x_landscape: {
-    width: 1100,
-    height: 550,
+    width: 812,
+    height: 375,
   },
   embed_ipad_12_9: {
-    width: 100,
-    height: 100,
+    width: 1024,
+    height: 1366,
   },
   embed_ipad_12_9_landscape: {
-    width: 100,
-    height: 100,
+    width: 1366,
+    height: 1024,
   },
   embed_macbook: {
-    width: 100,
-    height: 100,
+    width: 1600,
+    height: 2400,
   },
 };
