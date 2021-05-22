@@ -5,7 +5,9 @@
         "deploy:prod": "sls deploy --stage production"
     },
     "dependencies": {
-        "aws-sdk": "^2.912.0"
+        "aws-sdk": "^2.912.0",
+        "dynamoose": "^2.7.3",
+        "nanoid": "^3.1.23"
     },
     "devDependencies": {
         "serverless-bundle": "^4.3.1",

@@ -4,7 +4,7 @@ plugins:
   - serverless-bundle
   # - serverless-dynamodb-local
   - serverless-offline
-  - serverless-domain-manager
+  # - serverless-domain-manager #Temporarily disabled.
 
 custom:
   customDomain:
@@ -24,6 +24,43 @@ provider:
     level: ERROR
   websocketsApiName: g11n-realtime-websockets-api
   websocketsApiRouteSelectionExpression: $request.body.action # custom routes are selected by the value of the action property in the body
+  environment:
+    AWS_NODEJS_CONNECTION_REUSE_ENABLED: "1"
+    DYNAMODB_SESSION_TABLE: "${self:service}-session-${opt:stage, self:provider.stage}"
+  WSConnectionRespondPolicy:
+    - Effect: Allow
+      Action:
+        - "execute-api:ManageConnections"
+        - "execute-api:Invoke"
+      Resource:
+        - “arn:aws:execute-api:us-west-1::**/@connections/”
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - dynamodb:Query
+        - dynamodb:Scan
+        - dynamodb:GetItem
+        - dynamodb:PutItem
+        - dynamodb:UpdateItem
+        - dynamodb:DeleteItem
+        - dynamodb:DescribeTable
+      Resource: "arn:aws:dynamodb:${opt:region, self:provider.region}:*:table/${self:provider.environment.DYNAMODB_SESSION_TABLE}"
+
+resources:
+  Resources:
+    globalizationsTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: "${self:provider.environment.DYNAMODB_KEY_TABLE}"
+        KeySchema:
+          - AttributeName: id
+            KeyType: HASH
+        AttributeDefinitions:
+          - AttributeName: id
+            AttributeType: S
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
 
 functions:
   connectHandler:

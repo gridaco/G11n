@@ -1,25 +1,9 @@
-import AWS from "aws-sdk";
-
-const sendMessageToClient = (url, connectionId, payload) =>
-  new Promise((resolve, reject) => {
-    const apigatewaymanagementapi = new AWS.ApiGatewayManagementApi({
-      apiVersion: "2018-11-29",
-      endpoint: url,
-    });
-    apigatewaymanagementapi.postToConnection(
-      {
-        ConnectionId: connectionId, // connectionId of the receiving ws-client
-        Data: JSON.stringify(payload),
-      },
-      (err, data) => {
-        if (err) {
-          console.log("err is", err);
-          reject(err);
-        }
-        resolve(data);
-      }
-    );
-  });
+import {
+  braodcastToSessionWith,
+  joinSession,
+  sendMessageToClient,
+  setEndpoint,
+} from "service";
 
 export const connectHandler = async (...props) => {
   console.log("connect", props);
@@ -36,12 +20,41 @@ export const disconnectHandler = async (...props) => {
 };
 
 export const defaultHandler = async (event, context) => {
-  console.log("event", event);
-  const domain = event.requestContext.domainName;
-  // const stage = event.requestContext.stage;
+  const stage =
+    event.requestContext.stage == "local" ? "dev" : event.requestContext.stage;
   const connectionId = event.requestContext.connectionId;
-  const callbackUrlForAWS = `https://${domain}`;
-  await sendMessageToClient(callbackUrlForAWS, connectionId, event);
+  const endpoint = `${"0vmxo5qnya"}.execute-api.${
+    process.env.AWS_REGION
+  }.amazonaws.com/${stage}`;
+  setEndpoint(endpoint);
+
+  const jsonBody: {
+    action: string;
+    appId: string;
+    data?: any;
+  } = JSON.parse(event.body);
+
+  switch (jsonBody.action) {
+    case "join-session":
+      await joinSession({
+        connectionId,
+        appId: jsonBody.appId,
+      });
+      break;
+    case "to-app/control":
+      await braodcastToSessionWith({
+        appId: jsonBody.appId,
+        event: jsonBody.data,
+      });
+      break;
+    case "to-editor/layer":
+      break;
+    case "to-app/layer-update":
+      break;
+    default:
+      await sendMessageToClient(connectionId, event);
+      break;
+  }
 
   return {
     statusCode: 200,
