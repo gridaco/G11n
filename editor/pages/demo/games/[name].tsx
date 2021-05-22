@@ -6,12 +6,25 @@ import { InnerEditorWorkspace } from "../../../sections/editor/inner-editor-work
 const DEFAULT_GAMES_DEMO_REGISTRY_BASE =
   "https://bridged-service-demo.s3-us-west-1.amazonaws.com/";
 
-const DEFAULT_GAMES_DEMO_REGISTRY = [
+/**
+ * games configuration
+ */
+const DEFAULT_GAMES_DEMO_REGISTRY: {
+  [key: string]: {
+    device: string;
+  };
+} = {
   // https://bridged-service-demo.s3-us-west-1.amazonaws.com/games-tanks-demo/index.html
-  "games-tanks-demo",
-  "games-dragon-crushers",
-  "games-endless-runner",
-];
+  "games-tanks-demo": {
+    device: "embed_ipad_12_9_landscape",
+  },
+  "games-dragon-crushers": {
+    device: "embed_ipad_12_9_landscape",
+  },
+  "games-endless-runner": {
+    device: "embed_iphone_x",
+  },
+};
 
 /**
  * e.g. "games-tanks-demo" -> "https://bridged-service-demo.s3-us-west-1.amazonaws.com/games-tanks-demo/index.html"
@@ -76,6 +89,10 @@ const sizes: { [key: string]: { width: number; height: number } } = {
     height: 550,
   },
   embed_ipad_12_9: {
+    width: 100,
+    height: 100,
+  },
+  embed_ipad_12_9_landscape: {
     width: 100,
     height: 100,
   },
