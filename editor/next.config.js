@@ -24,5 +24,9 @@ module.exports = withTM({
     // Important: return the modified config
     return config;
   },
+
+  /**
+   * https://console.bridged.xyz/globalization
+   */
   basePath: "/globalization",
 });
