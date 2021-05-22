@@ -8,5 +8,9 @@
         "homepage",
         "packages/*",
         "services/*"
-    ]
+    ],
+    "scripts": {
+        "editor": "yarn workspace editor run dev",
+        "homepage": "yarn workspace homepage run dev"
+    }
 }
