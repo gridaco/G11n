@@ -12,11 +12,11 @@ yarn add @bridged.xyz/g11n
 
 ## Project
 
-- g11n
-- editor
-- homepage
-- packages
-- services
+- [g11n](./g11n) (npm) - g11n core package
+- [editor](./editor) ([web](https://globalization-editor-mz.bridged.xyz/)) - g11n editor
+- [homepage](./homepage) ([web](https://globalization-homepage-mz.bridged.xyz/)) - g11n homepage
+- [packages](./packages) - general shared packages
+- [services](./services) - backend
 
 ## G11n for storybook
 
