@@ -1,5 +1,5 @@
 import React from "react";
-import Editor from "../sections/editor";
+import { InnerEditorWorkspace } from "../sections/editor/inner-editor-workspace";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { SceneLocalRepository, SceneRepositoryStore } from "../repositories";
@@ -11,6 +11,7 @@ import {
   DesignGlobalizationRepositoriesStore,
 } from "@bridged.xyz/base-sdk/lib/g11n/repository";
 import { DefaultScaffoldLayoyt } from "../layouts/default-layout";
+import { InnerStaticAppEditorWorkspace } from "../sections/editor/inner-static-app-editor-workspace";
 
 export default function Home() {
   const router = useRouter();
@@ -51,7 +52,10 @@ export default function Home() {
 
   return (
     <DefaultScaffoldLayoyt title={sceneRepository.scene.name}>
-      <Editor key={sceneRepository?.id} sceneId={sceneId} />
+      <InnerStaticAppEditorWorkspace
+        key={sceneRepository?.id}
+        sceneId={sceneId}
+      />
     </DefaultScaffoldLayoyt>
   );
 }

@@ -1,5 +1,7 @@
 import { useRouter } from "next/router";
 import React, { useEffect, useRef, useState } from "react";
+import { DefaultScaffoldLayoyt } from "../../../layouts/default-layout";
+import { InnerEditorWorkspace } from "../../../sections/editor/inner-editor-workspace";
 
 const DEFAULT_GAMES_DEMO_REGISTRY_BASE =
   "https://bridged-service-demo.s3-us-west-1.amazonaws.com/";
@@ -21,6 +23,7 @@ function buildDemoEmbedTargetUrl(demo: string): string {
 export default function GamesDemoPage() {
   const router = useRouter();
   const webglIframeRef = useRef(null);
+  const demoName = router.query.name as string;
   const [demoUrl, setDemoUrl] = useState<string>(null);
 
   const sizeKey = "embed_iphone_x_landscape";
@@ -39,21 +42,25 @@ export default function GamesDemoPage() {
 
     //
     // validate demo
-    const demoName = router.query.name as string;
     const demoSrcUrl = buildDemoEmbedTargetUrl(demoName);
     setDemoUrl(demoSrcUrl);
     //
   }, [webglIframeRef, router]);
 
   return (
-    <>
-      <iframe
-        ref={webglIframeRef}
-        src={demoUrl}
-        width={size.width}
-        height={size.height}
-      />
-    </>
+    <DefaultScaffoldLayoyt title={demoName ?? "Games demo"}>
+      <InnerEditorWorkspace
+        canvas={
+          <iframe
+            ref={webglIframeRef}
+            src={demoUrl}
+            width={size.width}
+            height={size.height}
+          />
+        }
+        editor={<></>}
+      ></InnerEditorWorkspace>
+    </DefaultScaffoldLayoyt>
   );
 }
 
