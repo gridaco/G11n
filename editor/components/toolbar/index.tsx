@@ -2,8 +2,8 @@ import React, { useMemo } from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
 
-import CodeRoundSVG from "../../assets/icons/mdi_code_round.svg";
-import LanguageRoundSVG from "../../assets/icons/mdi_language_round.svg";
+// import CodeRoundSVG from "../../assets/icons/mdi_code_round.svg";
+// import LanguageRoundSVG from "../../assets/icons/mdi_language_round.svg";
 import styled from "@emotion/styled";
 
 interface IToolbar {
@@ -27,13 +27,13 @@ const Toolbar: React.FC<IToolbar> = ({
             style={{ marginRight: 8 }}
             data-selected={isCodeSelected && "true"}
           >
-            <CodeRoundSVG />
+            {/* <CodeRoundSVG /> */}
             Code Editor
           </TabButton>
         </Link>
         <Link href={toGlobalization}>
           <TabButton data-selected={!isCodeSelected && "true"}>
-            <LanguageRoundSVG />
+            {/* <LanguageRoundSVG /> */}
             Language translation
           </TabButton>
         </Link>

@@ -1,6 +1,7 @@
 const withTM = require("next-transpile-modules")([
   "@reflect-ui/core",
   "@bridged.xyz/base-sdk",
+  //   "react-konva",
 ]);
 
 module.exports = withTM({
