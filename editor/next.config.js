@@ -24,4 +24,5 @@ module.exports = withTM({
     // Important: return the modified config
     return config;
   },
+  basePath: "/globalization",
 });
