@@ -1,4 +1,4 @@
-service: serverless-ws-test
+service: g11n-realtime
 
 plugins:
   - serverless-bundle
@@ -19,7 +19,8 @@ custom:
 provider:
   name: aws
   runtime: nodejs12.x
-  websocketsApiName: custom-websockets-api-name
+  region: us-west-1
+  websocketsApiName: g11n-realtime-websockets-api
   websocketsApiRouteSelectionExpression: $request.body.action # custom routes are selected by the value of the action property in the body
 
 functions:

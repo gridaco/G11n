@@ -1,6 +1,9 @@
 {
     "name": "@globalization/realtime-server",
     "version": "0.0.0",
+    "scripts": {
+        "deploy:prod": "sls deploy --stage production"
+    },
     "dependencies": {
         "aws-sdk": "^2.912.0"
     },
