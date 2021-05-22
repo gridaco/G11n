@@ -1,0 +1,39 @@
+service: serverless-ws-test
+
+plugins:
+  - serverless-bundle
+  # - serverless-dynamodb-local
+  - serverless-offline
+  - serverless-domain-manager
+
+custom:
+  customDomain:
+    domainName: realtime.g11n.bridged.cc
+    hostedZoneId: us-west-1
+    basePath: ""
+    stage: ${self:provider.stage}
+    createRoute53Record: true
+  serverless-offline:
+    httpPort: 4202
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  websocketsApiName: custom-websockets-api-name
+  websocketsApiRouteSelectionExpression: $request.body.action # custom routes are selected by the value of the action property in the body
+
+functions:
+  connectHandler:
+    handler: handler.connectHandler
+    events:
+      - websocket:
+          route: $connect
+  disconnectHandler:
+    handler: handler.disconnectHandler
+    events:
+      - websocket:
+          route: $disconnect
+  defaultHandler:
+    handler: handler.defaultHandler
+    events:
+      - websocket: $default #simple event definition without extra route property
