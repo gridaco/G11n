@@ -23,21 +23,24 @@ const sendMessageToClient = (url, connectionId, payload) =>
 
 export const connectHandler = async (...props) => {
   console.log("connect", props);
+  return {
+    statusCode: 200,
+  };
 };
 
 export const disconnectHandler = async (...props) => {
   console.log("disconnect", props);
+  return {
+    statusCode: 200,
+  };
 };
 
 export const defaultHandler = async (event, context) => {
   console.log("event", event);
   const domain = event.requestContext.domainName;
-  const stage = event.requestContext.stage;
+  // const stage = event.requestContext.stage;
   const connectionId = event.requestContext.connectionId;
-  const callbackUrlForAWS = "https://example.com";
-  //   const callbackUrlForAWS = util.format(
-  //     util.format("https://%s/%s", domain, stage)
-  //   ); //construct the needed url
+  const callbackUrlForAWS = `https://${domain}`;
   await sendMessageToClient(callbackUrlForAWS, connectionId, event);
 
   return {

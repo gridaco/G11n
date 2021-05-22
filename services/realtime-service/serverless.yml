@@ -11,7 +11,6 @@ custom:
     domainName: realtime.g11n.bridged.cc
     hostedZoneId: us-west-1
     basePath: ""
-    stage: ${self:provider.stage}
     createRoute53Record: true
   serverless-offline:
     httpPort: 4202
@@ -20,6 +19,9 @@ provider:
   name: aws
   runtime: nodejs12.x
   region: us-west-1
+  logs:
+  websocket:
+    level: ERROR
   websocketsApiName: g11n-realtime-websockets-api
   websocketsApiRouteSelectionExpression: $request.body.action # custom routes are selected by the value of the action property in the body
 
