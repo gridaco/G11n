@@ -4,6 +4,16 @@
 
 G11n, i18n, l10n support for bridged's internal system and as supporting other products of their own on bridged ecosystem
 
+## Running on your localhost
+
+```
+git clone https://github.com/bridgedxyz/g11n
+cd g11n # or cd G11n
+yarn
+yarn editor
+# visit test scene. -> http://localhost:3000/globalization?scene=9XZnovuiK90GaN2UxjND7
+```
+
 ## Installation
 
 ```
