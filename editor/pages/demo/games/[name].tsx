@@ -1,0 +1,77 @@
+import { useRouter } from "next/router";
+import React, { useEffect, useRef, useState } from "react";
+
+const DEFAULT_GAMES_DEMO_REGISTRY_BASE =
+  "https://bridged-service-demo.s3-us-west-1.amazonaws.com/";
+
+const DEFAULT_GAMES_DEMO_REGISTRY = [
+  // https://bridged-service-demo.s3-us-west-1.amazonaws.com/games-tanks-demo/index.html
+  "games-tanks-demo",
+];
+
+/**
+ * e.g. "games-tanks-demo" -> "https://bridged-service-demo.s3-us-west-1.amazonaws.com/games-tanks-demo/index.html"
+ * @param demo
+ * @returns
+ */
+function buildDemoEmbedTargetUrl(demo: string): string {
+  return `${DEFAULT_GAMES_DEMO_REGISTRY_BASE}${demo}/index.html`;
+}
+
+export default function GamesDemoPage() {
+  const router = useRouter();
+  const webglIframeRef = useRef(null);
+  const [demoUrl, setDemoUrl] = useState<string>(null);
+
+  const sizeKey = "embed_iphone_x_landscape";
+  const size = sizes[sizeKey];
+
+  useEffect(() => {
+    //
+    // disable alert from iframe
+    const iframe = webglIframeRef.current;
+    if (iframe) {
+      // inspect this. the game script is being loaded after, which makes this redundant.
+      iframe.contentWindow.alert = function() {};
+      console.log('disabled iframe function - "alert"');
+    }
+    //
+
+    //
+    // validate demo
+    const demoName = router.query.name as string;
+    const demoSrcUrl = buildDemoEmbedTargetUrl(demoName);
+    setDemoUrl(demoSrcUrl);
+    //
+  }, [webglIframeRef, router]);
+
+  return (
+    <>
+      <iframe
+        ref={webglIframeRef}
+        src={demoUrl}
+        width={size.width}
+        height={size.height}
+      />
+    </>
+  );
+}
+
+const sizes: { [key: string]: { width: number; height: number } } = {
+  embed_iphone_x: {
+    width: 100,
+    height: 100,
+  },
+  embed_iphone_x_landscape: {
+    width: 1100,
+    height: 550,
+  },
+  embed_ipad_12_9: {
+    width: 100,
+    height: 100,
+  },
+  embed_macbook: {
+    width: 100,
+    height: 100,
+  },
+};

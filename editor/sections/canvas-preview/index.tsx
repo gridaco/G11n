@@ -2,12 +2,10 @@ import React, { useState } from "react";
 import { usePinch } from "react-use-gesture";
 import styled from "@emotion/styled";
 import Background from "../../components/canvas/background";
-import CanvasStage from "../../components/canvas/stage";
-import { SceneLocalRepository } from "../../repositories";
 
 export default function CanvasPreview(props: {
   onBackgroundClick: (e: any) => void;
-  sceneRepository?: SceneLocalRepository;
+  children: JSX.Element;
 }) {
   // 1. TODO
   // implement zooming feature (reference: zeplin)
@@ -31,7 +29,7 @@ export default function CanvasPreview(props: {
             margin: "auto",
           }}
         >
-          <CanvasStage sceneRepository={props.sceneRepository} />
+          {props.children}
         </div>
         {/* </motion.div> */}
       </Background>

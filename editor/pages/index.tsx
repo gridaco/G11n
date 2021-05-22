@@ -1,5 +1,4 @@
 import React from "react";
-import Head from "next/head";
 import Editor from "../sections/editor";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
@@ -11,8 +10,7 @@ import {
   DesignGlobalizationRepository,
   DesignGlobalizationRepositoriesStore,
 } from "@bridged.xyz/base-sdk/lib/g11n/repository";
-import Appbar from "../components/appbar/default-appbar";
-import { LinearProgress } from "@material-ui/core";
+import { DefaultScaffoldLayoyt } from "../layouts/default-layout";
 
 export default function Home() {
   const router = useRouter();
@@ -48,48 +46,12 @@ export default function Home() {
   });
 
   if (!sceneRepository) {
-    return (
-      <div>
-        <Appbar
-          title={"Loading..."}
-          backButton="DASHBOARD"
-          onClickShare={() => {
-            navigator.clipboard.writeText(window.location.href);
-            alert("copied to clipboard");
-          }}
-          onClickPlay={() => {}}
-        />
-        <LinearProgress
-          style={{
-            alignContent: "center",
-          }}
-        />
-      </div>
-    );
+    return <DefaultScaffoldLayoyt loading />;
   }
 
   return (
-    <div>
-      <Appbar
-        title={sceneRepository.scene.name}
-        backButton="DASHBOARD"
-        onClickShare={() => {
-          navigator.clipboard.writeText(window.location.href);
-          alert("copied to clipboard");
-        }}
-        onClickPlay={() => {}}
-      />
-      <Head>
-        <title>G11n by bridged</title>
-      </Head>
-
-      <main>
-        <Editor
-          key={sceneRepository?.id}
-          mode="translation"
-          sceneId={sceneId}
-        />
-      </main>
-    </div>
+    <DefaultScaffoldLayoyt title={sceneRepository.scene.name}>
+      <Editor key={sceneRepository?.id} sceneId={sceneId} />
+    </DefaultScaffoldLayoyt>
   );
 }

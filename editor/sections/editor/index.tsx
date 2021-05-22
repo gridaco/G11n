@@ -3,18 +3,15 @@ import { useRecoilValue, useRecoilState } from "recoil";
 import { Resizable } from "re-resizable";
 import styled from "@emotion/styled";
 import { DesignGlobalizationRepositoriesStore } from "@bridged.xyz/base-sdk/lib/g11n/repository";
-
 import { targetLayerSelector } from "../../states";
 import { editorState } from "../../states/text-editor.state";
 import SceneKeyEditor from "../scene-key-editor";
 import CanvasPreview from "../canvas-preview";
 import SingleKeyEditor from "../key-editor";
-import { SceneLocalRepository, SceneRepositoryStore } from "../../repositories";
-
-type EditorMode = "translation" | "preview" | "prototype" | "*";
+import { SceneRepositoryStore } from "../../repositories";
+import CanvasStage from "../../components/canvas/stage";
 
 interface EditorProps {
-  mode: EditorMode;
   projectId?: string;
   sceneId: string;
 }
@@ -28,7 +25,7 @@ function Editor(props: EditorProps) {
   };
 
   const repository = DesignGlobalizationRepositoriesStore.find(props.sceneId);
-
+  const sceneRepository = SceneRepositoryStore.find(props.sceneId);
   return (
     <Wrapper>
       <CanvasPreview
@@ -36,8 +33,9 @@ function Editor(props: EditorProps) {
           console.log(e);
           setIsSelect(false);
         }}
-        sceneRepository={SceneRepositoryStore.find(props.sceneId)}
-      />
+      >
+        <CanvasStage sceneRepository={sceneRepository} />
+      </CanvasPreview>
       <Resizable
         style={{
           paddingBottom: 0,
