@@ -1,12 +1,7 @@
 import * as dynamoose from 'dynamoose';
+import { AssetType } from '@bridged.xyz/base-sdk/lib/assets';
+import { PlaceholderType } from '@bridged.xyz/base-sdk/lib/g11n';
 import { nanoid } from 'nanoid';
-
-import { AssetType } from '@bridged.xyz/client-sdk/lib/assets';
-import {
-  keyNameFormatValidation,
-  placeholderNameFormatValidation,
-  PlaceholderType,
-} from '@bridged.xyz/client-sdk/lib/g11n';
 
 /**
  * the key manifest for globallized assets.

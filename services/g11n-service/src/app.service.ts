@@ -1,37 +1,37 @@
-import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
-import { nanoid } from 'nanoid';
-import * as dynamoose from 'dynamoose';
+import { HttpException, HttpStatus, Injectable } from "@nestjs/common";
+import { nanoid } from "nanoid";
+import * as dynamoose from "dynamoose";
 
 import {
   GlobalizedKeyRegisterRequest,
   TextTranslationAddRequest,
   TextTranslationPutRequest,
   TextTranslationUpdateRequest,
-} from '@bridged.xyz/client-sdk/lib/g11n/api';
+} from "@bridged.xyz/base-sdk/lib/g11n/api";
 import {
   registerVariantAsset,
   getVariantAsset,
   addAvariant,
   putVariant,
   updateVariant,
-} from '@bridged.xyz/client-sdk/lib/assets/api';
+} from "@bridged.xyz/base-sdk/lib/assets/api";
 import {
   IGlobalizedKey,
   LayerTranslation,
-} from '@bridged.xyz/client-sdk/lib/g11n';
+} from "@bridged.xyz/base-sdk/lib/g11n";
 import {
   KeyModel,
   KeyRecord,
   LayerKeyMapModel,
   LayerKeyMapRecord,
-} from './app.entity';
+} from "./app.entity";
 
-const projectId = 'temp';
+const projectId = "temp";
 
 @Injectable()
 export class AppService {
   async registerNewKey(request: GlobalizedKeyRegisterRequest) {
-    console.log('registerNewKey with request', request);
+    console.log("registerNewKey with request", request);
     /**
      * create the variant asset to be linked with this key first.
      */
@@ -42,7 +42,7 @@ export class AppService {
         initialAssets: request.initialTranslations,
       });
     } catch (_) {
-      console.log('error', _);
+      console.log("error", _);
       throw _;
     }
 
@@ -57,7 +57,7 @@ export class AppService {
     });
 
     const newKeyRecord = await input.save();
-    console.log('new key created', newKeyRecord);
+    console.log("new key created", newKeyRecord);
 
     return await this.fetchTranslation(id);
   }
@@ -77,7 +77,7 @@ export class AppService {
         keyName: name,
       }
     );
-    console.log('key name updated.', updatedRecrod);
+    console.log("key name updated.", updatedRecrod);
     return await this.fetchTranslation(id);
   }
 
@@ -95,7 +95,7 @@ export class AppService {
     });
     return await this.fetchTranslation(request.keyId);
 
-    throw new HttpException('translation already exists', HttpStatus.CONFLICT);
+    throw new HttpException("translation already exists", HttpStatus.CONFLICT);
   }
 
   /**
@@ -132,7 +132,7 @@ export class AppService {
   }
 
   async fetchTranslation(id: string): Promise<IGlobalizedKey> {
-    console.log('fetching translations with key ', id);
+    console.log("fetching translations with key ", id);
     const key = ((await KeyModel.get(id)) as any) as KeyRecord;
 
     if (!key) {
@@ -154,7 +154,7 @@ export class AppService {
    * all related keys' assets key reference will be replaced with last cached value
    */
   async removeTranslation() {
-    throw 'not implemented';
+    throw "not implemented";
   }
 
   async fetchSceneTranslations(
@@ -163,7 +163,7 @@ export class AppService {
     const keyMaps = await this.findKeyMapsFromDesign({
       sceneId: sceneId,
     });
-    console.log('fetchSceneTranslations : keyMaps', keyMaps);
+    console.log("fetchSceneTranslations : keyMaps", keyMaps);
 
     if (keyMaps) {
       const layerTranslations: Array<LayerTranslation> = [];
@@ -185,16 +185,16 @@ export class AppService {
 
   async fetchLayerTranslation(request: { sceneId: string; layerId: string }) {
     const keyMaps = await this.findKeyMapsFromDesign(request);
-    console.log('fetchLayerTranslation : keyMaps', keyMaps);
+    console.log("fetchLayerTranslation : keyMaps", keyMaps);
 
     if (keyMaps) {
       if (keyMaps.length > 1) {
-        throw 'invalid number of keys for single layer. unique layer can only hold single key';
+        throw "invalid number of keys for single layer. unique layer can only hold single key";
       }
 
       const keyMap = keyMaps[0];
       const keyId = keyMap.keyId;
-      console.log('keyId', keyId);
+      console.log("keyId", keyId);
       const translation = await this.fetchTranslation(keyId);
 
       return <LayerTranslation>{
@@ -205,7 +205,7 @@ export class AppService {
         translation: translation,
       };
     } else {
-      throw new HttpException('translation not found', 404);
+      throw new HttpException("translation not found", 404);
     }
   }
 
@@ -231,7 +231,7 @@ export class AppService {
       layerId: request.layerId,
     });
 
-    console.log('updated', updated);
+    console.log("updated", updated);
     return updated;
   }
 
@@ -244,23 +244,23 @@ export class AppService {
     const condition = new dynamoose.Condition();
     if (q.projectId) {
       condition
-        .where('projectId')
+        .where("projectId")
         .eq(projectId)
         .and();
     }
     if (q.sceneId) {
       condition
-        .where('sceneId')
+        .where("sceneId")
         .eq(q.sceneId)
         .and();
     }
     if (q.layerId) {
-      condition.where('layerId').eq(q.layerId);
+      condition.where("layerId").eq(q.layerId);
     }
 
     const scaned = await LayerKeyMapModel.scan(condition).exec();
     if (scaned.length > 1) {
-      throw 'invalid operation scanned document must be single or empty';
+      throw "invalid operation scanned document must be single or empty";
     }
 
     const exists = scaned.length == 1;
@@ -280,22 +280,22 @@ export class AppService {
     const condition = new dynamoose.Condition();
     if (q.projectId) {
       condition
-        .where('projectId')
+        .where("projectId")
         .eq(projectId)
         .and();
     }
     if (q.sceneId) {
       condition
-        .where('sceneId')
+        .where("sceneId")
         .eq(q.sceneId)
         .and();
     }
     if (q.layerId) {
-      condition.where('layerId').eq(q.layerId);
+      condition.where("layerId").eq(q.layerId);
     }
 
     const scaned = await LayerKeyMapModel.scan(condition).exec();
-    console.log('findKeyMapsFromDesign : scaned', scaned);
+    console.log("findKeyMapsFromDesign : scaned", scaned);
     const exists = scaned.length >= 1;
     if (exists) {
       return (scaned as any) as ReadonlyArray<LayerKeyMapRecord>;
