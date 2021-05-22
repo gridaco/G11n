@@ -19,10 +19,13 @@ export default function Home() {
 
   const { query } = router;
   const sceneId: string = query.scene as string;
-  const [sceneRepository, setScreenRepository] =
-    useState<SceneLocalRepository>();
-  const [desingGlobalizationRepository, setdesingGlobalizationRepository] =
-    useState<DesignGlobalizationRepository>();
+  const [sceneRepository, setScreenRepository] = useState<
+    SceneLocalRepository
+  >();
+  const [
+    desingGlobalizationRepository,
+    setdesingGlobalizationRepository,
+  ] = useState<DesignGlobalizationRepository>();
   const [targetSceneId, setTargetSceneId] = useRecoilState(targetSceneIdAtom);
 
   useEffect(() => {
@@ -33,8 +36,10 @@ export default function Home() {
         console.log("response", response);
         const scene = response.data.data as StorableScene;
         const sceneRepository = SceneRepositoryStore.make(scene);
-        const desingGlobalizationRepository =
-          DesignGlobalizationRepositoriesStore.make("temp", scene.id!);
+        const desingGlobalizationRepository = DesignGlobalizationRepositoriesStore.make(
+          "temp",
+          scene.id!
+        );
         setTargetSceneId(sceneRepository.id);
         setScreenRepository(sceneRepository);
         setdesingGlobalizationRepository(desingGlobalizationRepository);
