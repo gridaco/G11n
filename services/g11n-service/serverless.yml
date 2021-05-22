@@ -1,5 +1,4 @@
-service:
-  name: g11n
+service: g11n
 
 plugins:
   - serverless-bundle
@@ -11,25 +10,25 @@ custom:
   bundle:
     caching: false
     forceExclude:
-      - '@nestjs/microservices'
-      - '@nestjs/microservices/microservices-module'
-      - '@nestjs/websockets/socket-module'
-      - 'cache-manager'
+      - "@nestjs/microservices"
+      - "@nestjs/microservices/microservices-module"
+      - "@nestjs/websockets/socket-module"
+      - "cache-manager"
   customDomain:
     domainName: g11n.bridged.cc
     hostedZoneId: us-west-1
-    basePath: ''
+    basePath: ""
     stage: ${self:provider.stage}
     createRoute53Record: true
   serverless-offline:
-    httpPort: 4004
+    httpPort: 4201
 
 resources:
   Resources:
     globalizationsTable:
       Type: AWS::DynamoDB::Table
       Properties:
-        TableName: '${self:provider.environment.DYNAMODB_KEY_TABLE}'
+        TableName: "${self:provider.environment.DYNAMODB_KEY_TABLE}"
         KeySchema:
           - AttributeName: id
             KeyType: HASH
@@ -42,7 +41,7 @@ resources:
     layerKeyMapTable:
       Type: AWS::DynamoDB::Table
       Properties:
-        TableName: '${self:provider.environment.DYNAMODB_LAYER_KEY_MAP_TABLE}'
+        TableName: "${self:provider.environment.DYNAMODB_LAYER_KEY_MAP_TABLE}"
         KeySchema:
           - AttributeName: id
             KeyType: HASH
@@ -63,7 +62,7 @@ resources:
               - AttributeName: projectId
                 KeyType: HASH
             Projection:
-              ProjectionType: 'ALL'
+              ProjectionType: "ALL"
             ProvisionedThroughput:
               ReadCapacityUnits: 1
               WriteCapacityUnits: 1
@@ -72,7 +71,7 @@ resources:
               - AttributeName: keyId
                 KeyType: HASH
             Projection:
-              ProjectionType: 'ALL'
+              ProjectionType: "ALL"
             ProvisionedThroughput:
               ReadCapacityUnits: 1
               WriteCapacityUnits: 1
@@ -81,7 +80,7 @@ resources:
               - AttributeName: sceneId
                 KeyType: HASH
             Projection:
-              ProjectionType: 'ALL'
+              ProjectionType: "ALL"
             ProvisionedThroughput:
               ReadCapacityUnits: 1
               WriteCapacityUnits: 1
@@ -90,7 +89,7 @@ resources:
               - AttributeName: layerId
                 KeyType: HASH
             Projection:
-              ProjectionType: 'ALL'
+              ProjectionType: "ALL"
             ProvisionedThroughput:
               ReadCapacityUnits: 1
               WriteCapacityUnits: 1
@@ -105,9 +104,9 @@ provider:
   apiGateway:
     minimumCompressionSize: 1024
   environment:
-    AWS_NODEJS_CONNECTION_REUSE_ENABLED: '1'
-    DYNAMODB_KEY_TABLE: '${self:service}-key-${opt:stage, self:provider.stage}'
-    DYNAMODB_LAYER_KEY_MAP_TABLE: '${self:service}-layer-key-map-${opt:stage, self:provider.stage}'
+    AWS_NODEJS_CONNECTION_REUSE_ENABLED: "1"
+    DYNAMODB_KEY_TABLE: "${self:service}-key-${opt:stage, self:provider.stage}"
+    DYNAMODB_LAYER_KEY_MAP_TABLE: "${self:service}-layer-key-map-${opt:stage, self:provider.stage}"
   iamRoleStatements:
     - Effect: Allow
       Action:
@@ -118,7 +117,7 @@ provider:
         - dynamodb:UpdateItem
         - dynamodb:DeleteItem
         - dynamodb:DescribeTable
-      Resource: 'arn:aws:dynamodb:${opt:region, self:provider.region}:*:table/${self:provider.environment.DYNAMODB_KEY_TABLE}'
+      Resource: "arn:aws:dynamodb:${opt:region, self:provider.region}:*:table/${self:provider.environment.DYNAMODB_KEY_TABLE}"
     - Effect: Allow
       Action:
         - dynamodb:Query
@@ -128,7 +127,7 @@ provider:
         - dynamodb:UpdateItem
         - dynamodb:DeleteItem
         - dynamodb:DescribeTable
-      Resource: 'arn:aws:dynamodb:${opt:region, self:provider.region}:*:table/${self:provider.environment.DYNAMODB_LAYER_KEY_MAP_TABLE}'
+      Resource: "arn:aws:dynamodb:${opt:region, self:provider.region}:*:table/${self:provider.environment.DYNAMODB_LAYER_KEY_MAP_TABLE}"
 
 package:
   individually: true

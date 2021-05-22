@@ -2803,6 +2803,13 @@ acorn@^8.0.4, acorn@^8.1.0:
   resolved "https://registry.yarnpkg.com/acorn/-/acorn-8.2.4.tgz#caba24b08185c3b56e3168e97d15ed17f4d31fd0"
   integrity sha512-Ibt84YwBDDA890eDiDCEqcbwvHlBvzzDkU2cGBBDDI1QWT12jTiXIOn2CIw5KK4i6N5Z2HUxwYjzriDyqaqqZg==
 
+agent-base@6:
+  version "6.0.2"
+  resolved "https://registry.yarnpkg.com/agent-base/-/agent-base-6.0.2.tgz#49fff58577cfee3f37176feab4c22e00f86d7f77"
+  integrity sha512-RZNwNclF7+MS/8bDg70amg32dyeZGZxiDuQmZxKLAlQjr3jGyLx+4Kkk58UO7D2QdgFIQCovuSuZESne6RG6XQ==
+  dependencies:
+    debug "4"
+
 aggregate-error@^3.0.0:
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/aggregate-error/-/aggregate-error-3.1.0.tgz#92670ff50f5359bdb7a3e0d40d0ec30c5737687a"
@@ -3146,7 +3153,7 @@ aws-lambda@^1.0.6:
     js-yaml "^3.13.1"
     watchpack "^2.0.0-beta.10"
 
-aws-sdk@*, aws-sdk@^2.7.0, aws-sdk@^2.756.0, aws-sdk@^2.783.0, aws-sdk@^2.792.0, aws-sdk@^2.834.0:
+aws-sdk@*, aws-sdk@^2.7.0, aws-sdk@^2.756.0, aws-sdk@^2.783.0, aws-sdk@^2.792.0, aws-sdk@^2.834.0, aws-sdk@^2.912.0:
   version "2.912.0"
   resolved "https://registry.yarnpkg.com/aws-sdk/-/aws-sdk-2.912.0.tgz#3f096b057ccc7b22ca234b44167be5c02a1daab3"
   integrity sha512-ImeMEC014AB9DMlS3X25G+y1Q/jGDwh7kOY+5AE0PBOMjDrQOYjfiqVYbFU2nZx57Uk7UVFclOb3Lty3hEz2gg==
@@ -4082,6 +4089,11 @@ commander@^3.0.2:
   resolved "https://registry.yarnpkg.com/commander/-/commander-3.0.2.tgz#6837c3fb677ad9933d1cfba42dd14d5117d6b39e"
   integrity sha512-Gar0ASD4BDyKC4hl4DwHqDrmvjoxWKZigVnAbn5H1owvm4CxCPdb0HQDehwNYMJpla5+M2tPmPARzhtYuwpHow==
 
+commander@^5.0.0:
+  version "5.1.0"
+  resolved "https://registry.yarnpkg.com/commander/-/commander-5.1.0.tgz#46abbd1652f8e059bddaef99bbdcb2ad9cf179ae"
+  integrity sha512-P0CysNDQ7rtVw4QIQtm+MRxV66vKFSvlsQvGYXZWR3qFU0jlMKHZZZgw8e+8DSah4UDKMqnknRDQz+xuQXQ/Zg==
+
 commondir@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/commondir/-/commondir-1.0.1.tgz#ddd800da0c66127393cca5950ea968a3aaf1253b"
@@ -4551,19 +4563,19 @@ debug@3.2.6:
   dependencies:
     ms "^2.1.1"
 
+debug@4, debug@^4.0.1, debug@^4.1.0, debug@^4.1.1:
+  version "4.3.1"
+  resolved "https://registry.yarnpkg.com/debug/-/debug-4.3.1.tgz#f0d229c505e0c6d8c49ac553d1b13dc183f6b2ee"
+  integrity sha512-doEwdvm4PCeK4K3RQN2ZC2BYUBaxwLARCqZmMjtF8a51J2Rb0xpVloFRnCODwqjpwnAoao4pelN8l3RJdv3gRQ==
+  dependencies:
+    ms "2.1.2"
+
 debug@^3.1.0, debug@^3.1.1, debug@^3.2.7:
   version "3.2.7"
   resolved "https://registry.yarnpkg.com/debug/-/debug-3.2.7.tgz#72580b7e9145fb39b6676f9c5e5fb100b934179a"
   integrity sha512-CFjzYYAi4ThfiQvizrFQevTTXHtnCqWfe7x1AhgEscTz6ZbLbfoLRLPugTQyBth6f8ZERVUSyWHFD/7Wu4t1XQ==
   dependencies:
     ms "^2.1.1"
-
-debug@^4.0.1, debug@^4.1.0, debug@^4.1.1:
-  version "4.3.1"
-  resolved "https://registry.yarnpkg.com/debug/-/debug-4.3.1.tgz#f0d229c505e0c6d8c49ac553d1b13dc183f6b2ee"
-  integrity sha512-doEwdvm4PCeK4K3RQN2ZC2BYUBaxwLARCqZmMjtF8a51J2Rb0xpVloFRnCODwqjpwnAoao4pelN8l3RJdv3gRQ==
-  dependencies:
-    ms "2.1.2"
 
 decamelize@^1.2.0:
   version "1.2.0"
@@ -4840,7 +4852,7 @@ dynamodb-localhost@0.0.9:
     rimraf "^2.6.3"
     tar "^4.4.8"
 
-dynamoose@^2.4.1:
+dynamoose@^2.4.1, dynamoose@^2.7.3:
   version "2.7.3"
   resolved "https://registry.yarnpkg.com/dynamoose/-/dynamoose-2.7.3.tgz#1242fddb683c17f83411578c3c0c7d10c2f0c60d"
   integrity sha512-Hnfp3Sh3p+YwpPFtxTGDAuliESSbaFcaPE4FYVGekWA+oOXjGj6F/0QCrZCsLnBsd1p7rCDDRnublfGHH7NDXA==
@@ -6353,6 +6365,14 @@ https-browserify@1.0.0, https-browserify@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/https-browserify/-/https-browserify-1.0.0.tgz#ec06c10e0a34c0f2faf199f7fd7fc78fffd03c73"
   integrity sha1-7AbBDgo0wPL68Zn3/X/Hj//QPHM=
+
+https-proxy-agent@^5.0.0:
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/https-proxy-agent/-/https-proxy-agent-5.0.0.tgz#e2a90542abb68a762e0a0850f6c9edadfd8506b2"
+  integrity sha512-EkYm5BcKUGiduxzSt3Eppko+PiNWNEpa4ySk9vTC6wDsQJW9rHSa+UhGNJoRYp7bz6Ht1eaRIa6QaJqO5rCFbA==
+  dependencies:
+    agent-base "6"
+    debug "4"
 
 human-signals@^1.1.1:
   version "1.1.1"
@@ -8383,7 +8403,7 @@ multer@1.4.2:
     type-is "^1.6.4"
     xtend "^4.0.0"
 
-mute-stream@0.0.8:
+mute-stream@0.0.8, mute-stream@~0.0.4:
   version "0.0.8"
   resolved "https://registry.yarnpkg.com/mute-stream/-/mute-stream-0.0.8.tgz#1630c42b2251ff81e2a283de96a5497ea92e5e0d"
   integrity sha512-nnbWWOkoWyUsTjKrhgD0dcz22mdkSnpYqbEjIm2nhwhuxlSkpywJmBo8h0ZqJdkp73mb90SssHkN4rsRaBAfAA==
@@ -8393,7 +8413,7 @@ nan@^2.12.1:
   resolved "https://registry.yarnpkg.com/nan/-/nan-2.14.2.tgz#f5376400695168f4cc694ac9393d0c9585eeea19"
   integrity sha512-M2ufzIiINKCuDfBSAUr1vWQ+vuVcA9kqx8JJUsbQi6yf1uGRyb7HfpdfUr5qLXf3B/t8dPvcjhKMmlfnP47EzQ==
 
-nanoid@^3.1.16, nanoid@^3.1.22:
+nanoid@^3.1.16, nanoid@^3.1.22, nanoid@^3.1.23:
   version "3.1.23"
   resolved "https://registry.yarnpkg.com/nanoid/-/nanoid-3.1.23.tgz#f744086ce7c2bc47ee0a8472574d5c78e4183a81"
   integrity sha512-FiB0kzdP0FFVGDKlRLEQ1BgDzU87dy5NnzjeW9YZNt+/c3+q82EQDUwniSAUxp/F0gFNI1ZhKU1FqYsMuqZVnw==
@@ -9740,6 +9760,13 @@ read-pkg@^5.2.0:
     parse-json "^5.0.0"
     type-fest "^0.6.0"
 
+read@^1.0.7:
+  version "1.0.7"
+  resolved "https://registry.yarnpkg.com/read/-/read-1.0.7.tgz#b3da19bd052431a97671d44a42634adf710b40c4"
+  integrity sha1-s9oZvQUkMal2cdRKQmNK33ELQMQ=
+  dependencies:
+    mute-stream "~0.0.4"
+
 "readable-stream@1 || 2", readable-stream@^2.0.0, readable-stream@^2.0.1, readable-stream@^2.0.2, readable-stream@^2.0.5, readable-stream@^2.1.5, readable-stream@^2.2.2, readable-stream@^2.3.3, readable-stream@^2.3.5, readable-stream@^2.3.6, readable-stream@~2.3.6:
   version "2.3.7"
   resolved "https://registry.yarnpkg.com/readable-stream/-/readable-stream-2.3.7.tgz#1eca1cf711aef814c04f62252a36a62f6cb23b57"
@@ -10304,7 +10331,7 @@ serve-static@1.14.1:
     parseurl "~1.3.3"
     send "0.17.1"
 
-serverless-bundle@^4.1.0:
+serverless-bundle@^4.1.0, serverless-bundle@^4.3.1:
   version "4.3.1"
   resolved "https://registry.yarnpkg.com/serverless-bundle/-/serverless-bundle-4.3.1.tgz#6a3539f33ca07974123c475a7636b53294459dbe"
   integrity sha512-k3FaHN28e4kfQFjSHSDpkZUFJG10m+oIV4GCFd/REs+4Ostl2ciyJ2zlHbeF3mXOX9xgLQVDZF2taxqQQcxDLw==
@@ -10379,6 +10406,41 @@ serverless-offline@^6.8.0:
   version "6.9.0"
   resolved "https://registry.yarnpkg.com/serverless-offline/-/serverless-offline-6.9.0.tgz#a87fee3561f34808be9ac8ab06db9278cea8fa5f"
   integrity sha512-toKcyXUv0rFM7nGk/0QcCxP1Zlv/37IAf3vQiUlOh5XHPl6pFWfHUVF4HelMkosAeWJqJt1SngNmK38uiAsLtg==
+  dependencies:
+    "@hapi/boom" "^7.4.11"
+    "@hapi/h2o2" "^8.3.2"
+    "@hapi/hapi" "^18.4.1"
+    aws-sdk "^2.834.0"
+    boxen "^5.0.0"
+    chalk "^4.1.0"
+    cuid "^2.1.8"
+    execa "^5.0.0"
+    extend "^3.0.2"
+    fs-extra "^9.1.0"
+    java-invoke-local "0.0.6"
+    js-string-escape "^1.0.1"
+    jsonpath-plus "^5.0.2"
+    jsonschema "^1.4.0"
+    jsonwebtoken "^8.5.1"
+    jszip "^3.5.0"
+    luxon "^1.25.0"
+    node-fetch "^2.6.1"
+    node-schedule "^1.3.3"
+    object.fromentries "^2.0.3"
+    p-memoize "^4.0.1"
+    p-queue "^6.6.2"
+    p-retry "^4.3.0"
+    please-upgrade-node "^3.2.0"
+    portfinder "^1.0.28"
+    semver "^7.3.4"
+    update-notifier "^5.0.1"
+    velocityjs "^2.0.3"
+    ws "^7.4.2"
+
+serverless-offline@^7.0.0:
+  version "7.0.0"
+  resolved "https://registry.yarnpkg.com/serverless-offline/-/serverless-offline-7.0.0.tgz#dc72a401d196bb7bded248338c19321adf985ad8"
+  integrity sha512-PrbRqS9796Bbb0A0JMHdBudL2+JsMJGHI8bwu3xtD4adAsYUCAONqTfNIBtbwk3KNuA1i/pdW9IIn63E0UNi0Q==
   dependencies:
     "@hapi/boom" "^7.4.11"
     "@hapi/h2o2" "^8.3.2"
@@ -12257,10 +12319,20 @@ write@1.0.3:
   dependencies:
     mkdirp "^0.5.1"
 
-ws@^7.4.2, ws@^7.4.4:
+ws@^7.1.2, ws@^7.4.2, ws@^7.4.4:
   version "7.4.5"
   resolved "https://registry.yarnpkg.com/ws/-/ws-7.4.5.tgz#a484dd851e9beb6fdb420027e3885e8ce48986c1"
   integrity sha512-xzyu3hFvomRfXKH8vOFMU3OguG6oOvhXMo3xsGy3xWExqaM2dxBbVxuD99O7m3ZUFMvvscsZDqxfgMaRr/Nr1g==
+
+wscat@^4.0.1:
+  version "4.0.1"
+  resolved "https://registry.yarnpkg.com/wscat/-/wscat-4.0.1.tgz#40aee22548a3010e14496bc27452976656a1b697"
+  integrity sha512-3lWdgZn8d92WjV1a1zIW8pUlK7iKKk4/DABp2fDM1ZLHrIyAIe1+R1tkSCR4q5QW4QQS4glGqGlQxrmVCN17Zg==
+  dependencies:
+    commander "^5.0.0"
+    https-proxy-agent "^5.0.0"
+    read "^1.0.7"
+    ws "^7.1.2"
 
 xdg-basedir@^4.0.0:
   version "4.0.0"

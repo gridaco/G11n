@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "declaration": true,
+    "noImplicitAny": false,
+    "removeComments": true,
+    "noLib": false,
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "target": "es2017",
+    "strict": false,
+    "sourceMap": true,
+    "outDir": "./dist",
+    "baseUrl": "./"
+  },
+  "exclude": ["node_modules", ".webpack/**/*", "dist"]
+}
