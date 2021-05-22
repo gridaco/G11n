@@ -9,6 +9,7 @@ const DEFAULT_GAMES_DEMO_REGISTRY_BASE =
 const DEFAULT_GAMES_DEMO_REGISTRY = [
   // https://bridged-service-demo.s3-us-west-1.amazonaws.com/games-tanks-demo/index.html
   "games-tanks-demo",
+  "games-dragon-crushers",
 ];
 
 /**
