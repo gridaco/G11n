@@ -1,0 +1,10 @@
+{
+  "name": "@bridged.xyz/g11n",
+  "version": "0.0.1",
+  "description": "globalize like a pro",
+  "main": "index.js",
+  "repository": "https://github.com/bridgedxyz/G11n.git",
+  "author": "softmarshmallow <woojoo@softmarshmallow.com>",
+  "license": "MIT",
+  "private": false
+}
