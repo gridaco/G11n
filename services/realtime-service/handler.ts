@@ -53,9 +53,7 @@ export const defaultHandler = async (event, context) => {
       case "to-editor/layer":
         await braodcastToSessionWith({
           appId: jsonBody.appId,
-          event: {
-            data: jsonBody,
-          },
+          event: jsonBody,
         });
         break;
       case "to-app/layer-update":

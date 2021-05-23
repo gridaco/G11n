@@ -1,4 +1,4 @@
-import { TextField, Typography } from "@material-ui/core";
+import { Button, TextField, Typography } from "@material-ui/core";
 import { useRouter } from "next/router";
 import React, { useEffect, useRef, useState } from "react";
 import { DefaultScaffoldLayoyt } from "../../../layouts/default-layout";
@@ -98,6 +98,20 @@ function RealtimeEditor(props: { appId: string }) {
   return (
     <>
       <div style={{ marginTop: 46 }} />
+      <Button
+        onClick={() => {
+          client.pauseApp();
+        }}
+      >
+        Pause
+      </Button>
+      <Button
+        onClick={() => {
+          client.resumeApp();
+        }}
+      >
+        Resume
+      </Button>
       <Typography>
         {currentSelectedLayerTextValue ?? "Nothing is selected"}
       </Typography>
