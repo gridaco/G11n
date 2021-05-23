@@ -27,14 +27,14 @@ provider:
   environment:
     AWS_NODEJS_CONNECTION_REUSE_ENABLED: "1"
     DYNAMODB_SESSION_TABLE: "${self:service}-session-${opt:stage, self:provider.stage}"
-  WSConnectionRespondPolicy:
+  # WSConnectionRespondPolicy:
+  iamRoleStatements:
     - Effect: Allow
       Action:
-        - "execute-api:ManageConnections"
-        - "execute-api:Invoke"
+        - execute-api:ManageConnections
+        - execute-api:Invoke
       Resource:
-        - “arn:aws:execute-api:us-west-1::**/@connections/”
-  iamRoleStatements:
+        - "arn:aws:execute-api:us-west-1::**/@connections/"
     - Effect: Allow
       Action:
         - dynamodb:Query
