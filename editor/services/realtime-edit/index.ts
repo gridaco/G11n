@@ -1,11 +1,23 @@
+import { currentTextEditValueAtom } from "../../states";
+
 export const REALTIME_EDIT_WSS_HOST =
   "wss://0vmxo5qnya.execute-api.us-west-1.amazonaws.com/dev";
 
+type OnLayerSelectListener = (data: {
+  layer: string;
+  text?: string;
+  locale?: string;
+}) => void;
 export class RealtimeEditEditorClient {
   ws: WebSocket;
   constructor(readonly appId) {
     this.ws = new WebSocket(REALTIME_EDIT_WSS_HOST);
     this.ws.onmessage = this.handleMessages;
+  }
+
+  _onLayerSelectListeners: Array<OnLayerSelectListener> = [];
+  addOnLayerSelectListener(callback: OnLayerSelectListener) {
+    this._onLayerSelectListeners.push(callback);
   }
 
   private handleMessages(message: MessageEvent) {
@@ -25,7 +37,11 @@ export class RealtimeEditEditorClient {
             locale?: string;
           } = event.data;
 
+          // data.text
           console.log("data received", data);
+
+          // call all callbacks
+          this._onLayerSelectListeners.map((cb) => cb?.(data));
           break;
 
         default:

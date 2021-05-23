@@ -1,7 +1,9 @@
+import { TextField, Typography } from "@material-ui/core";
 import { useRouter } from "next/router";
 import React, { useEffect, useRef, useState } from "react";
 import { DefaultScaffoldLayoyt } from "../../../layouts/default-layout";
 import { InnerEditorWorkspace } from "../../../sections/editor/inner-editor-workspace";
+import { RealtimeEditEditorClient } from "../../../services/realtime-edit";
 
 const DEFAULT_GAMES_DEMO_REGISTRY_BASE =
   "https://bridged-service-demo.s3-us-west-1.amazonaws.com/";
@@ -73,9 +75,38 @@ export default function GamesDemoPage() {
             height={size.height}
           />
         }
-        editor={<></>}
+        editor={demoName && <RealtimeEditor appId={demoName} />}
       ></InnerEditorWorkspace>
     </DefaultScaffoldLayoyt>
+  );
+}
+
+function RealtimeEditor(props: { appId: string }) {
+  const client = new RealtimeEditEditorClient(props.appId);
+  const [
+    currentSelectedLayerTextValue,
+    setCurrentSelectedLayerTextValue,
+  ] = useState<string>();
+
+  useEffect(() => {
+    client.addOnLayerSelectListener((data: { text: string; layer: string }) => {
+      setCurrentSelectedLayerTextValue(data.text);
+    });
+  }, []);
+
+  //setup realtime client
+  return (
+    <>
+      <div style={{ marginTop: 46 }} />
+      <Typography>
+        {currentSelectedLayerTextValue ?? "Nothing is selected"}
+      </Typography>
+      <TextField
+        onChange={(e) =>
+          client.updateLayer("", { text: e.target.value, locale: "" })
+        }
+      />
+    </>
   );
 }
 
