@@ -10,7 +10,8 @@ type OnLayerSelectListener = (data: {
 }) => void;
 export class RealtimeEditEditorClient {
   ws: WebSocket;
-  constructor(readonly appId) {
+  constructor(readonly appId: string) {
+    console.log("preparing editor wsclient with appid", appId);
     this.ws = new WebSocket(REALTIME_EDIT_WSS_HOST);
     this.ws.onmessage = this.handleMessages;
   }
@@ -28,7 +29,8 @@ export class RealtimeEditEditorClient {
       data?: any;
     } = typeof payload == "object" ? payload : JSON.parse(payload);
 
-    if (event.action.includes("to-editor")) {
+    console.log("event reviced from editor", event);
+    if (event.action?.includes("to-editor")) {
       switch (event.action) {
         case "to-editor/layer":
           const data: {
