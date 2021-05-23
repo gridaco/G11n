@@ -47,12 +47,22 @@ export const defaultHandler = async (event, context) => {
       case "to-app/control":
         await braodcastToSessionWith({
           appId: jsonBody.appId,
-          event: jsonBody.data,
+          event: jsonBody,
         });
         break;
       case "to-editor/layer":
+        await braodcastToSessionWith({
+          appId: jsonBody.appId,
+          event: {
+            data: jsonBody,
+          },
+        });
         break;
       case "to-app/layer-update":
+        await braodcastToSessionWith({
+          appId: jsonBody.appId,
+          event: jsonBody,
+        });
         break;
       default:
         await sendMessageToClient(connectionId, event);
