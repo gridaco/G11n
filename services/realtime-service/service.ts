@@ -7,6 +7,7 @@ import {
   EV_ToApp_LayerUpdate,
   EV_ToEditor_Layer,
 } from "./entity";
+import { nanoid } from "nanoid";
 
 /**
  * join or create & join session
@@ -17,27 +18,42 @@ export async function joinSession(params: {
 }) {
   // check for existing session.
   // appid = room for now.
-  const maybeExistingAppSession = await EditingSessionModel.get({
-    appId: params.appId,
-  });
-  //   const existsCheckCondition = new dynamoose.Condition()
-  //     .where("appId")
-  //     .eq(params.appId);
-  //   const scaned = await EditingSessionModel.scan(existsCheckCondition).exec();
+  //   const maybeExistingAppSession = await EditingSessionModel.get({
+  //     appId: params.appId,
+  //   });
+
+  console.log("connectionId", params.connectionId);
+  const existsCheckCondition = new dynamoose.Condition()
+    .where("appId")
+    .eq(params.appId);
+  const scaned = await EditingSessionModel.scan(existsCheckCondition).exec();
+  console.log(scaned);
+  const maybeExistingAppSession = scaned?.[0];
 
   if (maybeExistingAppSession) {
+    console.log(
+      "join session: joining session existing",
+      maybeExistingAppSession
+    );
     // existing
     const id = maybeExistingAppSession.id;
-    await EditingSessionModel.update(id, {
-      // dirty data. needs cleanup after connection is dead.
-      connections: [
-        ...maybeExistingAppSession.connections,
-        params.connectionId,
-      ],
-    });
+    await EditingSessionModel.update(
+      { id: id },
+      {
+        // dirty data. needs cleanup after connection is dead.
+        connections: [
+          ...new Set([
+            ...maybeExistingAppSession.connections,
+            params.connectionId,
+          ]),
+        ],
+      }
+    );
   } else {
     // create new
+    console.log("join session: creating new session and join");
     const input = new EditingSessionModel(<EditingSession>{
+      id: nanoid(),
       connections: [params.connectionId],
       appId: params.appId,
     });
