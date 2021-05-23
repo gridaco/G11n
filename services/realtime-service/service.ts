@@ -18,18 +18,7 @@ export async function joinSession(params: {
 }) {
   // check for existing session.
   // appid = room for now.
-  //   const maybeExistingAppSession = await EditingSessionModel.get({
-  //     appId: params.appId,
-  //   });
-
-  console.log("connectionId", params.connectionId);
-  const existsCheckCondition = new dynamoose.Condition()
-    .where("appId")
-    .eq(params.appId);
-  const scaned = await EditingSessionModel.scan(existsCheckCondition).exec();
-  console.log(scaned);
-  const maybeExistingAppSession = scaned?.[0];
-
+  const maybeExistingAppSession = await fetchSessionWithAppId(params.appId);
   if (maybeExistingAppSession) {
     console.log(
       "join session: joining session existing",
@@ -65,7 +54,7 @@ export async function joinSession(params: {
 /// region remote app control
 ///
 export async function appControl_pause(appId: string) {
-  const session = await EditingSessionModel.get({ appId: appId });
+  const session = await fetchSessionWithAppId(appId);
   if (session) {
     session.connections.map((con) => {
       // send message
@@ -85,17 +74,31 @@ export function appcontrolCommand(ev: EV_ToApp_Control) {
   }
 }
 
+async function fetchSessionWithAppId(appId: string): Promise<EditingSession> {
+  const existsCheckCondition = new dynamoose.Condition()
+    .where("appId")
+    .eq(appId);
+  const scaned = await EditingSessionModel.scan(existsCheckCondition).exec();
+  const maybeExistingAppSession = scaned?.[0];
+  if (maybeExistingAppSession) {
+    return (maybeExistingAppSession as any) as EditingSession;
+  } else {
+    return;
+  }
+}
+
 export async function braodcastToSessionWith(params: {
   appId: string;
   event: any;
 }) {
-  const session = await EditingSessionModel.get({ appId: params.appId });
+  const session = await fetchSessionWithAppId(params.appId);
   if (session) {
-    session.connections.map((con) => {
+    for (const con of session.connections) {
       // send message
-      sendMessageToClient(con, params.event);
-    });
+      await sendMessageToClient(con, params.event);
+    }
   } else {
+    console.log("no session to broadcast");
     // ignore. no available session
   }
 }
@@ -110,15 +113,19 @@ export const sendMessageToClient = (connectionId: string, payload: any) =>
       apiVersion: "2018-11-29",
       endpoint: ENDPOINT,
     });
+
     apigatewaymanagementapi.postToConnection(
       {
         ConnectionId: connectionId, // connectionId of the receiving ws-client
-        Data: JSON.stringify(payload),
+        Data: JSON.stringify(payload ?? {}),
       },
       (err, data) => {
         if (err) {
           console.log("err is", err);
-          reject(err);
+          //   reject(err);
+          // ignore error since it may be caused by expired connections.
+          // this can be handled by removing connection on disconnect. - or explicitly removing on this block.
+          resolve(err);
         }
         resolve(data);
       }
