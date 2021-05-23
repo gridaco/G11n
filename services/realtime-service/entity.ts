@@ -7,11 +7,13 @@ export type WSEvents =
   | EV_ToApp_LayerUpdate;
 export interface EV_ToApp_Control {
   action: "to-app/control";
+  appId: string;
   command: "resume" | "pause";
 }
 
 export interface EV_ToEditor_Layer {
   action: "to-editor/layer";
+  appId: string;
   data: {
     layer: string;
     text?: string;
@@ -21,10 +23,11 @@ export interface EV_ToEditor_Layer {
 
 export interface EV_ToApp_LayerUpdate {
   action: "to-app/layer-update";
+  appId: string;
   data: {
     layer: string;
     text: string;
-    local: string;
+    locale: string;
   };
 }
 
