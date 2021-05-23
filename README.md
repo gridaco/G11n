@@ -14,6 +14,11 @@ yarn editor
 # visit test scene. -> http://localhost:3000/globalization?scene=9XZnovuiK90GaN2UxjND7
 ```
 
+## Games Globalization with Unity
+run on localhost, visit - http://globalization-editor-mz.bridged.xyz/globalization/demo/games for demos
+
+
+
 ## Installation
 
 ```
