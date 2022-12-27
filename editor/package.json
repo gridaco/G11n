@@ -6,7 +6,7 @@
     "dev": "next dev -p 3306",
     "build": "next build",
     "start": "next start -p 3306",
-    "ngrok": "ngrok http -host-header -region=us -hostname=webdev.grida.co 3306"
+    "ngrok": "ngrok http --region=jp --hostname=webdev.grida.co 3306"
   },
   "dependencies": {
     "@base-sdk/base": "^0.1.8",
