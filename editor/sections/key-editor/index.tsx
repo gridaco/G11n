@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styled from "@emotion/styled";
-import { CircularProgress } from "@material-ui/core";
+import { CircularProgress } from "@mui/material";
 import { targetLayerIdAtom, targetLayerSelector } from "../../states";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import {

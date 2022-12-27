@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import styled from "@emotion/styled";
-import { IconButton } from "@material-ui/core";
+import { IconButton } from "@mui/material";
 import {
   ArrowLeftIcon,
   Share1Icon,

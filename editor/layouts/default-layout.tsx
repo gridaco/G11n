@@ -1,6 +1,6 @@
 import React from "react";
 import Appbar from "../components/appbar/default-appbar";
-import { LinearProgress } from "@material-ui/core";
+import { LinearProgress } from "@mui/material";
 import Head from "next/head";
 
 export function DefaultScaffoldLayoyt(props: {

@@ -1,5 +1,5 @@
 import React, { useRef } from "react";
-import { IconButton } from "@material-ui/core";
+import { IconButton } from "@mui/material";
 import styled from "@emotion/styled";
 
 interface ISearchInputBox extends React.InputHTMLAttributes<HTMLInputElement> {

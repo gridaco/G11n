@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "@emotion/styled";
-import { IconButton } from "@material-ui/core";
+import { IconButton } from "@mui/material";
 
 interface IHeader {
   title: string;

@@ -1,10 +1,8 @@
 import React, { useMemo } from "react";
-import { useRouter } from "next/router";
-import Link from "next/link";
-
-// import CodeRoundSVG from "../../assets/icons/mdi_code_round.svg";
-// import LanguageRoundSVG from "../../assets/icons/mdi_language_round.svg";
 import styled from "@emotion/styled";
+import Link from "next/link";
+import { useRouter } from "next/router";
+import { GlobeIcon, CodeIcon } from "@radix-ui/react-icons";
 
 interface IToolbar {
   toQuicklook?: string;
@@ -27,13 +25,13 @@ export default function Toolbar({
             style={{ marginRight: 8 }}
             data-selected={isCodeSelected && "true"}
           >
-            {/* <CodeRoundSVG /> */}
+            <CodeIcon />
             Code Editor
           </TabButton>
         </Link>
         <Link href={toGlobalization}>
           <TabButton data-selected={!isCodeSelected && "true"}>
-            {/* <LanguageRoundSVG /> */}
+            <GlobeIcon />
             Language translation
           </TabButton>
         </Link>
