@@ -11,11 +11,11 @@ interface IToolbar {
   toGlobalization?: string;
 }
 
-const Toolbar: React.FC<IToolbar> = ({
+export default function Toolbar({
   toQuicklook = "#",
   toGlobalization = "#",
   children,
-}) => {
+}: React.PropsWithChildren<IToolbar>) {
   const { pathname } = useRouter();
   const isCodeSelected = useMemo(() => pathname === "/quicklook", [pathname]);
 
@@ -41,9 +41,7 @@ const Toolbar: React.FC<IToolbar> = ({
       {children}
     </Wrapper>
   );
-};
-
-export default Toolbar;
+}
 
 const Wrapper = styled.div`
   padding: 10px 12px;

@@ -7,7 +7,11 @@ interface IHeader {
   onClickBack?: () => void;
 }
 
-const Header: React.FC<IHeader> = ({ title, onClickBack, children }) => {
+export default function Header({
+  title,
+  onClickBack,
+  children,
+}: React.PropsWithChildren<IHeader>) {
   return (
     <Container>
       <LeftSide>
@@ -19,9 +23,7 @@ const Header: React.FC<IHeader> = ({ title, onClickBack, children }) => {
       {children}
     </Container>
   );
-};
-
-export default Header;
+}
 
 const Container = styled.div`
   display: flex;

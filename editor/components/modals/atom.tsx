@@ -6,13 +6,13 @@ export interface IModal {
   onClose: () => void;
 }
 
-const Modal: React.FC<IModal> = ({ isOpen, onClose, children }) => {
+function Modal({ isOpen, onClose, children }: React.PropsWithChildren<IModal>) {
   return (
     <ReactModal isOpen={isOpen} onRequestClose={onClose} style={modalStyles}>
       {children}
     </ReactModal>
   );
-};
+}
 
 export default Modal;
 

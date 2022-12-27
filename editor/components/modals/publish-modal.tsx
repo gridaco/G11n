@@ -6,12 +6,12 @@ interface IPublishModal extends IModal {
   title: string;
 }
 
-const PublishModal: React.FC<IPublishModal> = ({
+export default function PublishModal({
   isOpen,
   onClose,
   title,
   children,
-}) => {
+}: React.PropsWithChildren<IPublishModal>) {
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <Container>
@@ -31,9 +31,7 @@ const PublishModal: React.FC<IPublishModal> = ({
       </Container>
     </Modal>
   );
-};
-
-export default PublishModal;
+}
 
 const Container = styled.div`
   background: #ffffff;
