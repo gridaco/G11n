@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { PrismaService } from './prisma.service';
+import { PrismaService } from './.prisma/prisma.service';
 import { Term, Prisma } from '@prisma/client';
 
 @Injectable()
@@ -7,8 +7,14 @@ export class TermService {
   constructor(private prisma: PrismaService) {}
 
   async term(id: string): Promise<Term | null> {
-    return this.prisma.term.findUnique({
+    return await this.prisma.term.findUnique({
       where: { id: id },
+    });
+  }
+
+  async termByName(name: string): Promise<Term[] | null> {
+    return await this.prisma.term.findMany({
+      where: { name },
     });
   }
 
@@ -18,7 +24,7 @@ export class TermService {
     value?: string;
   }): Promise<Term[]> {
     const { langType, name, value } = params;
-    return this.prisma.term.findMany({
+    return await this.prisma.term.findMany({
       where: {
         langType,
         name,
@@ -28,7 +34,8 @@ export class TermService {
   }
 
   async createTerm(data: Prisma.TermCreateInput): Promise<Term> {
-    return this.prisma.term.create({
+    console.log(data);
+    return await this.prisma.term.create({
       data,
     });
   }
@@ -38,11 +45,15 @@ export class TermService {
     data: Prisma.TermUpdateInput;
   }): Promise<Term> {
     const { id, data } = params;
-    return this.prisma.term.update({
+    return await this.prisma.term.update({
       where: { id },
       data,
     });
   }
 
-  async deleteTerm(id: string) {}
+  async deleteTerm(id: string): Promise<Term> {
+    return await this.prisma.term.delete({
+      where: { id },
+    });
+  }
 }
