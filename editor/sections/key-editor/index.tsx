@@ -9,7 +9,7 @@ import {
   assets,
 } from "@bridged.xyz/base-sdk/lib";
 
-import { TextManifest } from "@reflect-ui/core";
+import type { RenderedTextManifest } from "@reflect-ui/core";
 import { TranslationSetForKey } from "../../components/g11n/translation-set-for-key";
 import { DesignGlobalizationRepository } from "@bridged.xyz/base-sdk/lib/g11n/repository";
 import { IGlobalizedKey, Translations } from "@bridged.xyz/base-sdk/lib/g11n";
@@ -125,7 +125,7 @@ function SingleKeyEditorCreateNewState(props: {
 
   const textValue =
     layer?.type === StorableLayerType.text
-      ? (layer?.data as TextManifest).text
+      ? (layer?.data as any as RenderedTextManifest).data
       : "this is not a text";
 
   const handleInitialTranslationChange = (locale: string, value: string) => {
