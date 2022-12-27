@@ -1,7 +1,7 @@
 import React, { useRef } from "react";
 import { IconButton } from "@mui/material";
 import styled from "@emotion/styled";
-
+import { MagnifyingGlassIcon } from "@radix-ui/react-icons";
 interface ISearchInputBox extends React.InputHTMLAttributes<HTMLInputElement> {
   containerStyle?: React.CSSProperties;
   placeholder?: string;
@@ -18,8 +18,8 @@ export default function SearchInputBox({
 
   return (
     <InputWrapper style={containerStyle} onClick={onClickInputWrapper}>
-      <IconButton aria-label="search">
-        <IconImage src="/assets/icons/mdi_search.svg" />
+      <IconButton aria-label="search" style={{ marginRight: 8 }}>
+        <MagnifyingGlassIcon />
       </IconButton>
       <Input
         ref={inputRef}
@@ -60,10 +60,4 @@ const Input = styled.input`
   &:focus {
     outline: 0;
   }
-`;
-
-const IconImage = styled.img`
-  width: 24px;
-  height: 24px;
-  margin-right: 8px;
 `;

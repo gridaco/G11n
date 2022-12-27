@@ -13,6 +13,7 @@ import { SceneRepositoryStore } from "repositories";
 import Select from "./select";
 import BottomBar from "./bottom-bar";
 import PublishModal from "components/modals/publish-modal";
+import { KeyboardIcon } from "@radix-ui/react-icons";
 
 interface ISceneKeyEditor {
   repository: DesignGlobalizationRepository;
@@ -80,7 +81,8 @@ const SceneKeyEditor: React.FC<ISceneKeyEditor> = ({ repository }) => {
             <span>Select</span>
           </OutlineButton>
           <Button>
-            <IconImage src="/assets/icons/mdi_vpn_key_round.svg" />
+            <KeyboardIcon color="white" />
+            <span style={{ width: 8 }} />
             <span>Add Key</span>
           </Button>
         </ButtonList>
@@ -183,14 +185,6 @@ const Button = styled.button`
     line-height: 1.2;
     color: #ffffff;
   }
-`;
-
-const IconImage = styled.img`
-  width: 24px;
-  height: 24px;
-  margin-right: 8px;
-  user-select: none;
-  -webkit-user-drag: none;
 `;
 
 const KeyLengthBadge = styled.div`
