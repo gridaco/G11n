@@ -6,13 +6,22 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
+  provider = "mongodb"
   url      = env("DATABASE_URL")
 }
 
 model Term {
-  id String @id @default(uuid())
+  id String @id @default(auto()) @map("_id") @db.ObjectId 
   langType String
   name String
   value String
 }
+
+
+// model Term {
+//   id String @id @default(auto()) @map("_id") @db.ObjectId
+//   name String // "brand"
+//   translations Json // {en:"Apple",. ko:"애플"}
+//   embeddable Boolean // true
+//   locales String[]
+// }
