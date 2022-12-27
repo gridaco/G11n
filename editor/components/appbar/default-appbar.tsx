@@ -2,7 +2,12 @@ import React, { useState } from "react";
 import Link from "next/link";
 import styled from "@emotion/styled";
 import { IconButton } from "@material-ui/core";
-
+import {
+  ArrowLeftIcon,
+  Share1Icon,
+  PlayIcon,
+  AvatarIcon,
+} from "@radix-ui/react-icons";
 export interface IDashboardAppBar {
   title?: string;
   backButton?: string;
@@ -28,7 +33,7 @@ export default function DashboardAppbar({
         <Link href="/">
           {!!backButton ? (
             <BackButton>
-              <BackButtonIconImage src="/assets/icons/mdi_navigate_before.svg" />
+              <ArrowLeftIcon />
               <span>{backButton}</span>
             </BackButton>
           ) : (
@@ -47,12 +52,12 @@ export default function DashboardAppbar({
             }}
             onClick={onClickShare || onClickOpenShare}
           >
-            <IconImage src="/assets/icons/mdi_ios_share.svg" />
+            <Share1Icon />
           </IconButton>
           <IconButton onClick={onClickPlay}>
-            <IconImage src="/assets/icons/mdi_play_arrow.svg" />
+            <PlayIcon />
           </IconButton>
-          <ProfileImage src="/assets/examples/profile.png" />
+          <AvatarIcon />
         </Toolbar>
       </Container>
     </>
@@ -86,6 +91,7 @@ const BackButton = styled.button`
     font-size: 14px;
     line-height: 1.2;
     letter-spacing: 0.3px;
+    margin-left: 8px;
     color: #a2a2a2;
   }
 
@@ -93,11 +99,6 @@ const BackButton = styled.button`
   &:focus {
     outline: 0;
   }
-`;
-
-const BackButtonIconImage = styled.img`
-  width: 24px;
-  height: 24px;
 `;
 
 const LogoImage = styled.img`
@@ -119,13 +120,6 @@ const Title = styled.span`
 const Toolbar = styled.div`
   display: flex;
   align-items: center;
-`;
-
-const IconImage = styled.img`
-  width: 24px;
-  height: 24px;
-  user-select: none;
-  -webkit-user-drag: none;
 `;
 
 const ProfileImage = styled.img`
