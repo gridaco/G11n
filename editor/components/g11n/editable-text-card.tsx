@@ -1,8 +1,8 @@
 import React, { useState, useMemo } from "react";
 import { useRecoilState } from "recoil";
 import styled from "@emotion/styled";
-import { GlobalizedKey, IGlobalizedKey } from "@bridged.xyz/base-sdk/lib/g11n";
-import { assets } from "@bridged.xyz/base-sdk";
+import { GlobalizedKey, IGlobalizedKey } from "@base-sdk/g11n";
+import { assets } from "@base-sdk/base";
 
 import { currentEditorialLocaleAtom } from "../../states/editor-state";
 import { TranslationFieldRow } from "./translation-field";
@@ -16,10 +16,9 @@ interface IEditableTextCard {
 const EditableTextCard: React.FC<IEditableTextCard> = ({ translation }) => {
   const [isOpen, setIsOpen] = useState(false);
 
-  const translations = useMemo(
-    () => Object.keys(translation.translations),
-    [translation.translations]
-  );
+  const translations = useMemo(() => Object.keys(translation.translations), [
+    translation.translations,
+  ]);
 
   const [editorialLoclae] = useRecoilState(currentEditorialLocaleAtom);
   const defaultLocaleTranslationValue =

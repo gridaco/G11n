@@ -1,5 +1,5 @@
-import { assets } from "@bridged.xyz/base-sdk";
-import { Translations } from "@bridged.xyz/base-sdk/lib/g11n";
+import { assets } from "@base-sdk/base";
+import { Translations } from "@base-sdk/g11n";
 import React from "react";
 import { TranslationFieldRow } from "../translation-field";
 

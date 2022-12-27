@@ -1,6 +1,6 @@
 import React from "react";
 import { useRecoilValue } from "recoil";
-import { DesignGlobalizationRepositoriesStore } from "@bridged.xyz/base-sdk/lib/g11n/repository";
+import { DesignGlobalizationRepositoriesStore } from "@base-sdk/g11n";
 import { targetLayerSelector } from "../../states";
 import SceneKeyEditor from "../scene-key-editor";
 import SingleKeyEditor from "../key-editor";

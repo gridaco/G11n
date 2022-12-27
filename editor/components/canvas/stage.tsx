@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Stage, Layer, Text, Image, Group, Rect } from "react-konva";
 import useImage from "use-image";
-import { StorableLayerType } from "@bridged.xyz/base-sdk/lib";
+import { StorableLayerType } from "@base-sdk/base";
 import {
   currentTextEditValueAtom,
   editorState,
@@ -13,7 +13,6 @@ import { converters } from "@reflect-ui/core";
 import {
   useRecoilBridgeAcrossReactRoots_UNSTABLE,
   useRecoilState,
-  useRecoilValue,
 } from "recoil";
 import { SelectableLayer } from "../../components/canvas/selectable-layer";
 import { SceneLocalRepository } from "../../repositories";
@@ -21,7 +20,7 @@ import { SceneLocalRepository } from "../../repositories";
 import {
   DesignGlobalizationRepositoriesStore,
   DesignGlobalizationRepository,
-} from "@bridged.xyz/base-sdk/lib/g11n/repository";
+} from "@base-sdk/g11n";
 import { currentEditorialLocaleAtom } from "../../states/editor-state";
 
 const CanvasStage = (props: { sceneRepository?: SceneLocalRepository }) => {
@@ -40,11 +39,11 @@ const CanvasStage = (props: { sceneRepository?: SceneLocalRepository }) => {
   const [selectionLayerId, setSelectionLayerId] = useState<string>();
 
   // https://github.com/konvajs/react-konva/issues/533
-  const RecoilBridge = useRecoilBridgeAcrossReactRoots_UNSTABLE();
+  // const RecoilBridge = useRecoilBridgeAcrossReactRoots_UNSTABLE();
 
   if (scene && typeof window !== "undefined") {
     console.log("sceneRepository", sceneRepository);
-    console.log("layers", scene.layers);
+    console.log("layers", scene['layers']);
     return (
       <div
         style={{
@@ -75,10 +74,10 @@ const CanvasStage = (props: { sceneRepository?: SceneLocalRepository }) => {
             }
           }}
         >
-          <RecoilBridge>
+          {/* <RecoilBridge> */}
             <Layer key="main-layer">
               <StageBG width={scene.width} height={scene.height} fill="white" />
-              {scene.layers
+              {scene['layers']
                 .sort((a, b) => a.index - b.index)
                 .map((e) => {
                   console.log(e);
@@ -127,7 +126,7 @@ const CanvasStage = (props: { sceneRepository?: SceneLocalRepository }) => {
                   }
                 })}
             </Layer>
-          </RecoilBridge>
+          {/* </RecoilBridge> */}
         </Stage>
       </div>
     );

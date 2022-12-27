@@ -1,8 +1,8 @@
 import React, { useEffect, useState, useMemo } from "react";
 import { useRecoilState } from "recoil";
 import styled from "@emotion/styled";
-import { DesignGlobalizationRepository } from "@bridged.xyz/base-sdk/lib/g11n/repository";
-import { LayerTranslation } from "@bridged.xyz/base-sdk/lib/g11n";
+import { DesignGlobalizationRepository } from "@base-sdk/g11n";
+import { LayerTranslation } from "@base-sdk/g11n";
 import { useQueryParam, NumberParam, withDefault } from "use-query-params";
 
 import Toolbar from "../../components/toolbar";
@@ -41,7 +41,7 @@ const SceneKeyEditor: React.FC<ISceneKeyEditor> = ({ repository }) => {
   let sceneName = "loading...";
   if (repository) {
     sceneName =
-      SceneRepositoryStore.find(repository.sceneId).scene.name ??
+      SceneRepositoryStore.find(repository.sceneId).scene.rawname ??
       "no-named scene";
   }
 

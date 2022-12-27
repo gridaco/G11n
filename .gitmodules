@@ -1,3 +1,0 @@
-[submodule "packages/base-sdk"]
-	path = packages/base-sdk
-	url = https://github.com/bridgedxyz/base-sdk-ts

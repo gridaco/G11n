@@ -1,7 +1,7 @@
-import * as dynamoose from 'dynamoose';
-import { AssetType } from '@bridged.xyz/base-sdk/lib/assets';
-import { PlaceholderType } from '@bridged.xyz/base-sdk/lib/g11n';
-import { nanoid } from 'nanoid';
+import * as dynamoose from "dynamoose";
+import { AssetType } from "@base-sdk/assets";
+import { PlaceholderType } from "@base-sdk/g11n";
+import { nanoid } from "nanoid";
 
 /**
  * the key manifest for globallized assets.
@@ -93,7 +93,7 @@ const PlaceholderSchema = new dynamoose.Schema(
     },
     type: {
       type: String,
-      enum: ['NUMBER', 'DATE', 'BOOLEAN', 'TEXT', 'CURRENCY'],
+      enum: ["NUMBER", "DATE", "BOOLEAN", "TEXT", "CURRENCY"],
       required: true,
     },
   },
@@ -111,7 +111,7 @@ const LayerKeyMapSchema = new dynamoose.Schema({
     type: String,
     required: true,
     index: {
-      name: 'projectIndex',
+      name: "projectIndex",
       global: true,
     },
   },
@@ -119,7 +119,7 @@ const LayerKeyMapSchema = new dynamoose.Schema({
     type: String,
     required: true,
     index: {
-      name: 'keyIndex',
+      name: "keyIndex",
       global: true,
     },
   },
@@ -127,7 +127,7 @@ const LayerKeyMapSchema = new dynamoose.Schema({
     type: String,
     required: true,
     index: {
-      name: 'sceneIndex',
+      name: "sceneIndex",
       global: true,
     },
   },
@@ -135,7 +135,7 @@ const LayerKeyMapSchema = new dynamoose.Schema({
     type: String,
     required: true,
     index: {
-      name: 'layerIndex',
+      name: "layerIndex",
       global: true,
     },
   },
@@ -161,14 +161,14 @@ const KeySchema = new dynamoose.Schema(
     type: {
       type: String,
       enum: [
-        'URI',
-        'TEXT',
-        'IMAGE',
-        'ICON',
-        'ILLUST',
-        'COLOR',
-        'FILE',
-        'UNKNOWN',
+        "URI",
+        "TEXT",
+        "IMAGE",
+        "ICON",
+        "ILLUST",
+        "COLOR",
+        "FILE",
+        "UNKNOWN",
       ],
       required: true,
     },

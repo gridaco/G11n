@@ -1,4 +1,5 @@
-import { StorableLayer, StorableScene } from "@bridged.xyz/base-sdk/lib";
+import { StorableLayer } from "@base-sdk/base";
+import { SceneRecord } from "@base-sdk/scene-store";
 
 // NOT USING
 export class SceneRepositoryStore {
@@ -8,7 +9,7 @@ export class SceneRepositoryStore {
     return this.repositories.find((r) => r.scene.id == scene)!;
   }
 
-  static make(scene: StorableScene) {
+  static make(scene: SceneRecord) {
     const newRepository = new SceneLocalRepository(scene);
     this.repositories.push(newRepository);
     console.log("made sceneRepository", newRepository);
@@ -18,11 +19,12 @@ export class SceneRepositoryStore {
 
 export class SceneLocalRepository {
   readonly id: string;
-  constructor(readonly scene: StorableScene) {
+  constructor(readonly scene: SceneRecord) {
     this.id = scene.id!;
   }
 
   layer(id: string): StorableLayer {
-    return this.scene.layers.find((e) => e.nodeId == id)!;
+    // TODO: not tested
+    return this.scene.raw["layers"].find((e) => e.nodeId == id)!;
   }
 }

@@ -1,4 +1,4 @@
-const withTM = require("next-transpile-modules")(["@bridged.xyz/base-sdk"]);
+const withTM = require("next-transpile-modules")([]);
 
 module.exports = withTM({
   webpack: (config, { buildId, dev, isServer, defaultLoaders, webpack }) => {
