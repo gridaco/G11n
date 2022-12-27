@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { usePinch } from "react-use-gesture";
 import styled from "@emotion/styled";
-import Background from "../../components/canvas/background";
+import Background from "components/canvas/background";
 
 export default function CanvasPreview(props: {
   onBackgroundClick: (e: any) => void;

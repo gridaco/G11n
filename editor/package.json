@@ -19,6 +19,7 @@
     "@reflect-ui/core": "^0.0.10",
     "eslint-config-next": "^13.1.1",
     "framer-motion": "^8.0.2",
+    "immer": "^9.0.16",
     "konva": "^7.2.1",
     "next": "^13.1.1",
     "query-string": "^7.0.0",

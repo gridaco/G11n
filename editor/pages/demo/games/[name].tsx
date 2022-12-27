@@ -1,9 +1,9 @@
 import { Button, TextField, Typography } from "@mui/material";
 import { useRouter } from "next/router";
 import React, { useEffect, useRef, useState } from "react";
-import { DefaultScaffoldLayoyt } from "../../../layouts/default-layout";
-import { InnerEditorWorkspace } from "../../../scaffolds/editor/inner-editor-workspace";
-import { RealtimeEditEditorClient } from "../../../services/realtime-edit";
+import { DefaultScaffoldLayoyt } from "layouts/default-layout";
+import { InnerEditorWorkspace } from "scaffolds/editor/inner-editor-workspace";
+import { RealtimeEditEditorClient } from "services/realtime-edit";
 
 const DEFAULT_GAMES_DEMO_REGISTRY_BASE =
   "https://bridged-service-demo.s3-us-west-1.amazonaws.com/";

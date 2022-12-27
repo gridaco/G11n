@@ -1,6 +1,6 @@
 import { useRecoilState } from "recoil";
 import React from "react";
-import { currentEditorialLocaleAtom } from "../../states/editor-state";
+import { currentEditorialLocaleAtom } from "states/editor-state";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 

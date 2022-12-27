@@ -5,14 +5,14 @@ import { DesignGlobalizationRepository } from "@base-sdk/g11n";
 import { LayerTranslation } from "@base-sdk/g11n";
 import { useQueryParam, NumberParam, withDefault } from "use-query-params";
 
-import Toolbar from "../../components/toolbar";
-import EditableTextCard from "../../components/g11n/editable-text-card";
-import SearchInputBox from "../../components/search/search-input-box";
-import { currentEditorialLocaleAtom } from "../../states/editor-state";
-import { SceneRepositoryStore } from "../../repositories";
+import Toolbar from "components/toolbar";
+import EditableTextCard from "components/g11n/editable-text-card";
+import SearchInputBox from "components/search/search-input-box";
+import { currentEditorialLocaleAtom } from "states/editor-state";
+import { SceneRepositoryStore } from "repositories";
 import Select from "./select";
 import BottomBar from "./bottom-bar";
-import PublishModal from "../../components/modals/publish-modal";
+import PublishModal from "components/modals/publish-modal";
 
 interface ISceneKeyEditor {
   repository: DesignGlobalizationRepository;

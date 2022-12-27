@@ -2,7 +2,7 @@ import React from "react";
 import { useRecoilState } from "recoil";
 import styled from "@emotion/styled";
 import TextInput from "./text-input";
-import { currentTextEditValueAtom } from "../../states";
+import { currentTextEditValueAtom } from "states";
 
 /**
  * single field with translation compatability

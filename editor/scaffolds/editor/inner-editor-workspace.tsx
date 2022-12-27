@@ -2,7 +2,7 @@ import React from "react";
 import { useRecoilState } from "recoil";
 import { Resizable } from "re-resizable";
 import styled from "@emotion/styled";
-import { editorState } from "../../states/text-editor.state";
+import { editorState } from "states/text-editor.state";
 import CanvasPreview from "../preview";
 
 export function InnerEditorWorkspace(props: {

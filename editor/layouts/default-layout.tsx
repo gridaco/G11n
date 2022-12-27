@@ -1,5 +1,5 @@
 import React from "react";
-import Appbar from "../components/appbar/default-appbar";
+import Appbar from "components/appbar/default-appbar";
 import { LinearProgress } from "@mui/material";
 import Head from "next/head";
 

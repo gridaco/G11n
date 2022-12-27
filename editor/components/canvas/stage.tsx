@@ -5,8 +5,8 @@ import { StorableLayerType } from "@base-sdk/base";
 import {
   currentTextEditValueAtom,
   editorState,
-} from "../../states/text-editor.state";
-import { targetLayerIdAtom } from "../../states/preview-canvas.state";
+} from "states/text-editor.state";
+import { targetLayerIdAtom } from "states/preview-canvas.state";
 import type { CGRectManifest,  RenderedTextManifest } from "@reflect-ui/core";
 import  { ColorFormat } from "@reflect-ui/core";
 import { converters } from "@reflect-ui/core";
@@ -14,14 +14,14 @@ import {
   useRecoilBridgeAcrossReactRoots_UNSTABLE,
   useRecoilState,
 } from "recoil";
-import { SelectableLayer } from "../../components/canvas/selectable-layer";
-import { SceneLocalRepository } from "../../repositories";
+import { SelectableLayer } from "components/canvas/selectable-layer";
+import { SceneLocalRepository } from "repositories";
 
 import {
   DesignGlobalizationRepositoriesStore,
   DesignGlobalizationRepository,
 } from "@base-sdk/g11n";
-import { currentEditorialLocaleAtom } from "../../states/editor-state";
+import { currentEditorialLocaleAtom } from "states/editor-state";
 
 const CanvasStage = (props: { sceneRepository?: SceneLocalRepository }) => {
   const { sceneRepository } = props;

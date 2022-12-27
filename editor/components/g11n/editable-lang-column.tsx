@@ -1,9 +1,9 @@
 import React from "react";
 import { Typography, Input } from "@mui/material";
 
-import IconEn from "../../assets/lang-icon-en";
-import IconKr from "../../assets/lang-icon-kr";
-import IconJp from "../../assets/lang-icon-jp";
+import IconEn from "assets/lang-icon-en";
+import IconKr from "assets/lang-icon-kr";
+import IconJp from "assets/lang-icon-jp";
 
 const EditableLangColumn = () => {
   const langIcon = (type: string) => {
