@@ -12,6 +12,7 @@ import {
 } from "@base-sdk/g11n";
 import { DefaultScaffoldLayoyt } from "../layouts/default-layout";
 import { InnerStaticAppEditorWorkspace } from "../sections/editor/inner-static-app-editor-workspace";
+import { makeService } from "../services/scene-store";
 
 export default function Home() {
   const router = useRouter();
@@ -27,12 +28,12 @@ export default function Home() {
   ] = useState<DesignGlobalizationRepository>();
   const [targetSceneId, setTargetSceneId] = useRecoilState(targetSceneIdAtom);
 
+  const service = React.useMemo(() => makeService(), []);
+
   useEffect(() => {
     if (sceneId && !sceneRepository) {
       console.log("fetching scene data");
-      const service = new SceneStoreService({
-        type: "auto-browser-otp",
-      });
+
       service.get(sceneId).then((response) => {
         console.log("response", response);
         const scene = response;
