@@ -25,6 +25,7 @@ export class SceneLocalRepository {
 
   layer(id: string): StorableLayer {
     // TODO: not tested
-    return this.scene.raw["layers"].find((e) => e.nodeId == id)!;
+    // @ts-ignore
+    return this.scene.layers.find((e) => e.nodeId == id)!;
   }
 }

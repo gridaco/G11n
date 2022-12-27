@@ -1,7 +1,7 @@
 import "../styles/globals.css";
 import { RecoilRoot } from "recoil";
 import React from "react";
-import QueryParamProvider from "../components/query-param-provider";
+import QueryParamProvider from "components/query-param-provider";
 
 function App({ Component, pageProps }) {
   return (

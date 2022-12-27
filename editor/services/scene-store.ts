@@ -21,3 +21,12 @@ export function makeService() {
     }
   }
 }
+
+export function makeDummyService() {
+  return {
+    get: async (id) => {
+      const res = await fetch(`/globalization/api/dummy/${id}`);
+      return await res.json();
+    },
+  };
+}

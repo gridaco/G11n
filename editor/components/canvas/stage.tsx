@@ -5,8 +5,8 @@ import { StorableLayerType } from "@base-sdk/base";
 import {
   currentTextEditValueAtom,
   editorState,
-} from "../../states/text-editor.state";
-import { targetLayerIdAtom } from "../../states/preview-canvas.state";
+} from "states/text-editor.state";
+import { targetLayerIdAtom } from "states/preview-canvas.state";
 import type { CGRectManifest,  RenderedTextManifest } from "@reflect-ui/core";
 import  { ColorFormat } from "@reflect-ui/core";
 import { converters } from "@reflect-ui/core";
@@ -14,21 +14,19 @@ import {
   useRecoilBridgeAcrossReactRoots_UNSTABLE,
   useRecoilState,
 } from "recoil";
-import { SelectableLayer } from "../../components/canvas/selectable-layer";
-import { SceneLocalRepository } from "../../repositories";
+import { SelectableLayer } from "components/canvas/selectable-layer";
+import { SceneLocalRepository } from "repositories";
 
 import {
   DesignGlobalizationRepositoriesStore,
   DesignGlobalizationRepository,
 } from "@base-sdk/g11n";
-import { currentEditorialLocaleAtom } from "../../states/editor-state";
-
+import { currentEditorialLocaleAtom } from "states/editor-state";
 const CanvasStage = (props: { sceneRepository?: SceneLocalRepository }) => {
   const { sceneRepository } = props;
   const scene = sceneRepository?.scene;
-  const designGlobalizationRepository = DesignGlobalizationRepositoriesStore.find(
-    scene?.id!
-  );
+  const designGlobalizationRepository =
+    DesignGlobalizationRepositoriesStore.find(scene?.id!);
 
   // const [locale,] = useRecoilState(currentEditorialLocaleAtom)
   // const translatedText = designGlobalizationRepository.fetchTranslation(id)
@@ -39,11 +37,12 @@ const CanvasStage = (props: { sceneRepository?: SceneLocalRepository }) => {
   const [selectionLayerId, setSelectionLayerId] = useState<string>();
 
   // https://github.com/konvajs/react-konva/issues/533
-  // const RecoilBridge = useRecoilBridgeAcrossReactRoots_UNSTABLE();
+  const RecoilBridge = useRecoilBridgeAcrossReactRoots_UNSTABLE();
 
   if (scene && typeof window !== "undefined") {
-    console.log("sceneRepository", sceneRepository);
-    console.log("layers", scene['layers']);
+    // console.log("sceneRepository", sceneRepository);
+    // @ts-ignore
+    console.log("layers", scene.layers);
     return (
       <div
         style={{
@@ -57,8 +56,11 @@ const CanvasStage = (props: { sceneRepository?: SceneLocalRepository }) => {
             position: "relative",
             margin: "auto",
           }}
-          width={scene.width}
-          height={scene.height}
+          // width={scene.width}
+          width={400}
+          // height={scene.height}
+          height={800}
+          background="white"
           onClick={(e) => {
             const targetId = e.target.attrs.id;
             setTargetLayerId(targetId);
@@ -74,10 +76,11 @@ const CanvasStage = (props: { sceneRepository?: SceneLocalRepository }) => {
             }
           }}
         >
-          {/* <RecoilBridge> */}
+          <RecoilBridge>
             <Layer key="main-layer">
               <StageBG width={scene.width} height={scene.height} fill="white" />
-              {scene['layers']
+              {/* @ts-ignore */}
+              {scene.layers
                 .sort((a, b) => a.index - b.index)
                 .map((e) => {
                   console.log(e);
@@ -91,7 +94,7 @@ const CanvasStage = (props: { sceneRepository?: SceneLocalRepository }) => {
                           key={e.nodeId}
                           id={e.nodeId}
                           selected={selectionLayerId === e.nodeId}
-                          manifest={e.data as any as RenderedTextManifest}
+                          manifest={e.data as RenderedTextManifest}
                           width={e.width}
                           height={e.height}
                           onFocusChange={(id: string, focus: boolean) => {
@@ -126,7 +129,7 @@ const CanvasStage = (props: { sceneRepository?: SceneLocalRepository }) => {
                   }
                 })}
             </Layer>
-          {/* </RecoilBridge> */}
+          </RecoilBridge>
         </Stage>
       </div>
     );
@@ -146,10 +149,7 @@ function StageBG(props: { width: number; height: number; fill: string }) {
 function CGRect(props: { data: CGRectManifest }) {
   const fill =
     props.data.fill !== undefined
-      ? converters.color.convertReflectColorToUniversal(
-          props.data.fill,
-          ColorFormat.hex6
-        )
+      ? converters.color.convertReflectColorToUniversal(props.data.fill, ColorFormat.hex6)
       : undefined;
   const opacity = converters.color.fetchColrOpacity(props.data.fill);
   const borderRadius =
@@ -211,7 +211,8 @@ function EditableG11nText(props: {
   repository: DesignGlobalizationRepository;
   onFocusChange: (id: string, focus: boolean) => void;
 }) {
-  let defaulttext = props.manifest.data;
+  // @ts-ignore
+  let defaulttext = props.manifest.text;
   const [translatedText, setTranslatedText] = useState<string>(defaulttext);
 
   // useEffect(() => {

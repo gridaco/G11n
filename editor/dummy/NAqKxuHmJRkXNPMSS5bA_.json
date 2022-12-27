@@ -1,0 +1,2586 @@
+{
+  "id": "NAqKxuHmJRkXNPMSS5bA_",
+  "name": "/desk",
+  "widht": 375,
+  "height": 812,
+  "nodeId": "5341:171010",
+  "layers": [
+    {
+      "data": {
+        "style": {
+          "letterSpacing": 0,
+          "fontSize": 14,
+          "fontFamily": "SF Pro Text",
+          "color": {
+            "a": 1,
+            "r": 0,
+            "b": 0,
+            "g": 0
+          },
+          "decoration": 0,
+          "fontWeight": "w600"
+        },
+        "text": "9:41",
+        "textAlignVertical": "start",
+        "textAlign": "center"
+      },
+      "name": "↳ Time",
+      "width": 54,
+      "x": 21,
+      "index": 13,
+      "y": 16,
+      "sdkVersion": "v2020.0",
+      "type": "TEXT",
+      "nodeId": "I5341:171033;1614:109585",
+      "height": 17
+    },
+    {
+      "data": {
+        "width": 54,
+        "borderRadius": {
+          "all": 0
+        },
+        "opacity": 1,
+        "height": 21
+      },
+      "name": "(bg-converted) Time Style",
+      "width": 54,
+      "x": 21,
+      "index": -12,
+      "y": 13,
+      "sdkVersion": "v2020.0",
+      "type": "RECT",
+      "nodeId": "I5341:171033;1614:109584",
+      "height": 21
+    },
+    {
+      "data": {
+        "width": 24.32803726196289,
+        "src": "https://resource-hosting.s3.us-west-1.amazonaws.com/7BsLNl-V-[object Object]",
+        "height": 11.333333015441895
+      },
+      "name": "Battery",
+      "width": 24.32803726196289,
+      "x": 336,
+      "index": 9,
+      "y": 17.33331298828125,
+      "sdkVersion": "v2020.0",
+      "type": "VANILLA",
+      "nodeId": "I5341:171033;1614:109571",
+      "height": 11.333333015441895
+    },
+    {
+      "data": {
+        "borderRadius": {
+          "all": 0
+        },
+        "width": 375,
+        "height": 44
+      },
+      "name": "(bg-converted) Rectangle",
+      "width": 375,
+      "x": 0,
+      "index": -8,
+      "y": 0,
+      "sdkVersion": "v2020.0",
+      "type": "RECT",
+      "nodeId": "I5341:171033;1614:109570",
+      "height": 44
+    },
+    {
+      "data": {
+        "width": 375,
+        "borderRadius": {
+          "all": 0
+        },
+        "opacity": 1,
+        "height": 44
+      },
+      "name": "(bg-converted) iPhone X/Status Bars/Status Bar (Black)",
+      "width": 375,
+      "x": 0,
+      "index": -7,
+      "y": 0,
+      "sdkVersion": "v2020.0",
+      "type": "RECT",
+      "nodeId": "I5341:171033;1614:109569",
+      "height": 44
+    },
+    {
+      "data": {
+        "width": 375,
+        "borderRadius": {
+          "all": 0
+        },
+        "fill": {
+          "a": 1,
+          "r": 1,
+          "b": 1,
+          "g": 1
+        },
+        "opacity": 1,
+        "height": 44
+      },
+      "name": "(bg-converted) iPhone X/Status Bars/Status Bar (Black)",
+      "width": 375,
+      "x": 0,
+      "index": -6,
+      "y": 0,
+      "sdkVersion": "v2020.0",
+      "type": "RECT",
+      "nodeId": "5341:171033",
+      "height": 44
+    },
+    {
+      "data": {
+        "width": 54,
+        "src": "https://resource-hosting.s3.us-west-1.amazonaws.com/aPTrRS-i-[object Object]",
+        "height": 54
+      },
+      "name": "shape/rounded/rec-54",
+      "width": 54,
+      "x": 24,
+      "index": 7,
+      "y": 68,
+      "sdkVersion": "v2020.0",
+      "type": "VANILLA",
+      "nodeId": "I5341:171032;4577:578;1545:14063",
+      "height": 54
+    },
+    {
+      "data": {
+        "width": 54,
+        "borderRadius": {
+          "all": 0
+        },
+        "opacity": 1,
+        "height": 54
+      },
+      "name": "(bg-converted) shape/rounded/rec-54",
+      "width": 54,
+      "x": 24,
+      "index": -7,
+      "y": 68,
+      "sdkVersion": "v2020.0",
+      "type": "RECT",
+      "nodeId": "I5341:171032;4577:578;1545:14063",
+      "height": 54
+    },
+    {
+      "data": {
+        "width": 20,
+        "src": "https://resource-hosting.s3.us-west-1.amazonaws.com/mwao57fA-[object Object]",
+        "height": 20
+      },
+      "name": "Ellipse 420",
+      "width": 20,
+      "x": 41,
+      "index": 8,
+      "y": 85,
+      "sdkVersion": "v2020.0",
+      "type": "VANILLA",
+      "nodeId": "I5341:171032;4577:578;3827:4018",
+      "height": 20
+    },
+    {
+      "data": {
+        "style": {
+          "letterSpacing": 0,
+          "fontSize": 22,
+          "fontFamily": "Roboto",
+          "color": {
+            "a": 1,
+            "r": 1,
+            "b": 1,
+            "g": 1
+          },
+          "decoration": 0,
+          "fontWeight": "w700"
+        },
+        "text": "Ge",
+        "textAlignVertical": "center",
+        "textAlign": "center"
+      },
+      "name": "Ge",
+      "width": 42,
+      "x": 30,
+      "index": 9,
+      "y": 74,
+      "sdkVersion": "v2020.0",
+      "type": "TEXT",
+      "nodeId": "I5341:171032;4577:578;1545:14283",
+      "height": 42
+    },
+    {
+      "data": {
+        "width": 54,
+        "borderRadius": {
+          "all": 0
+        },
+        "opacity": 1,
+        "height": 54
+      },
+      "name": "(bg-converted) profile/54",
+      "width": 54,
+      "x": 24,
+      "index": -6,
+      "y": 68,
+      "sdkVersion": "v2020.0",
+      "type": "RECT",
+      "nodeId": "I5341:171032;4577:578",
+      "height": 54
+    },
+    {
+      "data": {
+        "style": {
+          "name": "Roboto/Headline/H5-18-B",
+          "letterSpacing": 0,
+          "fontSize": 18,
+          "fontFamily": "Roboto",
+          "decoration": 0,
+          "fontWeight": "w700"
+        },
+        "text": "Genoplan healthcare",
+        "textAlignVertical": "start",
+        "textAlign": "left"
+      },
+      "name": "title",
+      "width": 209,
+      "x": 98,
+      "index": 8,
+      "y": 73.5,
+      "sdkVersion": "v2020.0",
+      "type": "TEXT",
+      "nodeId": "I5341:171032;4577:599",
+      "height": 21
+    },
+    {
+      "data": {
+        "style": {
+          "name": "Roboto/Overline/12-R",
+          "letterSpacing": 0,
+          "fontSize": 12,
+          "fontFamily": "Roboto",
+          "decoration": 0,
+          "fontWeight": "w400"
+        },
+        "text": "Admin",
+        "textAlignVertical": "start",
+        "textAlign": "left"
+      },
+      "name": "common-words/agent",
+      "width": 35,
+      "x": 98,
+      "index": 10,
+      "y": 102.5,
+      "sdkVersion": "v2020.0",
+      "type": "TEXT",
+      "nodeId": "I5341:171032;4577:601",
+      "height": 14
+    },
+    {
+      "data": {
+        "style": {
+          "name": "Roboto/Overline/12-R",
+          "letterSpacing": 0,
+          "fontSize": 12,
+          "fontFamily": "Roboto",
+          "decoration": 0,
+          "fontWeight": "w400"
+        },
+        "text": "·",
+        "textAlignVertical": "start",
+        "textAlign": "left"
+      },
+      "name": "common-words/·",
+      "width": 4,
+      "x": 135,
+      "index": 11,
+      "y": 102.5,
+      "sdkVersion": "v2020.0",
+      "type": "TEXT",
+      "nodeId": "I5341:171032;4577:602",
+      "height": 14
+    },
+    {
+      "data": {
+        "style": {
+          "name": "Roboto/Overline/12-R",
+          "letterSpacing": 0,
+          "fontSize": 12,
+          "fontFamily": "Roboto",
+          "decoration": 0,
+          "fontWeight": "w400"
+        },
+        "text": "Joined at 2020-07-02",
+        "textAlignVertical": "start",
+        "textAlign": "left"
+      },
+      "name": "common-words/joined-at-date",
+      "width": 114,
+      "x": 141,
+      "index": 12,
+      "y": 102.5,
+      "sdkVersion": "v2020.0",
+      "type": "TEXT",
+      "nodeId": "I5341:171032;4577:603",
+      "height": 14
+    },
+    {
+      "data": {
+        "width": 157,
+        "borderRadius": {
+          "all": 0
+        },
+        "opacity": 1,
+        "height": 14
+      },
+      "name": "(bg-converted) Frame 1227",
+      "width": 157,
+      "x": 98,
+      "index": -9,
+      "y": 102.5,
+      "sdkVersion": "v2020.0",
+      "type": "RECT",
+      "nodeId": "I5341:171032;4577:600",
+      "height": 14
+    },
+    {
+      "data": {
+        "width": 209,
+        "borderRadius": {
+          "all": 0
+        },
+        "opacity": 1,
+        "height": 43
+      },
+      "name": "(bg-converted) text/set-2",
+      "width": 209,
+      "x": 98,
+      "index": -7,
+      "y": 73.5,
+      "sdkVersion": "v2020.0",
+      "type": "RECT",
+      "nodeId": "I5341:171032;4577:598",
+      "height": 43
+    },
+    {
+      "data": {
+        "width": 24,
+        "src": "https://resource-hosting.s3.us-west-1.amazonaws.com/E4z_2pCR-[object Object]",
+        "height": 24
+      },
+      "name": "icon/material/mdi_arrow_drop_down",
+      "width": 24,
+      "x": 327,
+      "index": 8,
+      "y": 83,
+      "sdkVersion": "v2020.0",
+      "type": "VANILLA",
+      "nodeId": "I5341:171032;4577:595",
+      "height": 24
+    },
+    {
+      "data": {
+        "width": 24,
+        "borderRadius": {
+          "all": 0
+        },
+        "opacity": 1,
+        "height": 24
+      },
+      "name": "(bg-converted) icon/material/mdi_arrow_drop_down",
+      "width": 24,
+      "x": 327,
+      "index": -8,
+      "y": 83,
+      "sdkVersion": "v2020.0",
+      "type": "RECT",
+      "nodeId": "I5341:171032;4577:595",
+      "height": 24
+    },
+    {
+      "data": {
+        "width": 327,
+        "borderRadius": {
+          "all": 0
+        },
+        "opacity": 1,
+        "height": 54
+      },
+      "name": "(bg-converted) sections/all/header-workspace",
+      "width": 327,
+      "x": 24,
+      "index": -5,
+      "y": 68,
+      "sdkVersion": "v2020.0",
+      "type": "RECT",
+      "nodeId": "5341:171032",
+      "height": 54
+    },
+    {
+      "data": {
+        "width": 327,
+        "src": "https://resource-hosting.s3.us-west-1.amazonaws.com/AuWI57x2-[object Object]",
+        "height": 8
+      },
+      "name": "Rectangle 1139",
+      "width": 327,
+      "x": 24,
+      "index": 1,
+      "y": 146,
+      "sdkVersion": "v2020.0",
+      "type": "VANILLA",
+      "nodeId": "5341:171011",
+      "height": 8
+    },
+    {
+      "data": {
+        "style": {
+          "name": "Roboto/Subtitle/2-14-M",
+          "letterSpacing": 0,
+          "fontSize": 14,
+          "fontFamily": "Roboto",
+          "decoration": 0,
+          "fontWeight": "w500"
+        },
+        "text": "Recently",
+        "textAlignVertical": "start",
+        "textAlign": "left"
+      },
+      "name": "Recently",
+      "width": 327,
+      "x": 24,
+      "index": 4,
+      "y": 162,
+      "sdkVersion": "v2020.0",
+      "type": "TEXT",
+      "nodeId": "I5341:171013;1622:1241",
+      "height": 16
+    },
+    {
+      "data": {
+        "width": 327,
+        "borderRadius": {
+          "all": 0
+        },
+        "opacity": 1,
+        "height": 16
+      },
+      "name": "(bg-converted) Card Title-sub",
+      "width": 327,
+      "x": 24,
+      "index": -3,
+      "y": 162,
+      "sdkVersion": "v2020.0",
+      "type": "RECT",
+      "nodeId": "5341:171013",
+      "height": 16
+    },
+    {
+      "data": {
+        "width": 32,
+        "src": "https://resource-hosting.s3.us-west-1.amazonaws.com/LOPyxj2n-[object Object]",
+        "height": 32
+      },
+      "name": "icon/32/square/kit",
+      "width": 32,
+      "x": 24,
+      "index": 7,
+      "y": 198,
+      "sdkVersion": "v2020.0",
+      "type": "VANILLA",
+      "nodeId": "I5341:171015;4531:288",
+      "height": 32
+    },
+    {
+      "data": {
+        "width": 32,
+        "borderRadius": {
+          "all": 0
+        },
+        "opacity": 1,
+        "height": 32
+      },
+      "name": "(bg-converted) icon/32/square/kit",
+      "width": 32,
+      "x": 24,
+      "index": -7,
+      "y": 198,
+      "sdkVersion": "v2020.0",
+      "type": "RECT",
+      "nodeId": "I5341:171015;4531:288",
+      "height": 32
+    },
+    {
+      "data": {
+        "style": {
+          "name": "Roboto/Subtitle/1-16-M",
+          "letterSpacing": 0,
+          "fontSize": 16,
+          "fontFamily": "Roboto",
+          "decoration": 0,
+          "fontWeight": "w500"
+        },
+        "text": "#11232",
+        "textAlignVertical": "center",
+        "textAlign": "left"
+      },
+      "name": "#11232",
+      "width": 279,
+      "x": 72,
+      "index": 9,
+      "y": 204.5,
+      "sdkVersion": "v2020.0",
+      "type": "TEXT",
+      "nodeId": "I5341:171015;4531:290",
+      "height": 19
+    },
+    {
+      "data": {
+        "width": 279,
+        "borderRadius": {
+          "all": 0
+        },
+        "opacity": 1,
+        "height": 19
+      },
+      "name": "(bg-converted) Frame 498",
+      "width": 279,
+      "x": 72,
+      "index": -8,
+      "y": 204.5,
+      "sdkVersion": "v2020.0",
+      "type": "RECT",
+      "nodeId": "I5341:171015;4531:289",
+      "height": 19
+    },
+    {
+      "data": {
+        "width": 327,
+        "borderRadius": {
+          "all": 0
+        },
+        "opacity": 1,
+        "height": 32
+      },
+      "name": "(bg-converted) Frame 499",
+      "width": 327,
+      "x": 24,
+      "index": -6,
+      "y": 198,
+      "sdkVersion": "v2020.0",
+      "type": "RECT",
+      "nodeId": "I5341:171015;4531:287",
+      "height": 32
+    },
+    {
+      "data": {
+        "width": 375,
+        "borderRadius": {
+          "all": 0
+        },
+        "opacity": 1,
+        "height": 56
+      },
+      "name": "(bg-converted) /rows/form-select/new-2",
+      "width": 375,
+      "x": 0,
+      "index": -5,
+      "y": 186,
+      "sdkVersion": "v2020.0",
+      "type": "RECT",
+      "nodeId": "5341:171015",
+      "height": 56
+    },
+    {
+      "data": {
+        "width": 32,
+        "src": "https://resource-hosting.s3.us-west-1.amazonaws.com/D-rTAsNd-[object Object]",
+        "height": 32
+      },
+      "name": "icon/32/square/kit",
+      "width": 32,
+      "x": 24,
+      "index": 8,
+      "y": 254,
+      "sdkVersion": "v2020.0",
+      "type": "VANILLA",
+      "nodeId": "I5341:171016;4531:288",
+      "height": 32
+    },
+    {
+      "data": {
+        "width": 32,
+        "borderRadius": {
+          "all": 0
+        },
+        "opacity": 1,
+        "height": 32
+      },
+      "name": "(bg-converted) icon/32/square/kit",
+      "width": 32,
+      "x": 24,
+      "index": -8,
+      "y": 254,
+      "sdkVersion": "v2020.0",
+      "type": "RECT",
+      "nodeId": "I5341:171016;4531:288",
+      "height": 32
+    },
+    {
+      "data": {
+        "style": {
+          "name": "Roboto/Subtitle/1-16-M",
+          "letterSpacing": 0,
+          "fontSize": 16,
+          "fontFamily": "Roboto",
+          "decoration": 0,
+          "fontWeight": "w500"
+        },
+        "text": "#1234",
+        "textAlignVertical": "center",
+        "textAlign": "left"
+      },
+      "name": "#1234",
+      "width": 279,
+      "x": 72,
+      "index": 10,
+      "y": 260.5,
+      "sdkVersion": "v2020.0",
+      "type": "TEXT",
+      "nodeId": "I5341:171016;4531:290",
+      "height": 19
+    },
+    {
+      "data": {
+        "width": 279,
+        "borderRadius": {
+          "all": 0
+        },
+        "opacity": 1,
+        "height": 19
+      },
+      "name": "(bg-converted) Frame 498",
+      "width": 279,
+      "x": 72,
+      "index": -9,
+      "y": 260.5,
+      "sdkVersion": "v2020.0",
+      "type": "RECT",
+      "nodeId": "I5341:171016;4531:289",
+      "height": 19
+    },
+    {
+      "data": {
+        "width": 327,
+        "borderRadius": {
+          "all": 0
+        },
+        "opacity": 1,
+        "height": 32
+      },
+      "name": "(bg-converted) Frame 499",
+      "width": 327,
+      "x": 24,
+      "index": -7,
+      "y": 254,
+      "sdkVersion": "v2020.0",
+      "type": "RECT",
+      "nodeId": "I5341:171016;4531:287",
+      "height": 32
+    },
+    {
+      "data": {
+        "width": 375,
+        "borderRadius": {
+          "all": 0
+        },
+        "opacity": 1,
+        "height": 56
+      },
+      "name": "(bg-converted) /rows/form-select/new-2",
+      "width": 375,
+      "x": 0,
+      "index": -6,
+      "y": 242,
+      "sdkVersion": "v2020.0",
+      "type": "RECT",
+      "nodeId": "5341:171016",
+      "height": 56
+    },
+    {
+      "data": {
+        "width": 32,
+        "src": "https://resource-hosting.s3.us-west-1.amazonaws.com/Sz-V0moT-[object Object]",
+        "height": 32
+      },
+      "name": "icon/32/square/kit",
+      "width": 32,
+      "x": 24,
+      "index": 9,
+      "y": 310,
+      "sdkVersion": "v2020.0",
+      "type": "VANILLA",
+      "nodeId": "I5341:171017;4531:288",
+      "height": 32
+    },
+    {
+      "data": {
+        "width": 32,
+        "borderRadius": {
+          "all": 0
+        },
+        "opacity": 1,
+        "height": 32
+      },
+      "name": "(bg-converted) icon/32/square/kit",
+      "width": 32,
+      "x": 24,
+      "index": -9,
+      "y": 310,
+      "sdkVersion": "v2020.0",
+      "type": "RECT",
+      "nodeId": "I5341:171017;4531:288",
+      "height": 32
+    },
+    {
+      "data": {
+        "style": {
+          "name": "Roboto/Subtitle/1-16-M",
+          "letterSpacing": 0,
+          "fontSize": 16,
+          "fontFamily": "Roboto",
+          "decoration": 0,
+          "fontWeight": "w500"
+        },
+        "text": "#1234",
+        "textAlignVertical": "center",
+        "textAlign": "left"
+      },
+      "name": "#1234",
+      "width": 279,
+      "x": 72,
+      "index": 11,
+      "y": 316.5,
+      "sdkVersion": "v2020.0",
+      "type": "TEXT",
+      "nodeId": "I5341:171017;4531:290",
+      "height": 19
+    },
+    {
+      "data": {
+        "width": 279,
+        "borderRadius": {
+          "all": 0
+        },
+        "opacity": 1,
+        "height": 19
+      },
+      "name": "(bg-converted) Frame 498",
+      "width": 279,
+      "x": 72,
+      "index": -10,
+      "y": 316.5,
+      "sdkVersion": "v2020.0",
+      "type": "RECT",
+      "nodeId": "I5341:171017;4531:289",
+      "height": 19
+    },
+    {
+      "data": {
+        "width": 327,
+        "borderRadius": {
+          "all": 0
+        },
+        "opacity": 1,
+        "height": 32
+      },
+      "name": "(bg-converted) Frame 499",
+      "width": 327,
+      "x": 24,
+      "index": -8,
+      "y": 310,
+      "sdkVersion": "v2020.0",
+      "type": "RECT",
+      "nodeId": "I5341:171017;4531:287",
+      "height": 32
+    },
+    {
+      "data": {
+        "width": 375,
+        "borderRadius": {
+          "all": 0
+        },
+        "opacity": 1,
+        "height": 56
+      },
+      "name": "(bg-converted) /rows/form-select/new-2",
+      "width": 375,
+      "x": 0,
+      "index": -7,
+      "y": 298,
+      "sdkVersion": "v2020.0",
+      "type": "RECT",
+      "nodeId": "5341:171017",
+      "height": 56
+    },
+    {
+      "data": {
+        "width": 375,
+        "borderRadius": {
+          "all": 0
+        },
+        "opacity": 1,
+        "height": 168
+      },
+      "name": "(bg-converted) Frame 1231",
+      "width": 375,
+      "x": 0,
+      "index": -4,
+      "y": 186,
+      "sdkVersion": "v2020.0",
+      "type": "RECT",
+      "nodeId": "5341:171014",
+      "height": 168
+    },
+    {
+      "data": {
+        "width": 375,
+        "borderRadius": {
+          "all": 0
+        },
+        "fill": {
+          "a": 1,
+          "r": 1,
+          "b": 1,
+          "g": 1
+        },
+        "opacity": 1,
+        "height": 224
+      },
+      "name": "(bg-converted) Frame 1240",
+      "width": 375,
+      "x": 0,
+      "index": -2,
+      "y": 146,
+      "sdkVersion": "v2020.0",
+      "type": "RECT",
+      "nodeId": "5341:171012",
+      "height": 224
+    },
+    {
+      "data": {
+        "width": 32,
+        "src": "https://resource-hosting.s3.us-west-1.amazonaws.com/AL4LFyNB-[object Object]",
+        "height": 32
+      },
+      "name": "icon/32/square/favorite",
+      "width": 32,
+      "x": 24,
+      "index": 7,
+      "y": 406,
+      "sdkVersion": "v2020.0",
+      "type": "VANILLA",
+      "nodeId": "I5341:171020;4531:288",
+      "height": 32
+    },
+    {
+      "data": {
+        "width": 32,
+        "borderRadius": {
+          "all": 0
+        },
+        "opacity": 1,
+        "height": 32
+      },
+      "name": "(bg-converted) icon/32/square/favorite",
+      "width": 32,
+      "x": 24,
+      "index": -7,
+      "y": 406,
+      "sdkVersion": "v2020.0",
+      "type": "RECT",
+      "nodeId": "I5341:171020;4531:288",
+      "height": 32
+    },
+    {
+      "data": {
+        "style": {
+          "name": "Roboto/Subtitle/1-16-M",
+          "letterSpacing": 0,
+          "fontSize": 16,
+          "fontFamily": "Roboto",
+          "decoration": 0,
+          "fontWeight": "w500"
+        },
+        "text": "Favorite",
+        "textAlignVertical": "center",
+        "textAlign": "left"
+      },
+      "name": "Favorite",
+      "width": 279,
+      "x": 72,
+      "index": 9,
+      "y": 412.5,
+      "sdkVersion": "v2020.0",
+      "type": "TEXT",
+      "nodeId": "I5341:171020;4531:290",
+      "height": 19
+    },
+    {
+      "data": {
+        "width": 279,
+        "borderRadius": {
+          "all": 0
+        },
+        "opacity": 1,
+        "height": 19
+      },
+      "name": "(bg-converted) Frame 498",
+      "width": 279,
+      "x": 72,
+      "index": -8,
+      "y": 412.5,
+      "sdkVersion": "v2020.0",
+      "type": "RECT",
+      "nodeId": "I5341:171020;4531:289",
+      "height": 19
+    },
+    {
+      "data": {
+        "width": 327,
+        "borderRadius": {
+          "all": 0
+        },
+        "opacity": 1,
+        "height": 32
+      },
+      "name": "(bg-converted) Frame 499",
+      "width": 327,
+      "x": 24,
+      "index": -6,
+      "y": 406,
+      "sdkVersion": "v2020.0",
+      "type": "RECT",
+      "nodeId": "I5341:171020;4531:287",
+      "height": 32
+    },
+    {
+      "data": {
+        "width": 375,
+        "borderRadius": {
+          "all": 0
+        },
+        "opacity": 1,
+        "height": 56
+      },
+      "name": "(bg-converted) /rows/form-select/new-2",
+      "width": 375,
+      "x": 0,
+      "index": -5,
+      "y": 394,
+      "sdkVersion": "v2020.0",
+      "type": "RECT",
+      "nodeId": "5341:171020",
+      "height": 56
+    },
+    {
+      "data": {
+        "width": 32,
+        "src": "https://resource-hosting.s3.us-west-1.amazonaws.com/8tDrnfW0-[object Object]",
+        "height": 32
+      },
+      "name": "icon/32/square/kit",
+      "width": 32,
+      "x": 24,
+      "index": 8,
+      "y": 462,
+      "sdkVersion": "v2020.0",
+      "type": "VANILLA",
+      "nodeId": "I5341:171021;4531:288",
+      "height": 32
+    },
+    {
+      "data": {
+        "width": 32,
+        "borderRadius": {
+          "all": 0
+        },
+        "opacity": 1,
+        "height": 32
+      },
+      "name": "(bg-converted) icon/32/square/kit",
+      "width": 32,
+      "x": 24,
+      "index": -8,
+      "y": 462,
+      "sdkVersion": "v2020.0",
+      "type": "RECT",
+      "nodeId": "I5341:171021;4531:288",
+      "height": 32
+    },
+    {
+      "data": {
+        "style": {
+          "name": "Roboto/Subtitle/1-16-M",
+          "letterSpacing": 0,
+          "fontSize": 16,
+          "fontFamily": "Roboto",
+          "decoration": 0,
+          "fontWeight": "w500"
+        },
+        "text": "Kits",
+        "textAlignVertical": "center",
+        "textAlign": "left"
+      },
+      "name": "Kits",
+      "width": 279,
+      "x": 72,
+      "index": 10,
+      "y": 468.5,
+      "sdkVersion": "v2020.0",
+      "type": "TEXT",
+      "nodeId": "I5341:171021;4531:290",
+      "height": 19
+    },
+    {
+      "data": {
+        "width": 279,
+        "borderRadius": {
+          "all": 0
+        },
+        "opacity": 1,
+        "height": 19
+      },
+      "name": "(bg-converted) Frame 498",
+      "width": 279,
+      "x": 72,
+      "index": -9,
+      "y": 468.5,
+      "sdkVersion": "v2020.0",
+      "type": "RECT",
+      "nodeId": "I5341:171021;4531:289",
+      "height": 19
+    },
+    {
+      "data": {
+        "width": 327,
+        "borderRadius": {
+          "all": 0
+        },
+        "opacity": 1,
+        "height": 32
+      },
+      "name": "(bg-converted) Frame 499",
+      "width": 327,
+      "x": 24,
+      "index": -7,
+      "y": 462,
+      "sdkVersion": "v2020.0",
+      "type": "RECT",
+      "nodeId": "I5341:171021;4531:287",
+      "height": 32
+    },
+    {
+      "data": {
+        "width": 375,
+        "borderRadius": {
+          "all": 0
+        },
+        "opacity": 1,
+        "height": 56
+      },
+      "name": "(bg-converted) /rows/form-select/new-2",
+      "width": 375,
+      "x": 0,
+      "index": -6,
+      "y": 450,
+      "sdkVersion": "v2020.0",
+      "type": "RECT",
+      "nodeId": "5341:171021",
+      "height": 56
+    },
+    {
+      "data": {
+        "width": 32,
+        "src": "https://resource-hosting.s3.us-west-1.amazonaws.com/GPyUDMu_-[object Object]",
+        "height": 32
+      },
+      "name": "icon/32/square/inventory-my-2",
+      "width": 32,
+      "x": 24,
+      "index": 9,
+      "y": 518,
+      "sdkVersion": "v2020.0",
+      "type": "VANILLA",
+      "nodeId": "I5341:171022;4531:288",
+      "height": 32
+    },
+    {
+      "data": {
+        "width": 32,
+        "borderRadius": {
+          "all": 0
+        },
+        "opacity": 1,
+        "height": 32
+      },
+      "name": "(bg-converted) icon/32/square/inventory-my-2",
+      "width": 32,
+      "x": 24,
+      "index": -9,
+      "y": 518,
+      "sdkVersion": "v2020.0",
+      "type": "RECT",
+      "nodeId": "I5341:171022;4531:288",
+      "height": 32
+    },
+    {
+      "data": {
+        "style": {
+          "name": "Roboto/Subtitle/1-16-M",
+          "letterSpacing": 0,
+          "fontSize": 16,
+          "fontFamily": "Roboto",
+          "decoration": 0,
+          "fontWeight": "w500"
+        },
+        "text": "My inventory",
+        "textAlignVertical": "center",
+        "textAlign": "left"
+      },
+      "name": "My inventory",
+      "width": 279,
+      "x": 72,
+      "index": 11,
+      "y": 524.5,
+      "sdkVersion": "v2020.0",
+      "type": "TEXT",
+      "nodeId": "I5341:171022;4531:290",
+      "height": 19
+    },
+    {
+      "data": {
+        "width": 279,
+        "borderRadius": {
+          "all": 0
+        },
+        "opacity": 1,
+        "height": 19
+      },
+      "name": "(bg-converted) Frame 498",
+      "width": 279,
+      "x": 72,
+      "index": -10,
+      "y": 524.5,
+      "sdkVersion": "v2020.0",
+      "type": "RECT",
+      "nodeId": "I5341:171022;4531:289",
+      "height": 19
+    },
+    {
+      "data": {
+        "width": 327,
+        "borderRadius": {
+          "all": 0
+        },
+        "opacity": 1,
+        "height": 32
+      },
+      "name": "(bg-converted) Frame 499",
+      "width": 327,
+      "x": 24,
+      "index": -8,
+      "y": 518,
+      "sdkVersion": "v2020.0",
+      "type": "RECT",
+      "nodeId": "I5341:171022;4531:287",
+      "height": 32
+    },
+    {
+      "data": {
+        "width": 375,
+        "borderRadius": {
+          "all": 0
+        },
+        "opacity": 1,
+        "height": 56
+      },
+      "name": "(bg-converted) /rows/form-select/new-2",
+      "width": 375,
+      "x": 0,
+      "index": -7,
+      "y": 506,
+      "sdkVersion": "v2020.0",
+      "type": "RECT",
+      "nodeId": "5341:171022",
+      "height": 56
+    },
+    {
+      "data": {
+        "width": 32,
+        "src": "https://resource-hosting.s3.us-west-1.amazonaws.com/NtEQsPkA-[object Object]",
+        "height": 32
+      },
+      "name": "icon/32/square/inventory-team-2",
+      "width": 32,
+      "x": 24,
+      "index": 10,
+      "y": 574,
+      "sdkVersion": "v2020.0",
+      "type": "VANILLA",
+      "nodeId": "I5341:171023;4531:288",
+      "height": 32
+    },
+    {
+      "data": {
+        "width": 32,
+        "borderRadius": {
+          "all": 0
+        },
+        "opacity": 1,
+        "height": 32
+      },
+      "name": "(bg-converted) icon/32/square/inventory-team-2",
+      "width": 32,
+      "x": 24,
+      "index": -10,
+      "y": 574,
+      "sdkVersion": "v2020.0",
+      "type": "RECT",
+      "nodeId": "I5341:171023;4531:288",
+      "height": 32
+    },
+    {
+      "data": {
+        "style": {
+          "name": "Roboto/Subtitle/1-16-M",
+          "letterSpacing": 0,
+          "fontSize": 16,
+          "fontFamily": "Roboto",
+          "decoration": 0,
+          "fontWeight": "w500"
+        },
+        "text": "Team inventory",
+        "textAlignVertical": "center",
+        "textAlign": "left"
+      },
+      "name": "Team inventory",
+      "width": 279,
+      "x": 72,
+      "index": 12,
+      "y": 580.5,
+      "sdkVersion": "v2020.0",
+      "type": "TEXT",
+      "nodeId": "I5341:171023;4531:290",
+      "height": 19
+    },
+    {
+      "data": {
+        "width": 279,
+        "borderRadius": {
+          "all": 0
+        },
+        "opacity": 1,
+        "height": 19
+      },
+      "name": "(bg-converted) Frame 498",
+      "width": 279,
+      "x": 72,
+      "index": -11,
+      "y": 580.5,
+      "sdkVersion": "v2020.0",
+      "type": "RECT",
+      "nodeId": "I5341:171023;4531:289",
+      "height": 19
+    },
+    {
+      "data": {
+        "width": 327,
+        "borderRadius": {
+          "all": 0
+        },
+        "opacity": 1,
+        "height": 32
+      },
+      "name": "(bg-converted) Frame 499",
+      "width": 327,
+      "x": 24,
+      "index": -9,
+      "y": 574,
+      "sdkVersion": "v2020.0",
+      "type": "RECT",
+      "nodeId": "I5341:171023;4531:287",
+      "height": 32
+    },
+    {
+      "data": {
+        "width": 375,
+        "borderRadius": {
+          "all": 0
+        },
+        "opacity": 1,
+        "height": 56
+      },
+      "name": "(bg-converted) /rows/form-select/new-2",
+      "width": 375,
+      "x": 0,
+      "index": -8,
+      "y": 562,
+      "sdkVersion": "v2020.0",
+      "type": "RECT",
+      "nodeId": "5341:171023",
+      "height": 56
+    },
+    {
+      "data": {
+        "width": 32,
+        "src": "https://resource-hosting.s3.us-west-1.amazonaws.com/K0p9Sde7-[object Object]",
+        "height": 32
+      },
+      "name": "icon/32/square/order",
+      "width": 32,
+      "x": 24,
+      "index": 11,
+      "y": 630,
+      "sdkVersion": "v2020.0",
+      "type": "VANILLA",
+      "nodeId": "I5341:171024;4531:288",
+      "height": 32
+    },
+    {
+      "data": {
+        "width": 32,
+        "borderRadius": {
+          "all": 0
+        },
+        "opacity": 1,
+        "height": 32
+      },
+      "name": "(bg-converted) icon/32/square/order",
+      "width": 32,
+      "x": 24,
+      "index": -11,
+      "y": 630,
+      "sdkVersion": "v2020.0",
+      "type": "RECT",
+      "nodeId": "I5341:171024;4531:288",
+      "height": 32
+    },
+    {
+      "data": {
+        "style": {
+          "name": "Roboto/Subtitle/1-16-M",
+          "letterSpacing": 0,
+          "fontSize": 16,
+          "fontFamily": "Roboto",
+          "decoration": 0,
+          "fontWeight": "w500"
+        },
+        "text": "Buy kits",
+        "textAlignVertical": "center",
+        "textAlign": "left"
+      },
+      "name": "Buy kits",
+      "width": 279,
+      "x": 72,
+      "index": 13,
+      "y": 636.5,
+      "sdkVersion": "v2020.0",
+      "type": "TEXT",
+      "nodeId": "I5341:171024;4531:290",
+      "height": 19
+    },
+    {
+      "data": {
+        "width": 279,
+        "borderRadius": {
+          "all": 0
+        },
+        "opacity": 1,
+        "height": 19
+      },
+      "name": "(bg-converted) Frame 498",
+      "width": 279,
+      "x": 72,
+      "index": -12,
+      "y": 636.5,
+      "sdkVersion": "v2020.0",
+      "type": "RECT",
+      "nodeId": "I5341:171024;4531:289",
+      "height": 19
+    },
+    {
+      "data": {
+        "width": 327,
+        "borderRadius": {
+          "all": 0
+        },
+        "opacity": 1,
+        "height": 32
+      },
+      "name": "(bg-converted) Frame 499",
+      "width": 327,
+      "x": 24,
+      "index": -10,
+      "y": 630,
+      "sdkVersion": "v2020.0",
+      "type": "RECT",
+      "nodeId": "I5341:171024;4531:287",
+      "height": 32
+    },
+    {
+      "data": {
+        "width": 375,
+        "borderRadius": {
+          "all": 0
+        },
+        "opacity": 1,
+        "height": 56
+      },
+      "name": "(bg-converted) /rows/form-select/new-2",
+      "width": 375,
+      "x": 0,
+      "index": -9,
+      "y": 618,
+      "sdkVersion": "v2020.0",
+      "type": "RECT",
+      "nodeId": "5341:171024",
+      "height": 56
+    },
+    {
+      "data": {
+        "width": 32,
+        "src": "https://resource-hosting.s3.us-west-1.amazonaws.com/Q1OcUcIw-[object Object]",
+        "height": 32
+      },
+      "name": "icon/32/square/order-history",
+      "width": 32,
+      "x": 24,
+      "index": 12,
+      "y": 686,
+      "sdkVersion": "v2020.0",
+      "type": "VANILLA",
+      "nodeId": "I5341:171025;4531:288",
+      "height": 32
+    },
+    {
+      "data": {
+        "width": 32,
+        "borderRadius": {
+          "all": 0
+        },
+        "opacity": 1,
+        "height": 32
+      },
+      "name": "(bg-converted) icon/32/square/order-history",
+      "width": 32,
+      "x": 24,
+      "index": -12,
+      "y": 686,
+      "sdkVersion": "v2020.0",
+      "type": "RECT",
+      "nodeId": "I5341:171025;4531:288",
+      "height": 32
+    },
+    {
+      "data": {
+        "style": {
+          "name": "Roboto/Subtitle/1-16-M",
+          "letterSpacing": 0,
+          "fontSize": 16,
+          "fontFamily": "Roboto",
+          "decoration": 0,
+          "fontWeight": "w500"
+        },
+        "text": "Order history",
+        "textAlignVertical": "center",
+        "textAlign": "left"
+      },
+      "name": "Order history",
+      "width": 279,
+      "x": 72,
+      "index": 14,
+      "y": 692.5,
+      "sdkVersion": "v2020.0",
+      "type": "TEXT",
+      "nodeId": "I5341:171025;4531:290",
+      "height": 19
+    },
+    {
+      "data": {
+        "width": 279,
+        "borderRadius": {
+          "all": 0
+        },
+        "opacity": 1,
+        "height": 19
+      },
+      "name": "(bg-converted) Frame 498",
+      "width": 279,
+      "x": 72,
+      "index": -13,
+      "y": 692.5,
+      "sdkVersion": "v2020.0",
+      "type": "RECT",
+      "nodeId": "I5341:171025;4531:289",
+      "height": 19
+    },
+    {
+      "data": {
+        "width": 327,
+        "borderRadius": {
+          "all": 0
+        },
+        "opacity": 1,
+        "height": 32
+      },
+      "name": "(bg-converted) Frame 499",
+      "width": 327,
+      "x": 24,
+      "index": -11,
+      "y": 686,
+      "sdkVersion": "v2020.0",
+      "type": "RECT",
+      "nodeId": "I5341:171025;4531:287",
+      "height": 32
+    },
+    {
+      "data": {
+        "width": 375,
+        "borderRadius": {
+          "all": 0
+        },
+        "opacity": 1,
+        "height": 56
+      },
+      "name": "(bg-converted) /rows/form-select/new-2",
+      "width": 375,
+      "x": 0,
+      "index": -10,
+      "y": 674,
+      "sdkVersion": "v2020.0",
+      "type": "RECT",
+      "nodeId": "5341:171025",
+      "height": 56
+    },
+    {
+      "data": {
+        "width": 375,
+        "borderRadius": {
+          "all": 0
+        },
+        "opacity": 1,
+        "height": 336
+      },
+      "name": "(bg-converted) Frame 1301",
+      "width": 375,
+      "x": 0,
+      "index": -4,
+      "y": 394,
+      "sdkVersion": "v2020.0",
+      "type": "RECT",
+      "nodeId": "5341:171019",
+      "height": 336
+    },
+    {
+      "data": {
+        "width": 327,
+        "src": "https://resource-hosting.s3.us-west-1.amazonaws.com/wNXdd4o7-[object Object]",
+        "height": 1
+      },
+      "name": "Divider-1px/grey2",
+      "width": 327,
+      "x": 24,
+      "index": 5,
+      "y": 738,
+      "sdkVersion": "v2020.0",
+      "type": "VANILLA",
+      "nodeId": "5341:171026",
+      "height": 1
+    },
+    {
+      "data": {
+        "width": 327,
+        "borderRadius": {
+          "all": 0
+        },
+        "opacity": 1,
+        "height": 1
+      },
+      "name": "(bg-converted) Divider-1px/grey2",
+      "width": 327,
+      "x": 24,
+      "index": -5,
+      "y": 738,
+      "sdkVersion": "v2020.0",
+      "type": "RECT",
+      "nodeId": "5341:171026",
+      "height": 1
+    },
+    {
+      "data": {
+        "width": 32,
+        "src": "https://resource-hosting.s3.us-west-1.amazonaws.com/wpxNb7xZ-[object Object]",
+        "height": 32
+      },
+      "name": "icon/32/square/note",
+      "width": 32,
+      "x": 24,
+      "index": 9,
+      "y": 759,
+      "sdkVersion": "v2020.0",
+      "type": "VANILLA",
+      "nodeId": "I5341:171028;4531:288",
+      "height": 32
+    },
+    {
+      "data": {
+        "width": 32,
+        "borderRadius": {
+          "all": 0
+        },
+        "opacity": 1,
+        "height": 32
+      },
+      "name": "(bg-converted) icon/32/square/note",
+      "width": 32,
+      "x": 24,
+      "index": -9,
+      "y": 759,
+      "sdkVersion": "v2020.0",
+      "type": "RECT",
+      "nodeId": "I5341:171028;4531:288",
+      "height": 32
+    },
+    {
+      "data": {
+        "style": {
+          "name": "Roboto/Subtitle/1-16-M",
+          "letterSpacing": 0,
+          "fontSize": 16,
+          "fontFamily": "Roboto",
+          "decoration": 0,
+          "fontWeight": "w500"
+        },
+        "text": "Note",
+        "textAlignVertical": "center",
+        "textAlign": "left"
+      },
+      "name": "Note",
+      "width": 279,
+      "x": 72,
+      "index": 11,
+      "y": 765.5,
+      "sdkVersion": "v2020.0",
+      "type": "TEXT",
+      "nodeId": "I5341:171028;4531:290",
+      "height": 19
+    },
+    {
+      "data": {
+        "width": 279,
+        "borderRadius": {
+          "all": 0
+        },
+        "opacity": 1,
+        "height": 19
+      },
+      "name": "(bg-converted) Frame 498",
+      "width": 279,
+      "x": 72,
+      "index": -10,
+      "y": 765.5,
+      "sdkVersion": "v2020.0",
+      "type": "RECT",
+      "nodeId": "I5341:171028;4531:289",
+      "height": 19
+    },
+    {
+      "data": {
+        "width": 327,
+        "borderRadius": {
+          "all": 0
+        },
+        "opacity": 1,
+        "height": 32
+      },
+      "name": "(bg-converted) Frame 499",
+      "width": 327,
+      "x": 24,
+      "index": -8,
+      "y": 759,
+      "sdkVersion": "v2020.0",
+      "type": "RECT",
+      "nodeId": "I5341:171028;4531:287",
+      "height": 32
+    },
+    {
+      "data": {
+        "width": 375,
+        "borderRadius": {
+          "all": 0
+        },
+        "opacity": 1,
+        "height": 56
+      },
+      "name": "(bg-converted) /rows/form-select/new-2",
+      "width": 375,
+      "x": 0,
+      "index": -7,
+      "y": 747,
+      "sdkVersion": "v2020.0",
+      "type": "RECT",
+      "nodeId": "5341:171028",
+      "height": 56
+    },
+    {
+      "data": {
+        "width": 32,
+        "src": "https://resource-hosting.s3.us-west-1.amazonaws.com/SKReum2c-[object Object]",
+        "height": 32
+      },
+      "name": "icon/32/square/setting",
+      "width": 32,
+      "x": 24,
+      "index": 10,
+      "y": 815,
+      "sdkVersion": "v2020.0",
+      "type": "VANILLA",
+      "nodeId": "I5341:171029;4531:288",
+      "height": 32
+    },
+    {
+      "data": {
+        "width": 32,
+        "borderRadius": {
+          "all": 0
+        },
+        "opacity": 1,
+        "height": 32
+      },
+      "name": "(bg-converted) icon/32/square/setting",
+      "width": 32,
+      "x": 24,
+      "index": -10,
+      "y": 815,
+      "sdkVersion": "v2020.0",
+      "type": "RECT",
+      "nodeId": "I5341:171029;4531:288",
+      "height": 32
+    },
+    {
+      "data": {
+        "style": {
+          "name": "Roboto/Subtitle/1-16-M",
+          "letterSpacing": 0,
+          "fontSize": 16,
+          "fontFamily": "Roboto",
+          "decoration": 0,
+          "fontWeight": "w500"
+        },
+        "text": "Settings",
+        "textAlignVertical": "center",
+        "textAlign": "left"
+      },
+      "name": "Settings",
+      "width": 279,
+      "x": 72,
+      "index": 12,
+      "y": 821.5,
+      "sdkVersion": "v2020.0",
+      "type": "TEXT",
+      "nodeId": "I5341:171029;4531:290",
+      "height": 19
+    },
+    {
+      "data": {
+        "width": 279,
+        "borderRadius": {
+          "all": 0
+        },
+        "opacity": 1,
+        "height": 19
+      },
+      "name": "(bg-converted) Frame 498",
+      "width": 279,
+      "x": 72,
+      "index": -11,
+      "y": 821.5,
+      "sdkVersion": "v2020.0",
+      "type": "RECT",
+      "nodeId": "I5341:171029;4531:289",
+      "height": 19
+    },
+    {
+      "data": {
+        "width": 327,
+        "borderRadius": {
+          "all": 0
+        },
+        "opacity": 1,
+        "height": 32
+      },
+      "name": "(bg-converted) Frame 499",
+      "width": 327,
+      "x": 24,
+      "index": -9,
+      "y": 815,
+      "sdkVersion": "v2020.0",
+      "type": "RECT",
+      "nodeId": "I5341:171029;4531:287",
+      "height": 32
+    },
+    {
+      "data": {
+        "width": 375,
+        "borderRadius": {
+          "all": 0
+        },
+        "opacity": 1,
+        "height": 56
+      },
+      "name": "(bg-converted) /rows/form-select/new-2",
+      "width": 375,
+      "x": 0,
+      "index": -8,
+      "y": 803,
+      "sdkVersion": "v2020.0",
+      "type": "RECT",
+      "nodeId": "5341:171029",
+      "height": 56
+    },
+    {
+      "data": {
+        "width": 32,
+        "src": "https://resource-hosting.s3.us-west-1.amazonaws.com/A10WVf9Q-[object Object]",
+        "height": 32
+      },
+      "name": "icon/32/square/help-desk",
+      "width": 32,
+      "x": 24,
+      "index": 11,
+      "y": 871,
+      "sdkVersion": "v2020.0",
+      "type": "VANILLA",
+      "nodeId": "I5341:171030;4531:288",
+      "height": 32
+    },
+    {
+      "data": {
+        "width": 32,
+        "borderRadius": {
+          "all": 0
+        },
+        "opacity": 1,
+        "height": 32
+      },
+      "name": "(bg-converted) icon/32/square/help-desk",
+      "width": 32,
+      "x": 24,
+      "index": -11,
+      "y": 871,
+      "sdkVersion": "v2020.0",
+      "type": "RECT",
+      "nodeId": "I5341:171030;4531:288",
+      "height": 32
+    },
+    {
+      "data": {
+        "style": {
+          "name": "Roboto/Subtitle/1-16-M",
+          "letterSpacing": 0,
+          "fontSize": 16,
+          "fontFamily": "Roboto",
+          "decoration": 0,
+          "fontWeight": "w500"
+        },
+        "text": "Help desk",
+        "textAlignVertical": "center",
+        "textAlign": "left"
+      },
+      "name": "Help desk",
+      "width": 279,
+      "x": 72,
+      "index": 13,
+      "y": 877.5,
+      "sdkVersion": "v2020.0",
+      "type": "TEXT",
+      "nodeId": "I5341:171030;4531:290",
+      "height": 19
+    },
+    {
+      "data": {
+        "width": 279,
+        "borderRadius": {
+          "all": 0
+        },
+        "opacity": 1,
+        "height": 19
+      },
+      "name": "(bg-converted) Frame 498",
+      "width": 279,
+      "x": 72,
+      "index": -12,
+      "y": 877.5,
+      "sdkVersion": "v2020.0",
+      "type": "RECT",
+      "nodeId": "I5341:171030;4531:289",
+      "height": 19
+    },
+    {
+      "data": {
+        "width": 327,
+        "borderRadius": {
+          "all": 0
+        },
+        "opacity": 1,
+        "height": 32
+      },
+      "name": "(bg-converted) Frame 499",
+      "width": 327,
+      "x": 24,
+      "index": -10,
+      "y": 871,
+      "sdkVersion": "v2020.0",
+      "type": "RECT",
+      "nodeId": "I5341:171030;4531:287",
+      "height": 32
+    },
+    {
+      "data": {
+        "width": 375,
+        "borderRadius": {
+          "all": 0
+        },
+        "opacity": 1,
+        "height": 56
+      },
+      "name": "(bg-converted) /rows/form-select/new-2",
+      "width": 375,
+      "x": 0,
+      "index": -9,
+      "y": 859,
+      "sdkVersion": "v2020.0",
+      "type": "RECT",
+      "nodeId": "5341:171030",
+      "height": 56
+    },
+    {
+      "data": {
+        "width": 375,
+        "borderRadius": {
+          "all": 0
+        },
+        "opacity": 1,
+        "height": 168
+      },
+      "name": "(bg-converted) Frame 1300",
+      "width": 375,
+      "x": 0,
+      "index": -6,
+      "y": 747,
+      "sdkVersion": "v2020.0",
+      "type": "RECT",
+      "nodeId": "5341:171027",
+      "height": 168
+    },
+    {
+      "data": {
+        "width": 375,
+        "borderRadius": {
+          "all": 0
+        },
+        "fill": {
+          "a": 1,
+          "r": 1,
+          "b": 1,
+          "g": 1
+        },
+        "opacity": 1,
+        "height": 553
+      },
+      "name": "(bg-converted) Frame 1239",
+      "width": 375,
+      "x": 0,
+      "index": -3,
+      "y": 378,
+      "sdkVersion": "v2020.0",
+      "type": "RECT",
+      "nodeId": "5341:171018",
+      "height": 553
+    },
+    {
+      "data": {
+        "style": {
+          "name": "Roboto/Subtitle/1-16-M",
+          "letterSpacing": 0,
+          "fontSize": 16,
+          "fontFamily": "Roboto",
+          "decoration": 0,
+          "fontWeight": "w500"
+        },
+        "text": "Can’t find what your looking for?",
+        "textAlignVertical": "start",
+        "textAlign": "left"
+      },
+      "name": "Can’t find what your looking for?",
+      "width": 327,
+      "x": 24,
+      "index": 5,
+      "y": 963,
+      "sdkVersion": "v2020.0",
+      "type": "TEXT",
+      "nodeId": "I5341:171031;1645:130079",
+      "height": 19
+    },
+    {
+      "data": {
+        "style": {
+          "name": "Roboto/Body/2-14-R",
+          "letterSpacing": 0,
+          "fontSize": 14,
+          "fontFamily": "Roboto",
+          "decoration": 0,
+          "fontWeight": "w400"
+        },
+        "text": "Suggest curation logic",
+        "textAlignVertical": "center",
+        "textAlign": "left"
+      },
+      "name": "Suggest curation logic",
+      "width": 327,
+      "x": 24,
+      "index": 7,
+      "y": 1006,
+      "sdkVersion": "v2020.0",
+      "type": "TEXT",
+      "nodeId": "I5341:171031;1645:130081",
+      "height": 16
+    },
+    {
+      "data": {
+        "width": 327,
+        "src": "https://resource-hosting.s3.us-west-1.amazonaws.com/MYksCUHL-[object Object]",
+        "height": 1
+      },
+      "name": "Rectangle 812",
+      "width": 327,
+      "x": 24,
+      "index": 8,
+      "y": 1034,
+      "sdkVersion": "v2020.0",
+      "type": "VANILLA",
+      "nodeId": "I5341:171031;1645:130082",
+      "height": 1
+    },
+    {
+      "data": {
+        "style": {
+          "name": "Roboto/Body/2-14-R",
+          "letterSpacing": 0,
+          "fontSize": 14,
+          "fontFamily": "Roboto",
+          "decoration": 0,
+          "fontWeight": "w400"
+        },
+        "text": "Move to “find”",
+        "textAlignVertical": "center",
+        "textAlign": "left"
+      },
+      "name": "Move to “find”",
+      "width": 327,
+      "x": 24,
+      "index": 9,
+      "y": 1047,
+      "sdkVersion": "v2020.0",
+      "type": "TEXT",
+      "nodeId": "I5341:171031;1645:130083",
+      "height": 16
+    },
+    {
+      "data": {
+        "width": 327,
+        "src": "https://resource-hosting.s3.us-west-1.amazonaws.com/oYhJbvpK-[object Object]",
+        "height": 1
+      },
+      "name": "Rectangle 811",
+      "width": 327,
+      "x": 24,
+      "index": 10,
+      "y": 1075,
+      "sdkVersion": "v2020.0",
+      "type": "VANILLA",
+      "nodeId": "I5341:171031;1645:130084",
+      "height": 1
+    },
+    {
+      "data": {
+        "style": {
+          "name": "Roboto/Body/2-14-R",
+          "letterSpacing": 0,
+          "fontSize": 14,
+          "fontFamily": "Roboto",
+          "decoration": 0,
+          "fontWeight": "w400"
+        },
+        "text": "Check system status",
+        "textAlignVertical": "center",
+        "textAlign": "left"
+      },
+      "name": "Check system status",
+      "width": 327,
+      "x": 24,
+      "index": 13,
+      "y": 1088,
+      "sdkVersion": "v2020.0",
+      "type": "TEXT",
+      "nodeId": "I5341:171031;1766:116791",
+      "height": 16
+    },
+    {
+      "data": {
+        "width": 327,
+        "borderRadius": {
+          "all": 0
+        },
+        "opacity": 1,
+        "height": 98
+      },
+      "name": "(bg-converted) Frame 500",
+      "width": 327,
+      "x": 24,
+      "index": -6,
+      "y": 1006,
+      "sdkVersion": "v2020.0",
+      "type": "RECT",
+      "nodeId": "I5341:171031;1645:130080",
+      "height": 98
+    },
+    {
+      "data": {
+        "width": 375,
+        "borderRadius": {
+          "all": 0
+        },
+        "fill": {
+          "a": 1,
+          "r": 0.9725490212440491,
+          "b": 0.9803921580314636,
+          "g": 0.9764705896377563
+        },
+        "opacity": 1,
+        "height": 189
+      },
+      "name": "(bg-converted) cant find-section",
+      "width": 375,
+      "x": 0,
+      "index": -4,
+      "y": 939,
+      "sdkVersion": "v2020.0",
+      "type": "RECT",
+      "nodeId": "5341:171031",
+      "height": 189
+    },
+    {
+      "data": {
+        "width": 24,
+        "src": "https://resource-hosting.s3.us-west-1.amazonaws.com/LcBFtKmf-[object Object]",
+        "height": 24
+      },
+      "name": "icon/24/tab/team-inventory",
+      "width": 24,
+      "x": 50,
+      "index": 12,
+      "y": 1144,
+      "sdkVersion": "v2020.0",
+      "type": "VANILLA",
+      "nodeId": "I5341:171034;1545:20118;5305:4240",
+      "height": 24
+    },
+    {
+      "data": {
+        "width": 24,
+        "borderRadius": {
+          "all": 0
+        },
+        "opacity": 1,
+        "height": 24
+      },
+      "name": "(bg-converted) icon/24/tab/team-inventory",
+      "width": 24,
+      "x": 50,
+      "index": -12,
+      "y": 1144,
+      "sdkVersion": "v2020.0",
+      "type": "RECT",
+      "nodeId": "I5341:171034;1545:20118;5305:4240",
+      "height": 24
+    },
+    {
+      "data": {
+        "style": {
+          "letterSpacing": 0,
+          "fontSize": 10,
+          "fontFamily": "Roboto",
+          "color": {
+            "a": 1,
+            "r": 0.6784313917160034,
+            "b": 0.7411764860153198,
+            "g": 0.7098039388656616
+          },
+          "decoration": 0,
+          "fontWeight": "w500"
+        },
+        "text": "Inventory",
+        "textAlignVertical": "start",
+        "textAlign": "center"
+      },
+      "name": "Inventory",
+      "width": 42,
+      "x": 41,
+      "index": 13,
+      "y": 1172,
+      "sdkVersion": "v2020.0",
+      "type": "TEXT",
+      "nodeId": "I5341:171034;1545:20118;1545:17510",
+      "height": 12
+    },
+    {
+      "data": {
+        "width": 42,
+        "borderRadius": {
+          "all": 0
+        },
+        "opacity": 1,
+        "height": 40
+      },
+      "name": "(bg-converted) tab-btn/inventory/off",
+      "width": 42,
+      "x": 41,
+      "index": -11,
+      "y": 1144,
+      "sdkVersion": "v2020.0",
+      "type": "RECT",
+      "nodeId": "I5341:171034;1545:20118",
+      "height": 40
+    },
+    {
+      "data": {
+        "width": 125,
+        "borderRadius": {
+          "all": 0
+        },
+        "opacity": 1,
+        "height": 56
+      },
+      "name": "(bg-converted) Btn-2",
+      "width": 125,
+      "x": 0,
+      "index": -10,
+      "y": 1136,
+      "sdkVersion": "v2020.0",
+      "type": "RECT",
+      "nodeId": "I5341:171034;1545:20282",
+      "height": 56
+    },
+    {
+      "data": {
+        "width": 24,
+        "src": "https://resource-hosting.s3.us-west-1.amazonaws.com/mAT-lTW3-[object Object]",
+        "height": 24
+      },
+      "name": "icon/24/tab/find",
+      "width": 24,
+      "x": 176,
+      "index": 13,
+      "y": 1144,
+      "sdkVersion": "v2020.0",
+      "type": "VANILLA",
+      "nodeId": "I5341:171034;1545:20285;5305:2521",
+      "height": 24
+    },
+    {
+      "data": {
+        "width": 24,
+        "borderRadius": {
+          "all": 0
+        },
+        "opacity": 1,
+        "height": 24
+      },
+      "name": "(bg-converted) icon/24/tab/find",
+      "width": 24,
+      "x": 176,
+      "index": -13,
+      "y": 1144,
+      "sdkVersion": "v2020.0",
+      "type": "RECT",
+      "nodeId": "I5341:171034;1545:20285;5305:2521",
+      "height": 24
+    },
+    {
+      "data": {
+        "style": {
+          "letterSpacing": 0,
+          "fontSize": 10,
+          "fontFamily": "Roboto",
+          "color": {
+            "a": 1,
+            "r": 0.6784313917160034,
+            "b": 0.7411764860153198,
+            "g": 0.7098039388656616
+          },
+          "decoration": 0,
+          "fontWeight": "w500"
+        },
+        "text": "find",
+        "textAlignVertical": "start",
+        "textAlign": "center"
+      },
+      "name": "find",
+      "width": 20,
+      "x": 178,
+      "index": 14,
+      "y": 1172,
+      "sdkVersion": "v2020.0",
+      "type": "TEXT",
+      "nodeId": "I5341:171034;1545:20285;1545:17520",
+      "height": 12
+    },
+    {
+      "data": {
+        "width": 24,
+        "borderRadius": {
+          "all": 0
+        },
+        "opacity": 1,
+        "height": 40
+      },
+      "name": "(bg-converted) tab-btn/find/off",
+      "width": 24,
+      "x": 176,
+      "index": -12,
+      "y": 1144,
+      "sdkVersion": "v2020.0",
+      "type": "RECT",
+      "nodeId": "I5341:171034;1545:20285",
+      "height": 40
+    },
+    {
+      "data": {
+        "width": 125,
+        "borderRadius": {
+          "all": 0
+        },
+        "opacity": 1,
+        "height": 56
+      },
+      "name": "(bg-converted) Btn-3",
+      "width": 125,
+      "x": 125,
+      "index": -11,
+      "y": 1136,
+      "sdkVersion": "v2020.0",
+      "type": "RECT",
+      "nodeId": "I5341:171034;1545:20284",
+      "height": 56
+    },
+    {
+      "data": {
+        "width": 24,
+        "src": "https://resource-hosting.s3.us-west-1.amazonaws.com/8EdBw10j-[object Object]",
+        "height": 24
+      },
+      "name": "icon/24/tab/all",
+      "width": 24,
+      "x": 301,
+      "index": 14,
+      "y": 1144,
+      "sdkVersion": "v2020.0",
+      "type": "VANILLA",
+      "nodeId": "I5341:171034;1545:20287;1545:17670",
+      "height": 24
+    },
+    {
+      "data": {
+        "width": 24,
+        "borderRadius": {
+          "all": 0
+        },
+        "opacity": 1,
+        "height": 24
+      },
+      "name": "(bg-converted) icon/24/tab/all",
+      "width": 24,
+      "x": 301,
+      "index": -14,
+      "y": 1144,
+      "sdkVersion": "v2020.0",
+      "type": "RECT",
+      "nodeId": "I5341:171034;1545:20287;1545:17670",
+      "height": 24
+    },
+    {
+      "data": {
+        "style": {
+          "letterSpacing": 0,
+          "fontSize": 10,
+          "fontFamily": "Roboto",
+          "color": {
+            "a": 1,
+            "r": 0.26274511218070984,
+            "b": 0.6823529601097107,
+            "g": 0.7019608020782471
+          },
+          "decoration": 0,
+          "fontWeight": "w500"
+        },
+        "text": "All",
+        "textAlignVertical": "start",
+        "textAlign": "center"
+      },
+      "name": "All",
+      "width": 12,
+      "x": 307,
+      "index": 15,
+      "y": 1172,
+      "sdkVersion": "v2020.0",
+      "type": "TEXT",
+      "nodeId": "I5341:171034;1545:20287;1545:17671",
+      "height": 12
+    },
+    {
+      "data": {
+        "width": 24,
+        "borderRadius": {
+          "all": 0
+        },
+        "opacity": 1,
+        "height": 40
+      },
+      "name": "(bg-converted) tab-btn/all/on",
+      "width": 24,
+      "x": 301,
+      "index": -13,
+      "y": 1144,
+      "sdkVersion": "v2020.0",
+      "type": "RECT",
+      "nodeId": "I5341:171034;1545:20287",
+      "height": 40
+    },
+    {
+      "data": {
+        "width": 125,
+        "borderRadius": {
+          "all": 0
+        },
+        "opacity": 1,
+        "height": 56
+      },
+      "name": "(bg-converted) Btn-4",
+      "width": 125,
+      "x": 250,
+      "index": -12,
+      "y": 1136,
+      "sdkVersion": "v2020.0",
+      "type": "RECT",
+      "nodeId": "I5341:171034;1545:20286",
+      "height": 56
+    },
+    {
+      "data": {
+        "width": 375,
+        "borderRadius": {
+          "all": 0
+        },
+        "opacity": 1,
+        "height": 56
+      },
+      "name": "(bg-converted) Bottom-Navigation",
+      "width": 375,
+      "x": 0,
+      "index": -9,
+      "y": 1136,
+      "sdkVersion": "v2020.0",
+      "type": "RECT",
+      "nodeId": "I5341:171034;1545:20279",
+      "height": 56
+    },
+    {
+      "data": {
+        "width": 375,
+        "src": "https://resource-hosting.s3.us-west-1.amazonaws.com/_jcQlLVH-[object Object]",
+        "height": 26
+      },
+      "name": "home-indicator",
+      "width": 375,
+      "x": 0,
+      "index": 8,
+      "y": 1192,
+      "sdkVersion": "v2020.0",
+      "type": "VANILLA",
+      "nodeId": "I5341:171034;1545:20276",
+      "height": 26
+    },
+    {
+      "data": {
+        "width": 375,
+        "borderRadius": {
+          "all": 0
+        },
+        "opacity": 1,
+        "height": 26
+      },
+      "name": "(bg-converted) home-indicator",
+      "width": 375,
+      "x": 0,
+      "index": -8,
+      "y": 1192,
+      "sdkVersion": "v2020.0",
+      "type": "RECT",
+      "nodeId": "I5341:171034;1545:20276",
+      "height": 26
+    },
+    {
+      "data": {
+        "width": 375,
+        "borderRadius": {
+          "all": 0
+        },
+        "shadow": {
+          "spreadRadius": 0,
+          "color": {
+            "a": 0.029999999329447746,
+            "r": 0,
+            "b": 0,
+            "g": 0
+          },
+          "offset": {
+            "dx": 0,
+            "dy": -2
+          },
+          "blurRadius": 10
+        },
+        "fill": {
+          "a": 1,
+          "r": 1,
+          "b": 1,
+          "g": 1
+        },
+        "opacity": 1,
+        "height": 82
+      },
+      "name": "(bg-converted) Bottom-Navigation/kit-manager",
+      "width": 375,
+      "x": 0,
+      "index": -7,
+      "y": 1136,
+      "sdkVersion": "v2020.0",
+      "type": "RECT",
+      "nodeId": "5341:171034",
+      "height": 82
+    }
+  ]
+}

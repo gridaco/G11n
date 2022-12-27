@@ -2,12 +2,12 @@
 
 # G11n
 
-G11n, i18n, l10n support for bridged's internal system and as supporting other products of their own on bridged ecosystem
+G11n, i18n, l10n support for Grida's internal system and as supporting other products of their own on Grida ecosystem
 
 ## Running on your localhost
 
 ```
-git clone https://github.com/bridgedxyz/g11n
+git clone https://github.com/gridaco/g11n
 cd g11n # or cd G11n
 yarn
 yarn editor
@@ -16,12 +16,13 @@ yarn editor
 
 ## Games Globalization with Unity
 
-run on localhost, visit - http://globalization-editor-mz.bridged.xyz/globalization/demo/games for demos
+- Demo : visit https://globalization-editor-mz.bridged.xyz/globalization/demo/games for demos or http://localhost:3306/globalization/demo/games on local.
+- Unity G11n SDK - [directory](./sdks/unity)
 
 ## Installation
 
 ```
-yarn add @bridged.xyz/g11n
+yarn add @grida.co/g11n
 ```
 
 ## Project

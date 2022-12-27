@@ -3,5 +3,5 @@
 ## Installation
 
 ```
-yarn add @bridged.xyz/g11n
+yarn add @grida.co/g11n
 ```

@@ -1,11 +1,11 @@
 import React from "react";
 import { useRecoilValue } from "recoil";
 import { DesignGlobalizationRepositoriesStore } from "@base-sdk/g11n";
-import { targetLayerSelector } from "../../states";
+import { targetLayerSelector } from "states";
 import SceneKeyEditor from "../scene-key-editor";
 import SingleKeyEditor from "../key-editor";
-import { SceneRepositoryStore } from "../../repositories";
-import CanvasStage from "../../components/canvas/stage";
+import { SceneRepositoryStore } from "repositories";
+import CanvasStage from "components/canvas/stage";
 import { InnerEditorWorkspace } from "./inner-editor-workspace";
 
 interface AppEditorProps {

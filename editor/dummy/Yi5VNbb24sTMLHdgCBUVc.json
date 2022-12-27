@@ -1,0 +1,1018 @@
+{
+  "id": "Yi5VNbb24sTMLHdgCBUVc",
+  "name": "/onboarding/workspace/template",
+  "widht": 375,
+  "height": 812,
+  "nodeId": "1731:115819",
+  "layers": [
+    {
+      "data": {
+        "style": {
+          "letterSpacing": 0,
+          "fontSize": 14,
+          "fontFamily": "SF Pro Text",
+          "color": {
+            "a": 1,
+            "r": 0,
+            "b": 0,
+            "g": 0
+          },
+          "decoration": 0,
+          "fontWeight": "w600"
+        },
+        "text": "9:41",
+        "textAlignVertical": "start",
+        "textAlign": "center"
+      },
+      "name": "↳ Time",
+      "width": 54,
+      "x": 21,
+      "index": 12,
+      "y": 16,
+      "sdkVersion": "v2020.0",
+      "type": "TEXT",
+      "nodeId": "I2883:219188;1614:109585",
+      "height": 17
+    },
+    {
+      "data": {
+        "width": 54,
+        "borderRadius": {
+          "all": 0
+        },
+        "opacity": 1,
+        "height": 21
+      },
+      "name": "(bg-converted) Time Style",
+      "width": 54,
+      "x": 21,
+      "index": -11,
+      "y": 13,
+      "sdkVersion": "v2020.0",
+      "type": "RECT",
+      "nodeId": "I2883:219188;1614:109584",
+      "height": 21
+    },
+    {
+      "data": {
+        "width": 24.32803726196289,
+        "src": "https://resource-hosting.s3.us-west-1.amazonaws.com/YfA4Yc7p-[object Object]",
+        "height": 11.333333015441895
+      },
+      "name": "Battery",
+      "width": 24.32803726196289,
+      "x": 336,
+      "index": 8,
+      "y": 17.33349609375,
+      "sdkVersion": "v2020.0",
+      "type": "VANILLA",
+      "nodeId": "I2883:219188;1614:109571",
+      "height": 11.333333015441895
+    },
+    {
+      "data": {
+        "borderRadius": {
+          "all": 0
+        },
+        "width": 375,
+        "height": 44
+      },
+      "name": "(bg-converted) Rectangle",
+      "width": 375,
+      "x": 0,
+      "index": -7,
+      "y": 0,
+      "sdkVersion": "v2020.0",
+      "type": "RECT",
+      "nodeId": "I2883:219188;1614:109570",
+      "height": 44
+    },
+    {
+      "data": {
+        "width": 375,
+        "borderRadius": {
+          "all": 0
+        },
+        "opacity": 1,
+        "height": 44
+      },
+      "name": "(bg-converted) iPhone X/Status Bars/Status Bar (Black)",
+      "width": 375,
+      "x": 0,
+      "index": -6,
+      "y": 0,
+      "sdkVersion": "v2020.0",
+      "type": "RECT",
+      "nodeId": "I2883:219188;1614:109569",
+      "height": 44
+    },
+    {
+      "data": {
+        "width": 375,
+        "borderRadius": {
+          "all": 0
+        },
+        "opacity": 1,
+        "height": 44
+      },
+      "name": "(bg-converted) iPhone X/Status Bars/Status Bar (Black)",
+      "width": 375,
+      "x": 0,
+      "index": -5,
+      "y": 0,
+      "sdkVersion": "v2020.0",
+      "type": "RECT",
+      "nodeId": "2883:219188",
+      "height": 44
+    },
+    {
+      "data": {
+        "width": 375,
+        "src": "https://resource-hosting.s3.us-west-1.amazonaws.com/neSlOtp_-[object Object]",
+        "height": 56
+      },
+      "name": "App Bar / Top App Bar / Regular / Flat / Backgound Color",
+      "width": 375,
+      "x": 0,
+      "index": 4,
+      "y": 44,
+      "sdkVersion": "v2020.0",
+      "type": "VANILLA",
+      "nodeId": "2883:219187",
+      "height": 56
+    },
+    {
+      "data": {
+        "width": 375,
+        "borderRadius": {
+          "all": 0
+        },
+        "opacity": 1,
+        "height": 56
+      },
+      "name": "(bg-converted) App Bar / Top App Bar / Regular / Flat / Backgound Color",
+      "width": 375,
+      "x": 0,
+      "index": -4,
+      "y": 44,
+      "sdkVersion": "v2020.0",
+      "type": "RECT",
+      "nodeId": "2883:219187",
+      "height": 56
+    },
+    {
+      "data": {
+        "style": {
+          "letterSpacing": 0,
+          "fontSize": 36,
+          "fontFamily": "Roboto",
+          "color": {
+            "a": 1,
+            "r": 0.26274511218070984,
+            "b": 0.6823529601097107,
+            "g": 0.7019608020782471
+          },
+          "decoration": 0,
+          "fontWeight": "w700"
+        },
+        "text": "Q.",
+        "textAlignVertical": "start",
+        "textAlign": "left"
+      },
+      "name": "Verify your number",
+      "width": 327,
+      "x": 24,
+      "index": 1,
+      "y": 108,
+      "sdkVersion": "v2020.0",
+      "type": "TEXT",
+      "nodeId": "1731:115820",
+      "height": 42
+    },
+    {
+      "data": {
+        "style": {
+          "name": "Roboto/Headline/H2-36-B",
+          "letterSpacing": 0,
+          "fontSize": 36,
+          "fontFamily": "Roboto",
+          "decoration": 0,
+          "fontWeight": "w700"
+        },
+        "text": "Select Role",
+        "textAlignVertical": "start",
+        "textAlign": "left"
+      },
+      "name": "Verify your number",
+      "width": 327,
+      "x": 24,
+      "index": 2,
+      "y": 158,
+      "sdkVersion": "v2020.0",
+      "type": "TEXT",
+      "nodeId": "1731:115821",
+      "height": 42
+    },
+    {
+      "data": {
+        "width": 40,
+        "src": "https://resource-hosting.s3.us-west-1.amazonaws.com/m7tzw7cR-[object Object]",
+        "height": 40
+      },
+      "name": "icon/40/fcagents",
+      "width": 40,
+      "x": 48,
+      "index": 9,
+      "y": 294.5,
+      "sdkVersion": "v2020.0",
+      "type": "VANILLA",
+      "nodeId": "I3451:1204;3451:925;3451:772",
+      "height": 40
+    },
+    {
+      "data": {
+        "width": 40,
+        "borderRadius": {
+          "all": 0
+        },
+        "opacity": 1,
+        "height": 40
+      },
+      "name": "(bg-converted) icon/40/fcagents",
+      "width": 40,
+      "x": 48,
+      "index": -9,
+      "y": 294.5,
+      "sdkVersion": "v2020.0",
+      "type": "RECT",
+      "nodeId": "I3451:1204;3451:925;3451:772",
+      "height": 40
+    },
+    {
+      "data": {
+        "style": {
+          "name": "Roboto/Headline/H6-18-M",
+          "letterSpacing": 0,
+          "fontSize": 18,
+          "fontFamily": "Roboto",
+          "decoration": 0,
+          "fontWeight": "w500"
+        },
+        "text": "Agent",
+        "textAlignVertical": "center",
+        "textAlign": "left"
+      },
+      "name": "common-action/select-template/fc-agents/title",
+      "width": 183,
+      "x": 104,
+      "index": 11,
+      "y": 256,
+      "sdkVersion": "v2020.0",
+      "type": "TEXT",
+      "nodeId": "I3451:1204;3451:925;3451:774",
+      "height": 21
+    },
+    {
+      "data": {
+        "style": {
+          "name": "Roboto/Body/2-14-R",
+          "letterSpacing": 0,
+          "fontSize": 14,
+          "fontFamily": "Roboto",
+          "decoration": 0,
+          "fontWeight": "w400"
+        },
+        "text": "Agents manage their individual customers by using Genoplan’s genetic analysis service.",
+        "textAlignVertical": "center",
+        "textAlign": "left"
+      },
+      "name": "common-action/select-template/fc-agents/desc",
+      "width": 183,
+      "x": 104,
+      "index": 12,
+      "y": 285,
+      "sdkVersion": "v2020.0",
+      "type": "TEXT",
+      "nodeId": "I3451:1204;3451:925;3451:775",
+      "height": 64
+    },
+    {
+      "data": {
+        "width": 76,
+        "src": "https://resource-hosting.s3.us-west-1.amazonaws.com/Gw9-q8x1-[object Object]",
+        "height": 16
+      },
+      "name": "Frame 1409",
+      "width": 76,
+      "x": 104,
+      "index": 13,
+      "y": 357,
+      "sdkVersion": "v2020.0",
+      "type": "VANILLA",
+      "nodeId": "I3451:1204;3451:925;5296:933",
+      "height": 16
+    },
+    {
+      "data": {
+        "width": 76,
+        "borderRadius": {
+          "all": 0
+        },
+        "opacity": 1,
+        "height": 16
+      },
+      "name": "(bg-converted) Frame 1409",
+      "width": 76,
+      "x": 104,
+      "index": -13,
+      "y": 357,
+      "sdkVersion": "v2020.0",
+      "type": "RECT",
+      "nodeId": "I3451:1204;3451:925;5296:933",
+      "height": 16
+    },
+    {
+      "data": {
+        "width": 183,
+        "borderRadius": {
+          "all": 0
+        },
+        "opacity": 1,
+        "height": 117
+      },
+      "name": "(bg-converted) Frame 663",
+      "width": 183,
+      "x": 104,
+      "index": -10,
+      "y": 256,
+      "sdkVersion": "v2020.0",
+      "type": "RECT",
+      "nodeId": "I3451:1204;3451:925;3451:773",
+      "height": 117
+    },
+    {
+      "data": {
+        "width": 24,
+        "src": "https://resource-hosting.s3.us-west-1.amazonaws.com/8ixgHS4--[object Object]",
+        "height": 24
+      },
+      "name": "inside-layer-on-off",
+      "width": 24,
+      "x": 303,
+      "index": 11,
+      "y": 302.5,
+      "sdkVersion": "v2020.0",
+      "type": "VANILLA",
+      "nodeId": "I3451:1204;3451:925;3451:820",
+      "height": 24
+    },
+    {
+      "data": {
+        "width": 24,
+        "borderRadius": {
+          "all": 0
+        },
+        "opacity": 1,
+        "height": 24
+      },
+      "name": "(bg-converted) inside-layer-on-off",
+      "width": 24,
+      "x": 303,
+      "index": -11,
+      "y": 302.5,
+      "sdkVersion": "v2020.0",
+      "type": "RECT",
+      "nodeId": "I3451:1204;3451:925;3451:820",
+      "height": 24
+    },
+    {
+      "data": {
+        "width": 279,
+        "borderRadius": {
+          "all": 0
+        },
+        "opacity": 1,
+        "height": 117
+      },
+      "name": "(bg-converted) Frame 664",
+      "width": 279,
+      "x": 48,
+      "index": -8,
+      "y": 256,
+      "sdkVersion": "v2020.0",
+      "type": "RECT",
+      "nodeId": "I3451:1204;3451:925;3451:771",
+      "height": 117
+    },
+    {
+      "data": {
+        "width": 327,
+        "borderRadius": {
+          "all": 20
+        },
+        "shadow": {
+          "spreadRadius": 0,
+          "color": {
+            "a": 0.07999999821186066,
+            "r": 0,
+            "b": 0,
+            "g": 0
+          },
+          "offset": {
+            "dx": 0,
+            "dy": 10
+          },
+          "blurRadius": 30
+        },
+        "fill": {
+          "a": 1,
+          "r": 1,
+          "b": 1,
+          "g": 1
+        },
+        "opacity": 1,
+        "height": 149
+      },
+      "name": "(bg-converted) rows/template/admin-selected",
+      "width": 327,
+      "x": 24,
+      "index": -7,
+      "y": 240,
+      "sdkVersion": "v2020.0",
+      "type": "RECT",
+      "nodeId": "I3451:1204;3451:925",
+      "height": 149
+    },
+    {
+      "data": {
+        "width": 40,
+        "src": "https://resource-hosting.s3.us-west-1.amazonaws.com/BWiWXbdB-[object Object]",
+        "height": 40
+      },
+      "name": "icon/40/kitmanager",
+      "width": 40,
+      "x": 48,
+      "index": 10,
+      "y": 439.5,
+      "sdkVersion": "v2020.0",
+      "type": "VANILLA",
+      "nodeId": "I3451:1204;3451:950;3451:754",
+      "height": 40
+    },
+    {
+      "data": {
+        "width": 40,
+        "borderRadius": {
+          "all": 0
+        },
+        "opacity": 1,
+        "height": 40
+      },
+      "name": "(bg-converted) icon/40/kitmanager",
+      "width": 40,
+      "x": 48,
+      "index": -10,
+      "y": 439.5,
+      "sdkVersion": "v2020.0",
+      "type": "RECT",
+      "nodeId": "I3451:1204;3451:950;3451:754",
+      "height": 40
+    },
+    {
+      "data": {
+        "style": {
+          "name": "Roboto/Headline/H6-18-M",
+          "letterSpacing": 0,
+          "fontSize": 18,
+          "fontFamily": "Roboto",
+          "decoration": 0,
+          "fontWeight": "w500"
+        },
+        "text": "Kit Manager",
+        "textAlignVertical": "center",
+        "textAlign": "left"
+      },
+      "name": "common-action/select-template/kit-manager/title",
+      "width": 183,
+      "x": 104,
+      "index": 12,
+      "y": 421,
+      "sdkVersion": "v2020.0",
+      "type": "TEXT",
+      "nodeId": "I3451:1204;3451:950;3451:756",
+      "height": 21
+    },
+    {
+      "data": {
+        "style": {
+          "name": "Roboto/Body/2-14-R",
+          "letterSpacing": 0,
+          "fontSize": 14,
+          "fontFamily": "Roboto",
+          "decoration": 0,
+          "fontWeight": "w400"
+        },
+        "text": "Kit Managers manage Genoplan’s testing kits and provide those kits to agents.",
+        "textAlignVertical": "center",
+        "textAlign": "left"
+      },
+      "name": "common-action/select-template/kit-manager/desc",
+      "width": 183,
+      "x": 104,
+      "index": 13,
+      "y": 450,
+      "sdkVersion": "v2020.0",
+      "type": "TEXT",
+      "nodeId": "I3451:1204;3451:950;3451:757",
+      "height": 48
+    },
+    {
+      "data": {
+        "width": 183,
+        "borderRadius": {
+          "all": 0
+        },
+        "opacity": 1,
+        "height": 77
+      },
+      "name": "(bg-converted) Frame 663",
+      "width": 183,
+      "x": 104,
+      "index": -11,
+      "y": 421,
+      "sdkVersion": "v2020.0",
+      "type": "RECT",
+      "nodeId": "I3451:1204;3451:950;3451:755",
+      "height": 77
+    },
+    {
+      "data": {
+        "width": 24,
+        "src": "https://resource-hosting.s3.us-west-1.amazonaws.com/63d7pVZi-[object Object]",
+        "height": 24
+      },
+      "name": "inside-layer-on-off",
+      "width": 24,
+      "x": 303,
+      "index": 12,
+      "y": 447.5,
+      "sdkVersion": "v2020.0",
+      "type": "VANILLA",
+      "nodeId": "I3451:1204;3451:950;3451:819",
+      "height": 24
+    },
+    {
+      "data": {
+        "width": 24,
+        "borderRadius": {
+          "all": 0
+        },
+        "opacity": 1,
+        "height": 24
+      },
+      "name": "(bg-converted) inside-layer-on-off",
+      "width": 24,
+      "x": 303,
+      "index": -12,
+      "y": 447.5,
+      "sdkVersion": "v2020.0",
+      "type": "RECT",
+      "nodeId": "I3451:1204;3451:950;3451:819",
+      "height": 24
+    },
+    {
+      "data": {
+        "width": 279,
+        "borderRadius": {
+          "all": 0
+        },
+        "opacity": 1,
+        "height": 77
+      },
+      "name": "(bg-converted) Frame 664",
+      "width": 279,
+      "x": 48,
+      "index": -9,
+      "y": 421,
+      "sdkVersion": "v2020.0",
+      "type": "RECT",
+      "nodeId": "I3451:1204;3451:950;3451:753",
+      "height": 77
+    },
+    {
+      "data": {
+        "width": 327,
+        "borderRadius": {
+          "all": 20
+        },
+        "shadow": {
+          "spreadRadius": 0,
+          "color": {
+            "a": 0.07999999821186066,
+            "r": 0,
+            "b": 0,
+            "g": 0
+          },
+          "offset": {
+            "dx": 0,
+            "dy": 10
+          },
+          "blurRadius": 30
+        },
+        "fill": {
+          "a": 1,
+          "r": 1,
+          "b": 1,
+          "g": 1
+        },
+        "opacity": 1,
+        "height": 109
+      },
+      "name": "(bg-converted) rows/template/kit-manager",
+      "width": 327,
+      "x": 24,
+      "index": -8,
+      "y": 405,
+      "sdkVersion": "v2020.0",
+      "type": "RECT",
+      "nodeId": "I3451:1204;3451:950",
+      "height": 109
+    },
+    {
+      "data": {
+        "width": 40,
+        "src": "https://resource-hosting.s3.us-west-1.amazonaws.com/Vx8Iv1P1-[object Object]",
+        "height": 40
+      },
+      "name": "icon/40/administrator",
+      "width": 40,
+      "x": 48,
+      "index": 11,
+      "y": 592.5,
+      "sdkVersion": "v2020.0",
+      "type": "VANILLA",
+      "nodeId": "I3451:1204;3451:951;3451:796",
+      "height": 40
+    },
+    {
+      "data": {
+        "width": 40,
+        "borderRadius": {
+          "all": 0
+        },
+        "opacity": 1,
+        "height": 40
+      },
+      "name": "(bg-converted) icon/40/administrator",
+      "width": 40,
+      "x": 48,
+      "index": -11,
+      "y": 592.5,
+      "sdkVersion": "v2020.0",
+      "type": "RECT",
+      "nodeId": "I3451:1204;3451:951;3451:796",
+      "height": 40
+    },
+    {
+      "data": {
+        "style": {
+          "name": "Roboto/Headline/H6-18-M",
+          "letterSpacing": 0,
+          "fontSize": 18,
+          "fontFamily": "Roboto",
+          "decoration": 0,
+          "fontWeight": "w500"
+        },
+        "text": "Administrator",
+        "textAlignVertical": "center",
+        "textAlign": "left"
+      },
+      "name": "common-action/select-template/administrator/title",
+      "width": 183,
+      "x": 104,
+      "index": 13,
+      "y": 546,
+      "sdkVersion": "v2020.0",
+      "type": "TEXT",
+      "nodeId": "I3451:1204;3451:951;3451:798",
+      "height": 21
+    },
+    {
+      "data": {
+        "style": {
+          "name": "Roboto/Body/2-14-R",
+          "letterSpacing": 0,
+          "fontSize": 14,
+          "fontFamily": "Roboto",
+          "decoration": 0,
+          "fontWeight": "w400"
+        },
+        "text": "Administrators take charge of managerial duties of each partner and support kit management of Agents or Kit Mangers.",
+        "textAlignVertical": "center",
+        "textAlign": "left"
+      },
+      "name": "common-action/select-template/administrator/desc",
+      "width": 183,
+      "x": 104,
+      "index": 14,
+      "y": 575,
+      "sdkVersion": "v2020.0",
+      "type": "TEXT",
+      "nodeId": "I3451:1204;3451:951;3451:799",
+      "height": 80
+    },
+    {
+      "data": {
+        "width": 76,
+        "src": "https://resource-hosting.s3.us-west-1.amazonaws.com/mO-xFpWa-[object Object]",
+        "height": 16
+      },
+      "name": "Frame 1409",
+      "width": 76,
+      "x": 104,
+      "index": 15,
+      "y": 663,
+      "sdkVersion": "v2020.0",
+      "type": "VANILLA",
+      "nodeId": "I3451:1204;3451:951;5296:652",
+      "height": 16
+    },
+    {
+      "data": {
+        "width": 76,
+        "borderRadius": {
+          "all": 0
+        },
+        "opacity": 1,
+        "height": 16
+      },
+      "name": "(bg-converted) Frame 1409",
+      "width": 76,
+      "x": 104,
+      "index": -15,
+      "y": 663,
+      "sdkVersion": "v2020.0",
+      "type": "RECT",
+      "nodeId": "I3451:1204;3451:951;5296:652",
+      "height": 16
+    },
+    {
+      "data": {
+        "width": 183,
+        "borderRadius": {
+          "all": 0
+        },
+        "opacity": 1,
+        "height": 133
+      },
+      "name": "(bg-converted) Frame 663",
+      "width": 183,
+      "x": 104,
+      "index": -12,
+      "y": 546,
+      "sdkVersion": "v2020.0",
+      "type": "RECT",
+      "nodeId": "I3451:1204;3451:951;3451:797",
+      "height": 133
+    },
+    {
+      "data": {
+        "width": 24,
+        "src": "https://resource-hosting.s3.us-west-1.amazonaws.com/oSVNmMXN-[object Object]",
+        "height": 24
+      },
+      "name": "inside-layer-on-off",
+      "width": 24,
+      "x": 303,
+      "index": 13,
+      "y": 600.5,
+      "sdkVersion": "v2020.0",
+      "type": "VANILLA",
+      "nodeId": "I3451:1204;3451:951;3451:818",
+      "height": 24
+    },
+    {
+      "data": {
+        "width": 24,
+        "borderRadius": {
+          "all": 0
+        },
+        "opacity": 1,
+        "height": 24
+      },
+      "name": "(bg-converted) inside-layer-on-off",
+      "width": 24,
+      "x": 303,
+      "index": -13,
+      "y": 600.5,
+      "sdkVersion": "v2020.0",
+      "type": "RECT",
+      "nodeId": "I3451:1204;3451:951;3451:818",
+      "height": 24
+    },
+    {
+      "data": {
+        "width": 279,
+        "borderRadius": {
+          "all": 0
+        },
+        "opacity": 1,
+        "height": 133
+      },
+      "name": "(bg-converted) Frame 664",
+      "width": 279,
+      "x": 48,
+      "index": -10,
+      "y": 546,
+      "sdkVersion": "v2020.0",
+      "type": "RECT",
+      "nodeId": "I3451:1204;3451:951;3451:795",
+      "height": 133
+    },
+    {
+      "data": {
+        "width": 327,
+        "borderRadius": {
+          "all": 20
+        },
+        "shadow": {
+          "spreadRadius": 0,
+          "color": {
+            "a": 0.07999999821186066,
+            "r": 0,
+            "b": 0,
+            "g": 0
+          },
+          "offset": {
+            "dx": 0,
+            "dy": 10
+          },
+          "blurRadius": 30
+        },
+        "fill": {
+          "a": 1,
+          "r": 1,
+          "b": 1,
+          "g": 1
+        },
+        "opacity": 1,
+        "height": 165
+      },
+      "name": "(bg-converted) rows/template/admin",
+      "width": 327,
+      "x": 24,
+      "index": -9,
+      "y": 530,
+      "sdkVersion": "v2020.0",
+      "type": "RECT",
+      "nodeId": "I3451:1204;3451:951",
+      "height": 165
+    },
+    {
+      "data": {
+        "width": 327,
+        "borderRadius": {
+          "all": 0
+        },
+        "opacity": 1,
+        "height": 455
+      },
+      "name": "(bg-converted) list/template",
+      "width": 327,
+      "x": 24,
+      "index": -6,
+      "y": 240,
+      "sdkVersion": "v2020.0",
+      "type": "RECT",
+      "nodeId": "3451:1204",
+      "height": 455
+    },
+    {
+      "data": {
+        "width": 375,
+        "src": "https://resource-hosting.s3.us-west-1.amazonaws.com/qnWnJnpt-[object Object]",
+        "height": 36
+      },
+      "name": "fixed-btn-gradient",
+      "width": 375,
+      "x": 0,
+      "index": 9,
+      "y": 687,
+      "sdkVersion": "v2020.0",
+      "type": "VANILLA",
+      "nodeId": "I1731:115903;2219:150232",
+      "height": 36
+    },
+    {
+      "data": {
+        "style": {
+          "name": "Roboto/Button/1-16-M",
+          "letterSpacing": 0,
+          "fontSize": 16,
+          "fontFamily": "Roboto",
+          "decoration": 0,
+          "fontWeight": "w500"
+        },
+        "text": "Confirm",
+        "textAlignVertical": "start",
+        "textAlign": "left"
+      },
+      "name": "Button",
+      "width": 58,
+      "x": 158.5,
+      "index": 13,
+      "y": 751,
+      "sdkVersion": "v2020.0",
+      "type": "TEXT",
+      "nodeId": "I1731:115903;2219:150233;1545:6374",
+      "height": 16
+    },
+    {
+      "data": {
+        "width": 58,
+        "borderRadius": {
+          "all": 0
+        },
+        "opacity": 1,
+        "height": 24
+      },
+      "name": "(bg-converted) Group",
+      "width": 58,
+      "x": 158.5,
+      "index": -11,
+      "y": 747,
+      "sdkVersion": "v2020.0",
+      "type": "RECT",
+      "nodeId": "I1731:115903;2219:150233;1545:6369",
+      "height": 24
+    },
+    {
+      "data": {
+        "width": 327,
+        "borderRadius": {
+          "all": 16
+        },
+        "fill": {
+          "a": 1,
+          "r": 0.26274511218070984,
+          "b": 0.6823529601097107,
+          "g": 0.7019608020782471
+        },
+        "opacity": 1,
+        "height": 56
+      },
+      "name": "(bg-converted) Button/fill-Primary-normal",
+      "width": 327,
+      "x": 24,
+      "index": -10,
+      "y": 731,
+      "sdkVersion": "v2020.0",
+      "type": "RECT",
+      "nodeId": "I1731:115903;2219:150233",
+      "height": 56
+    },
+    {
+      "data": {
+        "width": 375,
+        "borderRadius": {
+          "all": 0
+        },
+        "fill": {
+          "a": 1,
+          "r": 0.9725490212440491,
+          "b": 0.9803921580314636,
+          "g": 0.9764705896377563
+        },
+        "height": 82
+      },
+      "name": "(bg-converted) fixed-btn-bg",
+      "width": 375,
+      "x": 0,
+      "index": -8,
+      "y": 723,
+      "sdkVersion": "v2020.0",
+      "type": "RECT",
+      "nodeId": "I1731:115903;2219:150231",
+      "height": 82
+    },
+    {
+      "data": {
+        "width": 375,
+        "borderRadius": {
+          "all": 0
+        },
+        "opacity": 1,
+        "height": 118
+      },
+      "name": "(bg-converted) scroll-fixed-btn/active-gray",
+      "width": 375,
+      "x": 0,
+      "index": -7,
+      "y": 687,
+      "sdkVersion": "v2020.0",
+      "type": "RECT",
+      "nodeId": "1731:115903",
+      "height": 118
+    }
+  ]
+}

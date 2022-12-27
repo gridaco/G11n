@@ -1,8 +1,8 @@
 {
   "name": "g11n-service",
   "version": "0.0.0",
-  "description": "g11n asset linker service for bridged systems",
-  "author": "bridged.xyz authors",
+  "description": "g11n asset linker service for Grida systems",
+  "author": "grida.co authors",
   "private": false,
   "license": "MIT",
   "main": "lambda",

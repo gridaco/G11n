@@ -4,7 +4,7 @@ import styled from "@emotion/styled";
 import { GlobalizedKey, IGlobalizedKey } from "@base-sdk/g11n";
 import { assets } from "@base-sdk/base";
 
-import { currentEditorialLocaleAtom } from "../../states/editor-state";
+import { currentEditorialLocaleAtom } from "states/editor-state";
 import { TranslationFieldRow } from "./translation-field";
 
 const availableLocales = ["ko", "en", "ja"];

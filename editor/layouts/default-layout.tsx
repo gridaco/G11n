@@ -1,6 +1,6 @@
 import React from "react";
-import Appbar from "../components/appbar/default-appbar";
-import { LinearProgress } from "@material-ui/core";
+import Appbar from "components/appbar/default-appbar";
+import { LinearProgress } from "@mui/material";
 import Head from "next/head";
 
 export function DefaultScaffoldLayoyt(props: {
@@ -41,7 +41,7 @@ export function DefaultScaffoldLayoyt(props: {
         onClickPlay={() => {}}
       />
       <Head>
-        <title>G11n by bridged</title>
+        <title>G11n by Grida</title>
       </Head>
       <main>{props.children}</main>
     </div>

@@ -19,7 +19,7 @@ provider:
   name: aws
   runtime: nodejs12.x
   region: us-west-1
-  logs:
+  # logs:
   websocket:
     level: ERROR
   websocketsApiName: g11n-realtime-websockets-api
