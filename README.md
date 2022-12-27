@@ -16,12 +16,13 @@ yarn editor
 
 ## Games Globalization with Unity
 
-run on localhost, visit - http://globalization-editor-mz.bridged.xyz/globalization/demo/games for demos
+- Demo : visit https://globalization-editor-mz.bridged.xyz/globalization/demo/games for demos or http://localhost:3306/globalization/demo/games on local.
+- Unity G11n SDK - [directory](./sdks/unity)
 
 ## Installation
 
 ```
-yarn add @base-sdk/g11n
+yarn add @grida.co/g11n
 ```
 
 ## Project
