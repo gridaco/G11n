@@ -11,7 +11,7 @@ import {
   DesignGlobalizationRepositoriesStore,
 } from "@base-sdk/g11n";
 import { DefaultScaffoldLayoyt } from "../layouts/default-layout";
-import { InnerStaticAppEditorWorkspace } from "../sections/editor/inner-static-app-editor-workspace";
+import { InnerStaticAppEditorWorkspace } from "../scaffolds/editor/inner-static-app-editor-workspace";
 import { makeService } from "../services/scene-store";
 
 export default function Home() {

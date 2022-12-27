@@ -2,7 +2,7 @@ import { Button, TextField, Typography } from "@mui/material";
 import { useRouter } from "next/router";
 import React, { useEffect, useRef, useState } from "react";
 import { DefaultScaffoldLayoyt } from "../../../layouts/default-layout";
-import { InnerEditorWorkspace } from "../../../sections/editor/inner-editor-workspace";
+import { InnerEditorWorkspace } from "../../../scaffolds/editor/inner-editor-workspace";
 import { RealtimeEditEditorClient } from "../../../services/realtime-edit";
 
 const DEFAULT_GAMES_DEMO_REGISTRY_BASE =
