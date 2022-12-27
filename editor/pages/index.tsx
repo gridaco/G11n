@@ -12,7 +12,7 @@ import {
 } from "@base-sdk/g11n";
 import { DefaultScaffoldLayoyt } from "layouts/default-layout";
 import { InnerStaticAppEditorWorkspace } from "scaffolds/editor/inner-static-app-editor-workspace";
-import { makeService } from "services/scene-store";
+import { makeService, makeDummyService } from "services/scene-store";
 
 export default function Home() {
   const router = useRouter();
@@ -28,7 +28,7 @@ export default function Home() {
   ] = useState<DesignGlobalizationRepository>();
   const [targetSceneId, setTargetSceneId] = useRecoilState(targetSceneIdAtom);
 
-  const service = React.useMemo(() => makeService(), []);
+  const service = React.useMemo(() => makeDummyService(), []);
 
   useEffect(() => {
     if (sceneId && !sceneRepository) {

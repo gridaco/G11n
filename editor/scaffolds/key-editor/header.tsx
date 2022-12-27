@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "@emotion/styled";
 import { IconButton } from "@mui/material";
-
+import { CaretLeftIcon } from "@radix-ui/react-icons";
 interface IHeader {
   title: string;
   onClickBack?: () => void;
@@ -16,7 +16,7 @@ export default function Header({
     <Container>
       <LeftSide>
         <BackButton onClick={onClickBack}>
-          <BackIcon src="/assets/icons/mdi_arrow_back.svg" />
+          <CaretLeftIcon />
         </BackButton>
         <Title>{title}</Title>
       </LeftSide>
@@ -45,11 +45,6 @@ const BackButton = styled(IconButton)`
   border-radius: 8px;
   margin: 2px 0;
   margin-right: 16px;
-`;
-
-const BackIcon = styled.img`
-  width: 24px;
-  height: 24px;
 `;
 
 const Title = styled.h1`
