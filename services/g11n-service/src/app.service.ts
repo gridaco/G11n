@@ -7,18 +7,15 @@ import {
   TextTranslationAddRequest,
   TextTranslationPutRequest,
   TextTranslationUpdateRequest,
-} from "@bridged.xyz/base-sdk/lib/g11n/api";
+} from "@base-sdk/g11n/dist/g11n/api";
 import {
   registerVariantAsset,
   getVariantAsset,
   addAvariant,
   putVariant,
   updateVariant,
-} from "@bridged.xyz/base-sdk/lib/assets/api";
-import {
-  IGlobalizedKey,
-  LayerTranslation,
-} from "@bridged.xyz/base-sdk/lib/g11n";
+} from "@base-sdk/assets/dist/api";
+import { IGlobalizedKey, LayerTranslation } from "@base-sdk/g11n";
 import {
   KeyModel,
   KeyRecord,

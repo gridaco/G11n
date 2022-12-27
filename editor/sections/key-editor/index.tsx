@@ -7,12 +7,11 @@ import {
   StorableLayer,
   StorableLayerType,
   assets,
-} from "@bridged.xyz/base-sdk/lib";
+} from "@base-sdk/base";
 
-import { TextManifest } from "@reflect-ui/core";
+import type { RenderedTextManifest } from "@reflect-ui/core";
 import { TranslationSetForKey } from "../../components/g11n/translation-set-for-key";
-import { DesignGlobalizationRepository } from "@bridged.xyz/base-sdk/lib/g11n/repository";
-import { IGlobalizedKey, Translations } from "@bridged.xyz/base-sdk/lib/g11n";
+import { IGlobalizedKey, Translations, DesignGlobalizationRepository } from "@base-sdk/g11n";
 import Header from "./header";
 import TextInput from "../../components/g11n/text-input";
 
@@ -125,7 +124,7 @@ function SingleKeyEditorCreateNewState(props: {
 
   const textValue =
     layer?.type === StorableLayerType.text
-      ? (layer?.data as TextManifest).text
+      ? (layer?.data as any as RenderedTextManifest).data
       : "this is not a text";
 
   const handleInitialTranslationChange = (locale: string, value: string) => {

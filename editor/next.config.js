@@ -1,8 +1,4 @@
-const withTM = require("next-transpile-modules")([
-  "@reflect-ui/core",
-  "@bridged.xyz/base-sdk",
-  //   "react-konva",
-]);
+const withTM = require("next-transpile-modules")([]);
 
 module.exports = withTM({
   webpack: (config, { buildId, dev, isServer, defaultLoaders, webpack }) => {

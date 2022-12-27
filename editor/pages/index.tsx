@@ -1,17 +1,18 @@
 import React from "react";
-import { InnerEditorWorkspace } from "../sections/editor/inner-editor-workspace";
+// import { InnerEditorWorkspace } from "../sections/editor/inner-editor-workspace";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { SceneLocalRepository, SceneRepositoryStore } from "../repositories";
-import { StorableScene, SceneStoreService } from "@bridged.xyz/base-sdk";
+import { SceneStoreService, SceneRecord } from "@base-sdk/scene-store";
 import { useRecoilState } from "recoil";
 import { targetSceneIdAtom } from "../states/preview-canvas.state";
 import {
   DesignGlobalizationRepository,
   DesignGlobalizationRepositoriesStore,
-} from "@bridged.xyz/base-sdk/lib/g11n/repository";
+} from "@base-sdk/g11n";
 import { DefaultScaffoldLayoyt } from "../layouts/default-layout";
 import { InnerStaticAppEditorWorkspace } from "../sections/editor/inner-static-app-editor-workspace";
+import { makeService } from "../services/scene-store";
 
 export default function Home() {
   const router = useRouter();
@@ -27,13 +28,15 @@ export default function Home() {
   ] = useState<DesignGlobalizationRepository>();
   const [targetSceneId, setTargetSceneId] = useRecoilState(targetSceneIdAtom);
 
+  const service = React.useMemo(() => makeService(), []);
+
   useEffect(() => {
     if (sceneId && !sceneRepository) {
       console.log("fetching scene data");
-      const service = new SceneStoreService("temp", "");
-      service.fetchScene(sceneId).then((response) => {
+
+      service.get(sceneId).then((response) => {
         console.log("response", response);
-        const scene = response.data.data as StorableScene;
+        const scene = response;
         const sceneRepository = SceneRepositoryStore.make(scene);
         const desingGlobalizationRepository = DesignGlobalizationRepositoriesStore.make(
           "temp",
@@ -51,7 +54,7 @@ export default function Home() {
   }
 
   return (
-    <DefaultScaffoldLayoyt title={sceneRepository.scene.name}>
+    <DefaultScaffoldLayoyt title={sceneRepository.scene.rawname}>
       <InnerStaticAppEditorWorkspace
         key={sceneRepository?.id}
         sceneId={sceneId}

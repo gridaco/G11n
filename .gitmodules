@@ -1,6 +1,0 @@
-[submodule "packages/base-sdk"]
-	path = packages/base-sdk
-	url = https://github.com/bridgedxyz/base-sdk-ts
-[submodule "packages/reflect-core"]
-	path = packages/reflect-core
-	url = https://github.com/bridgedxyz/reflect-core-ts

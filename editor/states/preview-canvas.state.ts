@@ -1,4 +1,4 @@
-import { StorableLayer } from "@bridged.xyz/base-sdk/lib";
+import { StorableLayer } from "@base-sdk/base";
 import { atom, selector } from "recoil";
 import { SceneRepositoryStore } from "../repositories";
 
