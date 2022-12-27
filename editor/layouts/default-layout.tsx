@@ -41,7 +41,7 @@ export function DefaultScaffoldLayoyt(props: {
         onClickPlay={() => {}}
       />
       <Head>
-        <title>G11n by bridged</title>
+        <title>G11n by Grida</title>
       </Head>
       <main>{props.children}</main>
     </div>
