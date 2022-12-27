@@ -1,30 +1,32 @@
 import { Controller, Get, Param, Post, Body } from '@nestjs/common';
-import { TermService } from './term.service';
 import { Term, Prisma } from '@prisma/client';
+import { AppService } from './app.service';
 
 @Controller()
 export class AppController {
-  constructor(private readonly appService: TermService) {}
+  constructor(private readonly appService: AppService) {}
 
   @Get('/')
   async getHello() {
     return 'service is running';
   }
 
-  @Get(':name')
-  async termByName(@Param() params): Promise<Term[]> {
-    console.log(params.name);
-    return await this.appService.termByName(params.name);
+  @Get('/all')
+  async terms() {
+    const params = {
+      name: 'test',
+    };
+    return await this.appService.terms(params);
   }
 
-  @Post()
-  async createTerm(@Body() term: Term): Promise<Term> {
+  @Post('/')
+  async createTerm(@Body() term: Term) {
     console.log(term);
     return await this.appService.createTerm(term);
   }
 
   @Get('/create-sample')
-  async createSample(): Promise<Term> {
+  async createSample() {
     const term = {
       name: 'test',
       langType: 'ko',
@@ -32,5 +34,11 @@ export class AppController {
     };
     console.log(term);
     return await this.appService.createTerm(term);
+  }
+
+  @Get(':name')
+  async termByName(@Param() params) {
+    console.log(params.name);
+    return await this.appService.termByName(params.name);
   }
 }

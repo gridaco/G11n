@@ -3,7 +3,9 @@ import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 
 async function main() {
-  const term = await prisma.term.findMany({});
+  const term = await prisma.term.findMany({
+    where: { name: 'test' },
+  });
   console.log(term);
 }
 
