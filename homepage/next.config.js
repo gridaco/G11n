@@ -1,7 +1,6 @@
-module.exports = {
-  /**
-   * https://bridged.xyz/globalization
-   * https://bridged.xyz/solutions/globalization
-   */
-  basePath: "/globalization",
-};
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  reactStrictMode: true,
+}
+
+module.exports = nextConfig
