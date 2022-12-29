@@ -10,11 +10,10 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Term {
+model Translation {
   id String @id @default(auto()) @map("_id") @db.ObjectId 
-  langType String
-  name String
-  value String
+  key String
+  value Json
 }
 
 

@@ -1,5 +1,13 @@
-import { Controller, Get, Param, Post, Body } from '@nestjs/common';
-import { Term, Prisma } from '@prisma/client';
+import {
+  Controller,
+  Get,
+  Param,
+  Post,
+  Body,
+  Patch,
+  Delete,
+} from '@nestjs/common';
+import { Translation, Prisma } from '@prisma/client';
 import { AppService } from './app.service';
 
 @Controller()
@@ -12,33 +20,30 @@ export class AppController {
   }
 
   @Get('/all')
-  async terms() {
-    const params = {
-      name: 'test',
-    };
-    return await this.appService.terms(params);
+  async translations() {
+    const params = {};
+    return await this.appService.translations(params);
   }
 
-  @Post('/')
-  async createTerm(@Body() term: Term) {
-    console.log(term);
-    return await this.appService.createTerm(term);
+  @Post('/create-translation')
+  async createTranslation(@Body() translation: Translation) {
+    return await this.appService.createTranslation(translation);
   }
 
-  @Get('/create-sample')
-  async createSample() {
-    const term = {
-      name: 'test',
-      langType: 'ko',
-      value: '테스트',
-    };
-    console.log(term);
-    return await this.appService.createTerm(term);
+  @Patch('/update-translation:id')
+  async updateTranslation(@Param() id: string, @Body() data: Translation) {
+    const params = { id, data };
+    return await this.appService.updateTranslation(params);
   }
 
-  @Get(':name')
-  async termByName(@Param() params) {
+  @Delete('/delete-translation:id')
+  async deleteTranslation(@Param() id: string) {
+    return await this.appService.deleteTranslation(id);
+  }
+
+  @Get('/get-translation:name')
+  async translationByKey(@Param() params) {
     console.log(params.name);
-    return await this.appService.termByName(params.name);
+    return await this.appService.translationByKey(params.name);
   }
 }
