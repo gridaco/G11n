@@ -10,17 +10,32 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Translation {
+model TextSet {
+  @@map("text_sets")
   id String @id @default(auto()) @map("_id") @db.ObjectId 
-  key String
+  key String // "home"
   value Json
+  projectId String @map("project_id") @db.ObjectId
+  project Project @relation(fields: [projectId], references: [id])
+
+
+  @@unique([projectId, key])
+  @@unique([value, key])
+  // locales String[]
+  // embeddable Boolean // true
+}
+
+model Project{
+  @@map("projects")
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  name String
+  locales String[]
+  texts TextSet[]
+  // files FileSet[]
 }
 
 
-// model Term {
-//   id String @id @default(auto()) @map("_id") @db.ObjectId
-//   name String // "brand"
-//   translations Json // {en:"Apple",. ko:"애플"}
-//   embeddable Boolean // true
-//   locales String[]
+// model FileSet{
+//   @@map("file_sets")
+//   // 
 // }
