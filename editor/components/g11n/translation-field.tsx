@@ -12,6 +12,7 @@ interface ITranslationFieldRow {
   locale: string;
   initialValue?: string;
   onSubmit: (locale: string, value: string) => void;
+  onChange?: (locale: string, value: string) => void;
   isAutoTranslate?: boolean;
 }
 
@@ -44,6 +45,7 @@ export const TranslationEditField = ({
 
   const handleEdit = (e: any) => {
     setCurrentEditTextValue(e.target.value);
+    props.onChange?.(props.locale, e.target.value);
   };
 
   // on key down, when enter key is pressed via keyboard or save button clicked.

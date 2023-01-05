@@ -15,9 +15,11 @@ export default function Header({
   return (
     <Container>
       <LeftSide>
-        <BackButton onClick={onClickBack}>
-          <CaretLeftIcon />
-        </BackButton>
+        {onClickBack && (
+          <BackButton onClick={onClickBack}>
+            <CaretLeftIcon />
+          </BackButton>
+        )}
         <Title>{title}</Title>
       </LeftSide>
       {children}

@@ -1,9 +1,18 @@
-import { Button, TextField, Typography } from "@mui/material";
-import { useRouter } from "next/router";
 import React, { useEffect, useRef, useState } from "react";
+import styled from "@emotion/styled";
+import {
+  IconButton,
+  TextField,
+  Typography,
+  CircularProgress,
+} from "@mui/material";
+import { useRouter } from "next/router";
 import { DefaultScaffoldLayoyt } from "layouts/default-layout";
 import { InnerEditorWorkspace } from "scaffolds/editor/inner-editor-workspace";
 import { RealtimeEditEditorClient } from "services/realtime-edit";
+import { Header } from "scaffolds/key-editor";
+import { PlayIcon, PauseIcon } from "@radix-ui/react-icons";
+import { TranslationSetForKey } from "components/g11n/translation-set-for-key";
 
 const DEFAULT_GAMES_DEMO_REGISTRY_BASE =
   "https://bridged-service-demo.s3-us-west-1.amazonaws.com/";
@@ -88,8 +97,11 @@ function RealtimeEditor(props: { appId: string }) {
     setCurrentSelectedLayerTextValue,
   ] = useState<string>();
 
+  const [paused, setPaused] = useState<boolean>(false);
+
   useEffect(() => {
     client.addOnLayerSelectListener((data: { text: string; layer: string }) => {
+      console.log("onLayerSelect", data);
       setCurrentSelectedLayerTextValue(data.text);
     });
   }, []);
@@ -97,32 +109,71 @@ function RealtimeEditor(props: { appId: string }) {
   //setup realtime client
   return (
     <>
-      <div style={{ marginTop: 46 }} />
-      <Button
-        onClick={() => {
-          client.pauseApp();
-        }}
-      >
-        Pause
-      </Button>
-      <Button
-        onClick={() => {
-          client.resumeApp();
-        }}
-      >
-        Resume
-      </Button>
-      <Typography>
-        {currentSelectedLayerTextValue ?? "Nothing is selected"}
-      </Typography>
-      <TextField
-        onChange={(e) =>
-          client.updateLayer("", { text: e.target.value, locale: "" })
-        }
-      />
+      <>
+        <Header title="Rename Key" />
+        <EditorContent>
+          <div style={{ marginBottom: 24 }}>
+            <IconButton
+              onClick={() => {
+                if (paused) {
+                  client.resumeApp();
+                  setPaused(false);
+                } else {
+                  client.pauseApp();
+                  setPaused(true);
+                }
+              }}
+            >
+              {paused ? <PlayIcon /> : <PauseIcon />}
+            </IconButton>
+          </div>
+          <FieldWrapper>
+            <InputField>Key Name</InputField>
+            {/* <TextInput value={props.gkey.key} disabled /> */}
+          </FieldWrapper>
+          <FieldWrapper>
+            <InputField>Value</InputField>
+
+            <TranslationSetForKey
+              key={"main"}
+              locales={["en", "ko", "ja"]}
+              onSubmit={() => {}}
+              onEdit={(locale, value) => {
+                client.updateLayer("", { text: value, locale: "" });
+              }}
+              // translations={{ en: "currentSelectedLayerTextValue", "": "" }}
+            />
+            {/* {translations !== undefined ? (
+            ) : (
+              <ProgressContainer>
+                <CircularProgress />
+              </ProgressContainer>
+            )} */}
+          </FieldWrapper>
+        </EditorContent>
+      </>
     </>
   );
 }
+
+const EditorContent = styled.div`
+  padding: 24px 32px;
+`;
+
+const FieldWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 32px;
+`;
+
+const InputField = styled.h2`
+  margin: 0;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 1.2;
+  color: #888888;
+  margin-bottom: 16px;
+`;
 
 const sizes: { [key: string]: { width: number; height: number } } = {
   embed_iphone_x: {
@@ -145,4 +196,4 @@ const sizes: { [key: string]: { width: number; height: number } } = {
     width: 1600,
     height: 2400,
   },
-};
+} as const;
