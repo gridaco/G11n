@@ -15,6 +15,8 @@ import { IGlobalizedKey, Translations, DesignGlobalizationRepository } from "@ba
 import Header from "./header";
 import TextInput from "components/g11n/text-input";
 
+export { default as Header } from "./header"
+
 type SingleKeyEditorMode = "create-new" | "edit-existing" | "loading";
 /**
  * provides interface for editing focused single key. creating, and editing the key name and translations's value

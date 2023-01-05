@@ -11,6 +11,7 @@ export function TranslationSetForKey(props: {
   locales: string[];
   translations?: Translations;
   onSubmit: (locale: string, value: string) => void;
+  onEdit?: (locale: string, value: string) => void;
 }) {
   const locales = props.locales;
 
@@ -36,6 +37,7 @@ export function TranslationSetForKey(props: {
             locale={locale}
             initialValue={getInitialValue(locale)}
             onSubmit={handleOnTranslationValueChange}
+            onChange={props.onEdit}
           />
         );
       })}
