@@ -10,7 +10,9 @@ import {
 import { TextSet, Prisma } from '@prisma/client';
 import { TextSetService } from './text-set.service';
 import { CreateTextSetDto, UpdateTextSetDto } from './text-set.object';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('textset')
 @Controller('text-sets')
 export class TextSetController {
   constructor(private readonly textSetService: TextSetService) {}
