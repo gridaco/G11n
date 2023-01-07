@@ -20,10 +20,10 @@ docker stop g11n-services-mongo-express
 
 - http://localhost:8081/
 
-**Admin**
+**Connection string (Mongodb compass & for Prisma)**
 
 ```
-mongodb://root:password@mongo:27017/main?authSource=admin
+mongodb://root:password@localhost:27017/main?authSource=admin
 ```
 
 ## References
