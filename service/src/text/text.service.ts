@@ -14,15 +14,18 @@ export class TextSetService {
     });
   }
 
-  // find textSetw by key
+  // find textSet by key
   async textSetByKey(params: {
     projectId: string;
     key: string;
   }): Promise<TextSet | null> {
     const { projectId, key } = params;
-    return await this.prisma.textSet.findFirst({
+    let textSet: TextSet = await this.prisma.textSet.findFirst({
       where: { projectId, key },
     });
+    textSet.value = JSON.parse(textSet.value as string);
+
+    return textSet;
   }
 
   async textSets(params: {
@@ -32,15 +35,15 @@ export class TextSetService {
   }): Promise<TextSet[]> {
     const { projectId, locale, key } = params;
 
-    let texts: TextSet[] = await this.prisma.textSet.findMany({
+    let textSets: TextSet[] = await this.prisma.textSet.findMany({
       where: { projectId, key },
     });
 
-    // texts.forEach((text: TextSet) => {
+    textSets.forEach((textSet: TextSet) => {
+      textSet.value = JSON.parse(textSet.value as string);
+    });
 
-    // })
-
-    return texts;
+    return textSets;
   }
 
   async createTextSet(data: CreateTextSetDto): Promise<TextSet> {
