@@ -8,8 +8,8 @@ import {
   Delete,
 } from "@nestjs/common";
 import { TextSet, Prisma } from "@prisma/client";
-import { TextSetService } from "./text-set.service";
-import { CreateTextSetDto, UpdateTextSetDto } from "./text-set.object";
+import { TextSetService } from "./text.service";
+import { CreateTextSetDto, UpdateTextSetDto } from "./text.object";
 import { ApiTags } from "@nestjs/swagger";
 
 @ApiTags("textset")
@@ -17,15 +17,16 @@ import { ApiTags } from "@nestjs/swagger";
 export class TextSetController {
   constructor(private readonly textSetService: TextSetService) {}
 
-  @Get("/")
-  async textSets() {
-    const params = {};
+  @Get("/:projectId/locales/:locale")
+  async textSets(
+    @Param() params: { projectId: string; locale?: string; key?: string }
+  ) {
     return await this.textSetService.textSets(params);
   }
 
-  @Get("/:key")
-  async textSetByKey(@Param() params) {
-    return await this.textSetService.textSetByKey(params.key);
+  @Get("/:projectId/keys/:key")
+  async textSetByKey(@Param() params: { projectId: string; key: string }) {
+    return await this.textSetService.textSetByKey(params);
   }
 
   @Post("/")
@@ -43,7 +44,7 @@ export class TextSetController {
   }
 
   @Delete("/:id")
-  async deleteTextSet(@Param() params) {
+  async deleteTextSet(@Param() params: { id: string }) {
     return await this.textSetService.deleteTextSet(params.id);
   }
 }

@@ -1,7 +1,7 @@
-import { ConflictException, Injectable } from '@nestjs/common';
-import { PrismaService } from '../.prisma/prisma.service';
-import { TextSet, Prisma, Project } from '@prisma/client';
-import { CreateTextSetDto, UpdateTextSetDto } from './text-set.object';
+import { ConflictException, Injectable } from "@nestjs/common";
+import { PrismaService } from "../.prisma/prisma.service";
+import { TextSet, Prisma, Project } from "@prisma/client";
+import { CreateTextSetDto, UpdateTextSetDto } from "./text.object";
 
 @Injectable()
 export class TextSetService {
@@ -15,29 +15,43 @@ export class TextSetService {
   }
 
   // find textSetw by key
-  async textSetByKey(key: string): Promise<TextSet | null> {
+  async textSetByKey(params: {
+    projectId: string;
+    key: string;
+  }): Promise<TextSet | null> {
+    const { projectId, key } = params;
     return await this.prisma.textSet.findFirst({
-      where: { key },
+      where: { projectId, key },
     });
   }
 
-  async textSets(params): Promise<TextSet[]> {
-    const { key, value } = params;
+  async textSets(params: {
+    projectId: string;
+    key?: string;
+    locale?: string;
+  }): Promise<TextSet[]> {
+    const { projectId, locale, key } = params;
 
-    return await this.prisma.textSet.findMany({
-      where: { key, value },
+    let texts: TextSet[] = await this.prisma.textSet.findMany({
+      where: { projectId, key },
     });
+
+    // texts.forEach((text: TextSet) => {
+
+    // })
+
+    return texts;
   }
 
   async createTextSet(data: CreateTextSetDto): Promise<TextSet> {
     try {
-      //sample project
-      const project = await this.prisma.project.findFirst({
-        where: { name: 'test3' },
-      });
-      data.projectId = project.id;
+      let value = JSON.stringify(data.value);
+      delete data.value;
       return await this.prisma.textSet.create({
-        data,
+        data: {
+          ...data,
+          value,
+        },
       });
     } catch (e) {
       this.throwConflictException(e);
@@ -69,13 +83,13 @@ export class TextSetService {
     }
   }
 
-  throwConflictException(e) {
+  throwConflictException(e: Error) {
     if (e instanceof Prisma.PrismaClientKnownRequestError) {
-      if (e.code === 'P2002') {
-        throw new ConflictException('Existing key already');
+      if (e.code === "P2002") {
+        throw new ConflictException("Existing key already");
       }
-      if (e.code === 'P2025') {
-        throw new ConflictException('Record not found');
+      if (e.code === "P2025") {
+        throw new ConflictException("Record not found");
       } else {
         throw new ConflictException(e);
       }
