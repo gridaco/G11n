@@ -66,10 +66,15 @@ export class TextSetService {
     data: UpdateTextSetDto;
   }): Promise<TextSet> {
     try {
-      const { id, data } = params;
+      let { id, data } = params;
+      let value = JSON.stringify(data.value);
+      delete data.value;
       return await this.prisma.textSet.update({
         where: { id },
-        data,
+        data: {
+          ...data,
+          value,
+        },
       });
     } catch (e) {
       this.throwConflictException(e);
