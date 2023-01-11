@@ -6,6 +6,8 @@ const client = Axios.create({
 });
 
 export default function() {
+  const [projects, setProjects] = React.useState<any[]>([]);
+
   const [projectId, setProjectId] = React.useState<string>('');
 
   const [locales, setLocales] = React.useState<any[]>([]);
@@ -16,11 +18,23 @@ export default function() {
 
   const [key, setKey] = React.useState<any>({ value: { [locale]: '' } });
 
+  const onProjectCreate = (project: any) => {
+    client.post('/projects', project).then((res) => {
+      setProjects([...projects, res.data]);
+    });
+  };
+
+  const onProjectChange = (projectId: string) => {
+    setProjectId(projectId);
+    setKey({ value: { [locale]: '' } });
+  };
+
   const onCreateNewKey = (key: any) => {
     key.projectId = projectId;
     const data = key;
     client.post('/texts', data).then((res) => {
       setKeys([...keys, res.data]);
+      setKey(res.data);
     });
     // alert("key created: " + key);
   };
@@ -37,13 +51,13 @@ export default function() {
     // alert("key created: " + key);
   };
 
-  const onDeletedKey = (id: string) => {
-    console.log(id);
+  const onDeleteKey = (id: string) => {
     client.delete(`/texts/${id}`).then((res) => {
       keys.forEach((k, i) => {
         k.id === id ? keys.splice(i, 1) : null;
       });
       setKeys([...keys]);
+      setKey({ value: { [locale]: '' } });
     });
     // alert("key created: " + key);
   };
@@ -54,7 +68,8 @@ export default function() {
       }}
     >
       <h1>V1 Playground {projectId}</h1>
-      {/* select project */}
+
+      <CreateProject onClick={onProjectCreate}></CreateProject>
       <div
         style={{
           display: 'flex',
@@ -68,7 +83,13 @@ export default function() {
             padding: 20,
           }}
         >
-          <SelectProjectsView value={projectId} onChange={setProjectId} />
+          {/* select project */}
+          <SelectProjectsView
+            value={projectId}
+            projects={projects}
+            getProjects={setProjects}
+            onChange={onProjectChange}
+          />
           {/* select locale */}
           <SetLocaleView
             locale={locale}
@@ -82,9 +103,11 @@ export default function() {
           {projectId ? (
             <GetKeysByProject
               projectId={projectId}
+              keys={keys}
               locale={locale || 'null'}
+              onGetKeys={setKeys}
               onClick={setKey}
-              onDeletedKey={onDeletedKey}
+              onDeleteKey={onDeleteKey}
             />
           ) : null}
         </div>
@@ -99,8 +122,8 @@ export default function() {
           <CreateKeyView
             locales={locales}
             currentKey={key}
-            onCreated={onCreateNewKey}
-            onUpdated={onUpdateKey}
+            onCreate={onCreateNewKey}
+            onUpdate={onUpdateKey}
             onClickedNewKey={setKey}
           />
         </div>
@@ -109,15 +132,65 @@ export default function() {
   );
 }
 
+function CreateProject({
+  onClick: onCreateProject,
+}: {
+  onClick: (project: any) => void;
+}) {
+  const locales = ['en', 'ko', 'ja'];
+
+  const [project, setProject] = React.useState<any>({ name: '', locales: [] });
+  console.log(project);
+  return (
+    <>
+      <h2>Create Project</h2>
+      Project Name:{' '}
+      <input
+        type="text"
+        onChange={(e) => {
+          setProject({ ...project, name: e.target.value });
+        }}
+      />
+      <br />
+      Select Locales <br />
+      {locales.map((locale, i) => {
+        return (
+          <label key={i}>
+            - {locale}:{' '}
+            <input
+              type="checkbox"
+              name={locale}
+              value={locale}
+              onChange={(e) => {
+                if (
+                  e.target.checked &&
+                  !project.locales.some((l: string) => l === e.target.name)
+                ) {
+                  const locales = [...project.locales, e.target.value];
+                  setProject({ ...project, locales });
+                }
+              }}
+            />
+            <br />
+          </label>
+        );
+      })}
+      <button onClick={() => onCreateProject(project)}>create</button>
+    </>
+  );
+}
+
 function SelectProjectsView({
   value: projectId,
-  onChange: setProjectId,
+  projects,
+  getProjects: setProjects,
+  onChange: onProjectChange,
 }: {
   value: string;
+  projects: any[];
+  getProjects: (projects: any[]) => void;
   onChange: (projectId: string) => void;
 }) {
-  const [projects, setProjects] = React.useState<any[]>([]);
-
   React.useEffect(() => {
     client.get('/projects').then((res) => {
       setProjects(res.data);
@@ -131,7 +204,7 @@ function SelectProjectsView({
       <select
         value={projectId}
         onChange={(e) => {
-          setProjectId(e.target.value);
+          onProjectChange(e.target.value);
         }}
       >
         <option key="0"></option>
@@ -185,17 +258,19 @@ function SetLocaleView({
 
 function GetKeysByProject({
   projectId: projectId,
+  keys: keys,
   locale: locale,
+  onGetKeys: setKeys,
   onClick: setKey,
-  onDeletedKey,
+  onDeleteKey,
 }: {
   projectId: string;
+  keys: any[];
   locale: string;
+  onGetKeys: (keys: any[]) => void;
   onClick: (key: any) => void;
-  onDeletedKey: (id: string) => void;
+  onDeleteKey: (id: string) => void;
 }) {
-  const [keys, setKeys] = React.useState<any[]>([]);
-
   React.useEffect(() => {
     // 로케일 필요한가
     client.get(`/texts/${projectId}/locales/${locale}`).then((res) => {
@@ -221,10 +296,10 @@ function GetKeysByProject({
           >
             key: {key.key}
             <br />
-            value: {key.value[locale]}
+            value: {key.value ? key.value[locale] : ''}
             <button
               onClick={() => {
-                onDeletedKey(key.id);
+                onDeleteKey(key.id);
               }}
             >
               delete
@@ -239,14 +314,14 @@ function GetKeysByProject({
 function CreateKeyView({
   locales,
   currentKey,
-  onCreated,
-  onUpdated,
+  onCreate,
+  onUpdate,
   onClickedNewKey,
 }: {
   locales: string[];
   currentKey: any;
-  onCreated: (key: any) => void;
-  onUpdated: (key: any) => void;
+  onCreate: (key: any) => void;
+  onUpdate: (key: any) => void;
   onClickedNewKey: (key: any) => void;
 }) {
   // const [keyPreview, setKeyPreview] = React.useState<string>('');
@@ -272,7 +347,7 @@ function CreateKeyView({
           <p key={i}>
             {locale}:{' '}
             <input
-              value={currentKey.value[locale] || ''}
+              value={currentKey?.value[locale] || ''}
               placeholder={locale}
               onChange={(e) => {
                 currentKey.value[locale] = e.target.value;
@@ -285,9 +360,9 @@ function CreateKeyView({
       <button
         onClick={() => {
           if (currentKey.id) {
-            onUpdated(currentKey);
+            onUpdate(currentKey);
           } else {
-            onCreated(currentKey);
+            onCreate(currentKey);
           }
         }}
       >

@@ -49,13 +49,14 @@ export class TextSetService {
   async createTextSet(data: CreateTextSetDto): Promise<TextSet> {
     try {
       let value = JSON.stringify(data.value);
-      delete data.value;
-      return await this.prisma.textSet.create({
+      const createdKey = await this.prisma.textSet.create({
         data: {
           ...data,
           value,
         },
       });
+      createdKey.value = JSON.parse(createdKey.value as string);
+      return createdKey;
     } catch (e) {
       this.throwConflictException(e);
     }
@@ -68,14 +69,15 @@ export class TextSetService {
     try {
       let { id, data } = params;
       let value = JSON.stringify(data.value);
-      delete data.value;
-      return await this.prisma.textSet.update({
+      const updatedKey = await this.prisma.textSet.update({
         where: { id },
         data: {
           ...data,
           value,
         },
       });
+      updatedKey.value = JSON.parse(updatedKey.value as string);
+      return updatedKey;
     } catch (e) {
       this.throwConflictException(e);
     }
