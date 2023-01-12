@@ -9,6 +9,7 @@ import {
 } from "@nestjs/common";
 import { TextSet, Prisma } from "@prisma/client";
 import { ProjectService } from "./project.service";
+import { CreateProjectDto } from "./project.object";
 
 @Controller("projects")
 export class ProjectController {
@@ -25,7 +26,7 @@ export class ProjectController {
   }
 
   @Post("/")
-  async createProject(@Body() project: Prisma.ProjectCreateInput) {
+  async createProject(@Body() project: CreateProjectDto) {
     return await this.projectService.createProject(project);
   }
 }
