@@ -1,0 +1,43 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model TextSet {
+  @@map("text-sets")
+  id String @id @default(auto()) @map("_id") @db.ObjectId 
+  key String
+  value Json?
+  project Project @relation(fields: [projectId], references: [id])
+  projectId String @db.ObjectId
+
+  @@unique([key, projectId])
+}
+
+// model FileSet {
+
+// }
+
+model Project {
+  @@map("projects")
+  id String @id @default(auto()) @map("_id") @db.ObjectId 
+  name String
+  locales String[]
+  textSet TextSet[]
+}
+
+
+// model Term {
+//   id String @id @default(auto()) @map("_id") @db.ObjectId
+//   name String // "brand"
+//   translations Json // {en:"Apple",. ko:"애플"}
+//   embeddable Boolean // true
+//   locales String[]
+// }
