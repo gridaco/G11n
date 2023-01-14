@@ -49,3 +49,7 @@ yarn add @grida.co/g11n
 **G11n for storybook**
 
 - g11n as storybook addon for previewing localized texts / assets on components.
+
+
+## References
+- [towardsdatascience.com/translate-with-gpt-3](https://towardsdatascience.com/translate-with-gpt-3-9903c4a6f385)
