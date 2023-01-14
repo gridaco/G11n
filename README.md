@@ -50,6 +50,10 @@ yarn add @grida.co/g11n
 
 - g11n as storybook addon for previewing localized texts / assets on components.
 
+## Resources
+
+- The design file can be found [here (figma)](https://www.figma.com/file/U30hcjkp49sopE3bS1WuG6/g11n?node-id=0%3A1&t=uikVe7Y1Bvs3EpqS-1).
 
 ## References
+
 - [towardsdatascience.com/translate-with-gpt-3](https://towardsdatascience.com/translate-with-gpt-3-9903c4a6f385)
