@@ -6,10 +6,14 @@ import {
   Body,
   Patch,
   Delete,
+  Res,
+  StreamableFile,
+  Header,
 } from "@nestjs/common";
-import { TextSet, Prisma } from "@prisma/client";
 import { ProjectService } from "./project.service";
 import { CreateProjectDto } from "./project.object";
+import { createReadStream } from "fs";
+import { join } from "path";
 
 @Controller("projects")
 export class ProjectController {
@@ -23,6 +27,16 @@ export class ProjectController {
   @Get("/")
   async getProjects() {
     return await this.projectService.getProjects();
+  }
+
+  @Header("Content-Disposition", "attachment; filename=project.json")
+  @Get("/:projectId/export")
+  async exportProject(
+    @Param() params: { projectId: string }
+  ): Promise<StreamableFile> {
+    const file = createReadStream(join(process.cwd(), "package.json"));
+
+    return await this.projectService.exportProject(params.projectId);
   }
 
   @Post("/")

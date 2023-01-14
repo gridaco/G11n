@@ -1,7 +1,9 @@
-import { Injectable } from "@nestjs/common";
+import { Injectable, StreamableFile } from "@nestjs/common";
 import { PrismaService } from "../.prisma/prisma.service";
-import { TextSet, Project } from "@prisma/client";
+import { Project } from "@prisma/client";
 import { CreateProjectDto } from "./project.object";
+import { createReadStream } from "fs";
+import { join } from "path";
 
 @Injectable()
 export class ProjectService {
@@ -15,6 +17,12 @@ export class ProjectService {
 
   async getProjects(): Promise<Project[]> {
     return await this.prisma.project.findMany();
+  }
+
+  async exportProject(projectId: string): Promise<StreamableFile> {
+    const file = createReadStream(join(process.cwd(), "package.json"));
+
+    return new StreamableFile(file);
   }
 
   async createProject(project: CreateProjectDto): Promise<Project> {

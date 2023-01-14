@@ -1,3 +1,4 @@
+import { createElement } from 'react';
 import React from 'react';
 import Axios from 'axios';
 
@@ -61,6 +62,17 @@ export default function() {
     });
     // alert("key created: " + key);
   };
+
+  const exportProject = (projectId: string) => {
+    client
+      .get(`/projects/${projectId}/export`, {
+        responseType: 'blob',
+      })
+      .then((res) => {
+        const href = URL.createObjectURL(res.data);
+        const link = createElement('a', { href, download: 'project.zip' });
+      });
+  };
   return (
     <div
       style={{
@@ -108,6 +120,7 @@ export default function() {
               onGetKeys={setKeys}
               onClick={setKey}
               onDeleteKey={onDeleteKey}
+              exportProject={exportProject}
             />
           ) : null}
         </div>
@@ -263,6 +276,7 @@ function GetKeysByProject({
   onGetKeys: setKeys,
   onClick: setKey,
   onDeleteKey,
+  exportProject,
 }: {
   projectId: string;
   keys: any[];
@@ -270,6 +284,7 @@ function GetKeysByProject({
   onGetKeys: (keys: any[]) => void;
   onClick: (key: any) => void;
   onDeleteKey: (id: string) => void;
+  exportProject: (projectId: string) => void;
 }) {
   React.useEffect(() => {
     // 로케일 필요한가
@@ -307,6 +322,13 @@ function GetKeysByProject({
           </p>
         );
       })}
+      <button
+        onClick={() => {
+          exportProject(projectId);
+        }}
+      >
+        export
+      </button>
     </>
   );
 }
