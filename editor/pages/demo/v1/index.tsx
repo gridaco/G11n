@@ -70,7 +70,14 @@ export default function() {
       })
       .then((res) => {
         const href = URL.createObjectURL(res.data);
-        const link = createElement('a', { href, download: 'project.zip' });
+        const link = document.createElement('a');
+        link.href = href;
+        link.setAttribute('download', 'attachments.zip');
+        document.body.appendChild(link);
+        link.click();
+
+        document.body.removeChild(link);
+        URL.revokeObjectURL(href);
       });
   };
   return (
@@ -153,7 +160,6 @@ function CreateProject({
   const locales = ['en', 'ko', 'ja'];
 
   const [project, setProject] = React.useState<any>({ name: '', locales: [] });
-  console.log(project);
   return (
     <>
       <h2>Create Project</h2>

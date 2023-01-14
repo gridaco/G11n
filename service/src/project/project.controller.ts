@@ -12,8 +12,7 @@ import {
 } from "@nestjs/common";
 import { ProjectService } from "./project.service";
 import { CreateProjectDto } from "./project.object";
-import { createReadStream } from "fs";
-import { join } from "path";
+import { Response } from "express";
 
 @Controller("projects")
 export class ProjectController {
@@ -29,14 +28,14 @@ export class ProjectController {
     return await this.projectService.getProjects();
   }
 
-  @Header("Content-Disposition", "attachment; filename=project.json")
+  @Header("Content-Type", "application/zip")
+  @Header("Content-Disposition", "attachment; filename=attachments.zip")
   @Get("/:projectId/export")
   async exportProject(
-    @Param() params: { projectId: string }
-  ): Promise<StreamableFile> {
-    const file = createReadStream(join(process.cwd(), "package.json"));
-
-    return await this.projectService.exportProject(params.projectId);
+    @Param() params: { projectId: string },
+    @Res() res: Response
+  ): Promise<void> {
+    await this.projectService.exportProject(params.projectId, res);
   }
 
   @Post("/")
