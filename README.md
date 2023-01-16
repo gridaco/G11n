@@ -57,3 +57,4 @@ yarn add @grida.co/g11n
 ## References
 
 - [towardsdatascience.com/translate-with-gpt-3](https://towardsdatascience.com/translate-with-gpt-3-9903c4a6f385)
+- [translate i18n json file](https://translate.i18next.com/)
