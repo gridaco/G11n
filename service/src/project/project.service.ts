@@ -49,7 +49,7 @@ export class ProjectService {
     });
 
     const output = createWriteStream(
-      join(process.cwd(), `attachments/attachments.zip`)
+      join(process.cwd(), `attachments/translations.zip`)
     );
     const archive = archiver("zip", {
       zlib: { level: 1 },

@@ -1,12 +1,13 @@
 import { createElement } from 'react';
 import React from 'react';
 import Axios from 'axios';
+import Link from 'next/link';
 
 const client = Axios.create({
   baseURL: 'http://localhost:3307',
 });
 
-export default function() {
+export default function () {
   const [projects, setProjects] = React.useState<any[]>([]);
 
   const [projectId, setProjectId] = React.useState<string>('');
@@ -18,17 +19,6 @@ export default function() {
   const [keys, setKeys] = React.useState<any[]>([]);
 
   const [key, setKey] = React.useState<any>({ value: { [locale]: '' } });
-
-  const onProjectCreate = (project: any) => {
-    client.post('/projects', project).then((res) => {
-      setProjects([...projects, res.data]);
-    });
-  };
-
-  const onProjectChange = (projectId: string) => {
-    setProjectId(projectId);
-    setKey({ value: { [locale]: '' } });
-  };
 
   const onCreateNewKey = (key: any) => {
     key.projectId = projectId;
@@ -72,7 +62,7 @@ export default function() {
         const href = URL.createObjectURL(res.data);
         const link = document.createElement('a');
         link.href = href;
-        link.setAttribute('download', 'attachments.zip');
+        link.setAttribute('download', 'translations.zip');
         document.body.appendChild(link);
         link.click();
 
@@ -88,7 +78,8 @@ export default function() {
     >
       <h1>V1 Playground {projectId}</h1>
 
-      <CreateProject onClick={onProjectCreate}></CreateProject>
+      <Link href="/demo/v1/projects/new">New Project</Link>
+      <Link href="/demo/v1/projects">Project List</Link>
       <div
         style={{
           display: 'flex',
@@ -102,13 +93,6 @@ export default function() {
             padding: 20,
           }}
         >
-          {/* select project */}
-          <SelectProjectsView
-            value={projectId}
-            projects={projects}
-            getProjects={setProjects}
-            onChange={onProjectChange}
-          />
           {/* select locale */}
           <SetLocaleView
             locale={locale}
@@ -149,93 +133,6 @@ export default function() {
         </div>
       </div>
     </div>
-  );
-}
-
-function CreateProject({
-  onClick: onCreateProject,
-}: {
-  onClick: (project: any) => void;
-}) {
-  const locales = ['en', 'ko', 'ja'];
-
-  const [project, setProject] = React.useState<any>({ name: '', locales: [] });
-  return (
-    <>
-      <h2>Create Project</h2>
-      Project Name:{' '}
-      <input
-        type="text"
-        onChange={(e) => {
-          setProject({ ...project, name: e.target.value });
-        }}
-      />
-      <br />
-      Select Locales <br />
-      {locales.map((locale, i) => {
-        return (
-          <label key={i}>
-            - {locale}:{' '}
-            <input
-              type="checkbox"
-              name={locale}
-              value={locale}
-              onChange={(e) => {
-                if (
-                  e.target.checked &&
-                  !project.locales.some((l: string) => l === e.target.name)
-                ) {
-                  const locales = [...project.locales, e.target.value];
-                  setProject({ ...project, locales });
-                }
-              }}
-            />
-            <br />
-          </label>
-        );
-      })}
-      <button onClick={() => onCreateProject(project)}>create</button>
-    </>
-  );
-}
-
-function SelectProjectsView({
-  value: projectId,
-  projects,
-  getProjects: setProjects,
-  onChange: onProjectChange,
-}: {
-  value: string;
-  projects: any[];
-  getProjects: (projects: any[]) => void;
-  onChange: (projectId: string) => void;
-}) {
-  React.useEffect(() => {
-    client.get('/projects').then((res) => {
-      setProjects(res.data);
-    });
-  }, []);
-
-  return (
-    <>
-      <h2>Term List</h2>
-      PROJECT:{' '}
-      <select
-        value={projectId}
-        onChange={(e) => {
-          onProjectChange(e.target.value);
-        }}
-      >
-        <option key="0"></option>
-        {projects.map((project, i) => {
-          return (
-            <option key={i} value={project.id}>
-              {project.name}
-            </option>
-          );
-        })}
-      </select>
-    </>
   );
 }
 

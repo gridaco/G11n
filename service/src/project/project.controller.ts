@@ -29,7 +29,7 @@ export class ProjectController {
   }
 
   @Header("Content-Type", "application/zip")
-  @Header("Content-Disposition", "attachment; filename=attachments.zip")
+  @Header("Content-Disposition", "attachment; filename=translations.zip")
   @Get("/:projectId/export")
   async exportProject(
     @Param() params: { projectId: string },
