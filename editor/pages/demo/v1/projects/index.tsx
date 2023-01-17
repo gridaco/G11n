@@ -1,14 +1,14 @@
-import React from 'react';
-import Axios from 'axios';
-import Link from 'next/link';
+import React from "react";
+import Axios from "axios";
+import Link from "next/link";
 
 const client = Axios.create({
-  baseURL: 'http://localhost:3307',
+  baseURL: "http://localhost:3307",
 });
 
-export default function () {
+export default function() {
   const [projects, setProjects] = React.useState<any[]>([]);
-  const [projectId, setProjectId] = React.useState<string>('');
+  const [projectId, setProjectId] = React.useState<string>("");
 
   const onProjectChange = (projectId: string) => {
     setProjectId(projectId);
@@ -36,7 +36,7 @@ function SelectProjectsView({
   onChange: (projectId: string) => void;
 }) {
   React.useEffect(() => {
-    client.get('/projects').then((res) => {
+    client.get("/projects").then((res) => {
       setProjects(res.data);
     });
   }, []);
@@ -53,11 +53,11 @@ function SelectProjectsView({
           return (
             <div
               style={{
-                backgroundColor: 'orange',
-                margin: '10px 0 10px 0',
+                backgroundColor: "orange",
+                margin: "10px 0 10px 0",
               }}
             >
-              <Link href={`demo/v1/projects/${project.id}`}>
+              <Link href={`/demo/v1/projects/${project.id}`}>
                 {project.name}
                 <br />
               </Link>
