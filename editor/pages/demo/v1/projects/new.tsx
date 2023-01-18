@@ -9,8 +9,9 @@ const client = Axios.create({
 export default function () {
   const router = useRouter();
   const onProjectCreate = (project: any) => {
-    client.post('/projects', project);
-    router.push('/demo/v1/projects', null, { shallow: false });
+    client.post('/projects', project).then((res) => {
+      router.push('/demo/v1/projects', null, { shallow: false });
+    });
   };
 
   return <CreateProject onClick={onProjectCreate} />;
