@@ -51,11 +51,18 @@ function SelectProjectsView({
               {project.name}
               <br />
             </Link>
-            <button>
-              <Link href={`/demo/v1/projects/${project.id}/export`}>
-                Download
-              </Link>
-            </button>
+            <div>
+              <button>
+                <Link href={`/demo/v1/projects/${project.id}/settings`}>
+                  Setting
+                </Link>
+              </button>
+              <button>
+                <Link href={`/demo/v1/projects/${project.id}/export`}>
+                  Download
+                </Link>
+              </button>
+            </div>
           </div>
         );
       })}
