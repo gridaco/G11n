@@ -50,12 +50,13 @@ function CreateProject({
               name={locale}
               value={locale}
               onChange={(e) => {
-                if (
-                  e.target.checked &&
-                  !project.locales.some((l: string) => l === e.target.name)
-                ) {
-                  const locales = [...project.locales, e.target.value];
-                  setProject({ ...project, locales });
+                let projectLocales = [...project.locales];
+                if (e.target.checked) {
+                  projectLocales.push(locale);
+                  setProject({ ...project, locales: projectLocales });
+                } else {
+                  projectLocales = projectLocales.filter((l) => l !== locale);
+                  setProject({ ...project, locales: projectLocales });
                 }
               }}
             />
