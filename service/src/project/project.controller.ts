@@ -11,7 +11,7 @@ import {
   Header,
 } from "@nestjs/common";
 import { ProjectService } from "./project.service";
-import { CreateProjectDto } from "./project.object";
+import { CreateProjectDto, UpdateProjectDto } from "./project.object";
 import { Response } from "express";
 
 @Controller("projects")
@@ -41,5 +41,18 @@ export class ProjectController {
   @Post("/")
   async createProject(@Body() project: CreateProjectDto) {
     return await this.projectService.createProject(project);
+  }
+
+  @Patch("/:projectId/settings")
+  async updateProject(
+    @Param() params: { projectId: string },
+    @Body() project: UpdateProjectDto
+  ) {
+    return await this.projectService.updateProject(params.projectId, project);
+  }
+
+  @Delete("/:projectId")
+  async deleteProject(@Param() params: { projectId: string }) {
+    return await this.projectService.deleteProject(params.projectId);
   }
 }

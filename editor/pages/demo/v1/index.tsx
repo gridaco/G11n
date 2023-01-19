@@ -1,7 +1,6 @@
 import { createElement } from 'react';
 import React from 'react';
 import Axios from 'axios';
-import Link from 'next/link';
 
 const client = Axios.create({
   baseURL: 'http://localhost:3307',

@@ -1,7 +1,7 @@
 import { Injectable, StreamableFile } from "@nestjs/common";
 import { PrismaService } from "../.prisma/prisma.service";
 import { Project } from "@prisma/client";
-import { CreateProjectDto } from "./project.object";
+import { CreateProjectDto, UpdateProjectDto } from "./project.object";
 import { createReadStream, createWriteStream, writeFileSync } from "fs";
 import { join } from "path";
 import * as archiver from "archiver";
@@ -19,6 +19,28 @@ export class ProjectService {
 
   async getProjects(): Promise<Project[]> {
     return await this.prisma.project.findMany();
+  }
+
+  async createProject(project: CreateProjectDto): Promise<Project> {
+    return await this.prisma.project.create({
+      data: project,
+    });
+  }
+
+  async updateProject(
+    projectId: string,
+    project: UpdateProjectDto
+  ): Promise<Project> {
+    return await this.prisma.project.update({
+      where: { id: projectId },
+      data: project,
+    });
+  }
+
+  async deleteProject(projectId: string): Promise<Project> {
+    return await this.prisma.project.delete({
+      where: { id: projectId },
+    });
   }
 
   async exportProject(projectId: string, res: Response): Promise<void> {
@@ -77,11 +99,5 @@ export class ProjectService {
 
     archive.finalize();
     archive.pipe(res);
-  }
-
-  async createProject(project: CreateProjectDto): Promise<Project> {
-    return await this.prisma.project.create({
-      data: project,
-    });
   }
 }
