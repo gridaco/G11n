@@ -60,10 +60,7 @@ export class ProjectService {
         }
       });
 
-      values = JSON.stringify(values);
-      values = values.replaceAll(",", ",\n");
-      values = values.replace("{", "{\n");
-      values = values.replace("}", "\n}");
+      values = JSON.stringify(values, null, 2);
       writeFileSync(join(process.cwd(), `attachments/${locale}.json`), values);
       const file = createReadStream(
         join(process.cwd(), `attachments/${locale}.json`)
