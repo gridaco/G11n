@@ -1,16 +1,16 @@
-import React from 'react';
-import Axios from 'axios';
-import { useRouter } from 'next/router';
+import React from "react";
+import Axios from "axios";
+import { useRouter } from "next/router";
 
 const client = Axios.create({
-  baseURL: 'http://localhost:3307',
+  baseURL: "http://localhost:3307",
 });
 
 export default function () {
   const router = useRouter();
   const onProjectCreate = (project: any) => {
-    client.post('/projects', project).then((res) => {
-      router.push('/demo/v1/projects', null, { shallow: false });
+    client.post("/projects", project).then((res) => {
+      router.push("/projects", null, { shallow: false });
     });
   };
 
@@ -22,9 +22,9 @@ function CreateProject({
 }: {
   onClick: (project: any) => void;
 }) {
-  const locales = ['en', 'ko', 'ja'];
+  const locales = ["en", "ko", "ja"];
 
-  const [project, setProject] = React.useState<any>({ name: '', locales: [] });
+  const [project, setProject] = React.useState<any>({ name: "", locales: [] });
   return (
     <div
       style={{
@@ -32,7 +32,7 @@ function CreateProject({
       }}
     >
       <h2>Create Project</h2>
-      Project Name:{' '}
+      Project Name:{" "}
       <input
         type="text"
         onChange={(e) => {
@@ -44,7 +44,7 @@ function CreateProject({
       {locales.map((locale, i) => {
         return (
           <label key={i}>
-            - {locale}:{' '}
+            - {locale}:{" "}
             <input
               type="checkbox"
               name={locale}

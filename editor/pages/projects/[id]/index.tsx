@@ -1,10 +1,10 @@
-import { useRouter } from 'next/router';
-import React from 'react';
-import Axios from 'axios';
-import Link from 'next/link';
+import { useRouter } from "next/router";
+import React from "react";
+import Axios from "axios";
+import Link from "next/link";
 
 const client = Axios.create({
-  baseURL: 'http://localhost:3307',
+  baseURL: "http://localhost:3307",
 });
 
 export default function () {
@@ -12,9 +12,9 @@ export default function () {
   const { id } = router.query;
 
   const [locales, setLocales] = React.useState<any[]>([]);
-  const [locale, setLocale] = React.useState<string>('');
+  const [locale, setLocale] = React.useState<string>("");
   const [keys, setKeys] = React.useState<any[]>([]);
-  const [key, setKey] = React.useState<any>({ value: { [locale]: '' } });
+  const [key, setKey] = React.useState<any>({ value: { [locale]: "" } });
 
   const onDeleteKey = (id: string) => {
     client.delete(`/texts/${id}`).then((res) => {
@@ -22,14 +22,14 @@ export default function () {
         k.id === id ? keys.splice(i, 1) : null;
       });
       setKeys([...keys]);
-      setKey({ value: { [locale]: '' } });
+      setKey({ value: { [locale]: "" } });
     });
   };
 
   const onCreateNewKey = (key: any) => {
     key.projectId = id;
     const data = key;
-    client.post('/texts', data).then((res) => {
+    client.post("/texts", data).then((res) => {
       setKeys([...keys, res.data]);
       setKey(res.data);
     });
@@ -57,7 +57,7 @@ export default function () {
       <h1>Project {id}</h1>
       <div
         style={{
-          display: 'flex',
+          display: "flex",
         }}
       >
         <div
@@ -76,13 +76,13 @@ export default function () {
           <KeyListView
             projectId={id}
             keys={keys}
-            locale={locale || 'null'}
+            locale={locale || "null"}
             onGetKeys={setKeys}
             onClick={setKey}
             onDeleteKey={onDeleteKey}
           />
           <button>
-            <Link href={`/demo/v1/projects/${id}/export`}>Download</Link>
+            <Link href={`/projects/${id}/export`}>Download</Link>
           </button>
         </div>
         <div
@@ -132,9 +132,9 @@ function KeyListView({
         return (
           <p
             style={{
-              backgroundColor: 'orange',
-              display: 'flex',
-              justifyContent: 'space-between',
+              backgroundColor: "orange",
+              display: "flex",
+              justifyContent: "space-between",
             }}
             onClick={() => {
               setKey(key);
@@ -144,7 +144,7 @@ function KeyListView({
           >
             key: {key.key}
             <br />
-            value: {key.value ? key.value[locale] : ''}
+            value: {key.value ? key.value[locale] : ""}
             <button
               onClick={() => {
                 onDeleteKey(key.id);
@@ -180,7 +180,7 @@ function SetLocaleView({
 
   return (
     <>
-      LOCALE:{' '}
+      LOCALE:{" "}
       <select value={locale} onChange={(e) => setLocale(e.target.value)}>
         <option key={-1}></option>
         {locales.map((locale, i) => {
@@ -214,9 +214,9 @@ function CreateKeyView({
   return (
     <>
       <h2>
-        Key:{' '}
+        Key:{" "}
         <input
-          value={currentKey.key || ''}
+          value={currentKey.key || ""}
           placeholder="key"
           onChange={(e) => {
             // setKeyPreview(e.target.value);
@@ -229,9 +229,9 @@ function CreateKeyView({
       {locales.map((locale, i) => {
         return (
           <p key={i}>
-            {locale}:{' '}
+            {locale}:{" "}
             <input
-              value={currentKey?.value[locale] || ''}
+              value={currentKey?.value[locale] || ""}
               placeholder={locale}
               onChange={(e) => {
                 currentKey.value[locale] = e.target.value;
@@ -250,7 +250,7 @@ function CreateKeyView({
           }
         }}
       >
-        {currentKey.id ? 'update' : 'create'}
+        {currentKey.id ? "update" : "create"}
       </button>
       <button
         onClick={() => {

@@ -1,9 +1,9 @@
-import { useRouter } from 'next/router';
-import React from 'react';
-import Axios from 'axios';
+import { useRouter } from "next/router";
+import React from "react";
+import Axios from "axios";
 
 const client = Axios.create({
-  baseURL: 'http://localhost:3307',
+  baseURL: "http://localhost:3307",
 });
 export default function () {
   const router = useRouter();
@@ -20,7 +20,7 @@ export default function () {
 
   const deleteProject = (id: string) => {
     client.delete(`/projects/${id}`).then(() => {
-      router.push('/demo/v1/projects');
+      router.push("/projects");
     });
   };
 
@@ -38,7 +38,7 @@ function ProjectSettingView({
   onSave: (project: any) => void;
   onDelete: (id: string) => void;
 }) {
-  const [project, setProject] = React.useState<any>({ name: '', locales: [] });
+  const [project, setProject] = React.useState<any>({ name: "", locales: [] });
 
   React.useEffect(() => {
     client.get(`/projects/${id}`).then((res) => {
@@ -46,7 +46,7 @@ function ProjectSettingView({
     });
   }, []);
 
-  const locales = ['en', 'ko', 'ja'];
+  const locales = ["en", "ko", "ja"];
 
   return (
     <div
@@ -55,11 +55,11 @@ function ProjectSettingView({
       }}
     >
       <h1>{project.name} Settings</h1>
-      Project Name:{' '}
+      Project Name:{" "}
       <input
         type="text"
         onChange={(e) => setProject({ ...project, name: e.target.value })}
-        value={project.name || ''}
+        value={project.name || ""}
       />
       <br />
       Locales:
@@ -95,8 +95,8 @@ function ProjectSettingView({
       <button onClick={() => saveProject(project)}>save</button>
       <button
         style={{
-          backgroundColor: 'red',
-          color: 'lightyellow',
+          backgroundColor: "red",
+          color: "lightyellow",
           marginLeft: 5,
         }}
         onClick={() => deleteProject(project.id)}
