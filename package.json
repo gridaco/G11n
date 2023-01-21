@@ -1,17 +1,18 @@
 {
-    "name": "g11n",
-    "private": true,
-    "license": "Apache 2.0",
-    "workspaces": [
-        "editor",
-        "g11n",
-        "homepage",
-        "packages/*",
-        "service"
-    ],
-    "scripts": {
-        "editor": "yarn workspace editor run dev",
-        "homepage": "yarn workspace homepage run dev",
-        "server": "yarn workspace service run dev"
-    }
+  "name": "g11n",
+  "private": true,
+  "license": "Apache 2.0",
+  "workspaces": [
+    "editor",
+    "g11n",
+    "homepage",
+    "packages/*",
+    "packages/editor-ui/packages/*",
+    "service"
+  ],
+  "scripts": {
+    "editor": "yarn workspace editor run dev",
+    "homepage": "yarn workspace homepage run dev",
+    "server": "yarn workspace service run dev"
+  }
 }
