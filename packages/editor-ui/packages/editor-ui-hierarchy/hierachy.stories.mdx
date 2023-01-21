@@ -1,0 +1,44 @@
+import { Meta, Story, Canvas } from "@storybook/addon-docs/blocks";
+
+import Hierachy, { dummyData } from "./hierachy";
+import Icon from "../icons";
+
+<Meta title="Hierachy/Hierachy" component={Hirachy} />
+
+# Hierachy
+
+`Hierachy` component that **wraps HierachyItem** to make it into Sturcts.
+
+<Canvas>
+  <Story name="Basic">
+    <div style={{ padding: "2em", width: 230, backgroundColor: "rgba(0,0,0,0.2)"  }}>
+      <Hierachy structs={dummyData} />
+    </div>
+  </Story>
+</Canvas>
+
+## Expand Hierachy Item
+
+**Item1 has been expanded.**
+
+For expanded items, it automatically becomes selected Item.
+
+<Canvas>
+  <Story name="Expand Item">
+    <div style={{ padding: "2em", width: 230, backgroundColor: "rgba(0,0,0,0.2)"  }}>
+      <Hierachy structs={dummyData} />
+    </div>
+  </Story>
+</Canvas>
+
+### How to Expand?
+
+Click indicator icon, Icon look like this
+
+<Canvas>
+  <Story name="How to Expand?">
+    <div style={{ padding: "2em", width: 24, backgroundColor: "rgba(0,0,0,0.2)"  }}>
+      <Icon name="indicator" width={24} height={24} />
+    </div>
+  </Story>
+</Canvas>
