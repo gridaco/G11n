@@ -1,11 +1,14 @@
 const withLinaria = require("next-linaria");
-const withTM = require("next-transpile-modules")(["@editor-ui/console"]);
 
-module.exports = withTM(
-  withLinaria({
-    /**
-     * https://console.grida.co/globalization
-     */
-    basePath: "/globalization",
-  })
-);
+/**
+ * @type {import('next').NextConfig}
+ */
+const config = {
+  /**
+   * https://console.grida.co/globalization
+   */
+  basePath: "/globalization",
+  transpilePackages: ["@editor-ui/console"],
+};
+
+module.exports = withLinaria(config);
