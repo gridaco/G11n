@@ -2,6 +2,8 @@ import { useRouter } from "next/router";
 import React from "react";
 import Axios from "axios";
 import Link from "next/link";
+import { useSelector, useDispatch } from "react-redux";
+import { setProjectData, RootState } from "core/store";
 
 const client = Axios.create({
   baseURL: "http://localhost:3307",
@@ -10,19 +12,14 @@ const client = Axios.create({
 export default function () {
   const router = useRouter();
   const { id } = router.query;
-
-  const [locales, setLocales] = React.useState<any[]>([]);
-  const [locale, setLocale] = React.useState<string>("");
-  const [keys, setKeys] = React.useState<any[]>([]);
-  const [key, setKey] = React.useState<any>({ value: { [locale]: "" } });
+  const project = useSelector((state: RootState) => state.editor.data);
+  const dispatch = useDispatch();
 
   const onDeleteKey = (id: string) => {
     client.delete(`/texts/${id}`).then((res) => {
-      keys.forEach((k, i) => {
-        k.id === id ? keys.splice(i, 1) : null;
-      });
-      setKeys([...keys]);
-      setKey({ value: { [locale]: "" } });
+      const keys = project.textSets.filter((k) => k.id !== id);
+
+      dispatch(setProjectData({ textSets: keys, selectedTextSet: null }));
     });
   };
 
@@ -30,22 +27,28 @@ export default function () {
     key.projectId = id;
     const data = key;
     client.post("/texts", data).then((res) => {
-      setKeys([...keys, res.data]);
-      setKey(res.data);
+      dispatch(
+        setProjectData({
+          textSets: [...project.textSets, res.data],
+          selectedTextSet: res.data,
+        })
+      );
     });
-    // alert("key created: " + key);
   };
 
   const onUpdateKey = (key: any) => {
     let data = { ...key };
     delete data.id;
     client.patch(`/texts/${key.id}`, data).then((res) => {
-      keys.forEach((k, i) => {
-        k.id === res.data.id ? (keys[i] = res.data) : null;
+      const keys = project.textSets.map((k, i) => {
+        if (k.id === res.data.id) {
+          return res.data;
+        } else {
+          return k;
+        }
       });
-      setKeys([...keys]);
+      dispatch(setProjectData({ textSets: keys }));
     });
-    // alert("key created: " + key);
   };
 
   return (
@@ -66,21 +69,8 @@ export default function () {
             padding: 20,
           }}
         >
-          <SetLocaleView
-            locale={locale}
-            projectId={id}
-            locales={locales}
-            onChange={setLocale}
-            setLocales={setLocales}
-          />
-          <KeyListView
-            projectId={id}
-            keys={keys}
-            locale={locale || "null"}
-            onGetKeys={setKeys}
-            onClick={setKey}
-            onDeleteKey={onDeleteKey}
-          />
+          <SetLocaleView />
+          <KeyListView onDeleteKey={onDeleteKey} />
           <button>
             <Link href={`/projects/${id}/export`}>Download</Link>
           </button>
@@ -91,170 +81,196 @@ export default function () {
             padding: 20,
           }}
         >
-          <CreateKeyView
-            locales={locales}
-            currentKey={key}
-            onCreate={onCreateNewKey}
-            onUpdate={onUpdateKey}
-            onClickedNewKey={setKey}
-          />
+          <CreateKeyView onCreate={onCreateNewKey} onUpdate={onUpdateKey} />
         </div>
       </div>
     </div>
   );
 }
 
-function KeyListView({
-  projectId: projectId,
-  keys: keys,
-  locale: locale,
-  onGetKeys: setKeys,
-  onClick: setKey,
-  onDeleteKey,
-}: {
-  projectId: string | string[];
-  keys: any[];
-  locale: string;
-  onGetKeys: (keys: any[]) => void;
-  onClick: (key: any) => void;
-  onDeleteKey: (id: string) => void;
-}) {
+function KeyListView({ onDeleteKey }: { onDeleteKey: (id: string) => void }) {
+  const project = useSelector((state: RootState) => state.editor.data);
+  const dispatch = useDispatch();
+
   React.useEffect(() => {
     // 로케일 필요한가
-    client.get(`/texts/${projectId}/locales/${locale}`).then((res) => {
-      setKeys(res.data || []);
-    });
-  }, [projectId]);
+    client
+      .get(
+        `/texts/${project?.id || null}/locales/${
+          project?.selectedLocale || null
+        }`
+      )
+      .then((res) => {
+        dispatch(setProjectData({ textSets: res.data }));
+      });
+  }, [project?.selectedLocale]);
 
   return (
     <>
-      {keys.map((key, i) => {
-        return (
-          <p
-            style={{
-              backgroundColor: "orange",
-              display: "flex",
-              justifyContent: "space-between",
-            }}
-            onClick={() => {
-              setKey(key);
-            }}
-            className="aa"
-            key={i}
-          >
-            key: {key.key}
-            <br />
-            value: {key.value ? key.value[locale] : ""}
-            <button
-              onClick={() => {
-                onDeleteKey(key.id);
-              }}
-            >
-              delete
-            </button>
-          </p>
-        );
-      })}
+      {project?.textSets?.length > 1
+        ? project.textSets.map((key, i) => {
+            return (
+              <p
+                style={{
+                  backgroundColor: "orange",
+                  display: "flex",
+                  justifyContent: "space-between",
+                }}
+                onClick={() => {
+                  dispatch(setProjectData({ selectedTextSet: key }));
+                }}
+                className="aa"
+                key={i}
+              >
+                key: {key.key}
+                <br />
+                value:{" "}
+                {key.value ? key.value[project.selectedLocale || null] : ""}
+                <button
+                  onClick={() => {
+                    onDeleteKey(key.id);
+                  }}
+                >
+                  delete
+                </button>
+              </p>
+            );
+          })
+        : null}
     </>
   );
 }
 
-function SetLocaleView({
-  locale: locale,
-  projectId: projectId,
-  locales: locales,
-  onChange: setLocale,
-  setLocales: setLocales,
-}: {
-  locale: string;
-  projectId: string | string[];
-  locales: string[];
-  onChange: (locale: string) => void;
-  setLocales: (locales: string[]) => void;
-}) {
+function SetLocaleView() {
+  const project = useSelector((state: RootState) => state.editor.data);
+  const dispatch = useDispatch();
+
   React.useEffect(() => {
-    client.get(`/projects/${projectId}`).then((res) => {
-      setLocales(res.data.locales || []);
+    client.get(`/projects/${project?.id}`).then((res) => {
+      dispatch(setProjectData({ locales: res.data.locales || [] }));
     });
-  }, [projectId]);
+  }, []);
 
   return (
     <>
       LOCALE:{" "}
-      <select value={locale} onChange={(e) => setLocale(e.target.value)}>
+      <select
+        value={project?.selectedLocale || ""}
+        onChange={(e) =>
+          dispatch(setProjectData({ selectedLocale: e.target.value }))
+        }
+      >
         <option key={-1}></option>
-        {locales.map((locale, i) => {
-          return (
-            <option key={i} value={locale}>
-              {locale}
-            </option>
-          );
-        })}
+        {project?.locales
+          ? project.locales.map((locale, i) => {
+              return (
+                <option key={i} value={locale}>
+                  {locale}
+                </option>
+              );
+            })
+          : null}
       </select>
     </>
   );
 }
 
 function CreateKeyView({
-  locales,
-  currentKey,
   onCreate,
   onUpdate,
-  onClickedNewKey,
 }: {
-  locales: string[];
-  currentKey: any;
   onCreate: (key: any) => void;
   onUpdate: (key: any) => void;
-  onClickedNewKey: (key: any) => void;
 }) {
-  // const [keyPreview, setKeyPreview] = React.useState<string>('');
-  const [key, setKey] = React.useState<any>({});
-
+  const project = useSelector((state: RootState) => state.editor.data);
+  const dispatch = useDispatch();
+  const [createKeyInput, setCreateKeyInput] = React.useState({
+    key: "",
+    value: {},
+  });
   return (
     <>
       <h2>
         Key:{" "}
         <input
-          value={currentKey.key || ""}
+          value={project?.selectedTextSet?.key || createKeyInput.key}
           placeholder="key"
           onChange={(e) => {
-            // setKeyPreview(e.target.value);
-            currentKey.key = e.target.value;
-            setKey({ ...currentKey });
+            if (project.selectedTextSet?.id) {
+              dispatch(
+                setProjectData({
+                  selectedTextSet: {
+                    ...project.selectedTextSet,
+                    key: e.target.value,
+                  },
+                })
+              );
+            } else {
+              setCreateKeyInput({ ...createKeyInput, key: e.target.value });
+            }
           }}
         />
       </h2>
-      {/* <p>preview = {keyPreview.length == 0 ? 'empty' : keyPreview}</p> */}
-      {locales.map((locale, i) => {
-        return (
-          <p key={i}>
-            {locale}:{" "}
-            <input
-              value={currentKey?.value[locale] || ""}
-              placeholder={locale}
-              onChange={(e) => {
-                currentKey.value[locale] = e.target.value;
-                setKey({ ...currentKey });
-              }}
-            />
-          </p>
-        );
-      })}
+      {project?.locales
+        ? project.locales.map((locale, i) => {
+            return (
+              <p key={i}>
+                {locale}:{" "}
+                <input
+                  value={
+                    project?.selectedTextSet?.value[locale] ||
+                    createKeyInput.value[locale] ||
+                    ""
+                  }
+                  placeholder={locale}
+                  onChange={(e) => {
+                    if (project.selectedTextSet?.id) {
+                      let selectedTextSet = {
+                        ...project.selectedTextSet,
+                        value: {
+                          ...project.selectedTextSet?.value,
+                          [locale]: e.target.value,
+                        },
+                      };
+
+                      dispatch(
+                        setProjectData({
+                          selectedTextSet,
+                        })
+                      );
+                    } else {
+                      setCreateKeyInput({
+                        ...createKeyInput,
+                        value: {
+                          ...createKeyInput.value,
+                          [locale]: e.target.value,
+                        },
+                      });
+                    }
+                  }}
+                />
+              </p>
+            );
+          })
+        : null}
       <button
         onClick={() => {
-          if (currentKey.id) {
-            onUpdate(currentKey);
+          if (project.selectedTextSet?.id) {
+            onUpdate(project.selectedTextSet);
           } else {
-            onCreate(currentKey);
+            onCreate(createKeyInput);
           }
         }}
       >
-        {currentKey.id ? "update" : "create"}
+        {project?.selectedTextSet?.id ? "update" : "create"}
       </button>
       <button
         onClick={() => {
-          onClickedNewKey({ value: {} });
+          if (project.selectedTextSet?.id) {
+            dispatch(setProjectData({ selectedTextSet: null }));
+          } else {
+            setCreateKeyInput({ key: "", value: {} });
+          }
         }}
       >
         New Key

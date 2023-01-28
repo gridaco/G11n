@@ -8,21 +8,22 @@ import {
 } from "@reduxjs/toolkit";
 import { useDispatch } from "react-redux";
 
-interface ProjectData {
-  locale: string;
-  locales: string[];
-  textSet: TextSet;
-  textSets: TextSet[];
+interface EditorData {
+  id?: string;
+  locales?: string[];
+  selectedLocale?: string;
+  textSets?: TextSet[];
+  selectedTextSet?: TextSet;
 }
 
 interface TextSet {
-  id: string;
-  key: string;
-  value: { [locale: string]: string };
+  id?: string;
+  key?: string;
+  value?: { [locale: string]: string };
 }
 
 interface EditorState {
-  data: ProjectData | null;
+  data: EditorData | null;
 }
 
 const editorInitialState: EditorState = {
@@ -33,20 +34,17 @@ const editorPageSlice = createSlice({
   name: "editor",
   initialState: editorInitialState,
   reducers: {
-    setProjectData(state, action: PayloadAction<ProjectData>) {
-      state.data = action.payload;
+    setProjectData(state, action: PayloadAction<EditorData>) {
+      state.data = { ...state.data, ...action.payload };
     },
   },
 });
 
-const reducers = {
-  editor: editorPageSlice.reducer,
-};
-const reducer = combineReducers(reducers);
-
 const makeStore = () => {
   const store = configureStore({
-    reducer,
+    reducer: {
+      editor: editorPageSlice.reducer,
+    },
     devTools: true,
   });
 

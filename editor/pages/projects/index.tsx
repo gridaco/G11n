@@ -1,25 +1,17 @@
 import React from "react";
 import Axios from "axios";
 import Link from "next/link";
+import { useSelector, useDispatch } from "react-redux";
+import { setProjectData, RootState } from "core/store";
 
 const client = Axios.create({
   baseURL: "http://localhost:3307",
 });
 
 export default function () {
+  const dispatch = useDispatch();
   const [projects, setProjects] = React.useState<any[]>([]);
-  const [projectId, setProjectId] = React.useState<string>("");
 
-  return <SelectProjectsView projects={projects} getProjects={setProjects} />;
-}
-
-function SelectProjectsView({
-  projects,
-  getProjects: setProjects,
-}: {
-  projects: any[];
-  getProjects: (projects: any[]) => void;
-}) {
   React.useEffect(() => {
     client.get("/projects").then((res) => {
       setProjects(res.data);
@@ -47,7 +39,12 @@ function SelectProjectsView({
               justifyContent: "space-between",
             }}
           >
-            <Link href={`/projects/${project.id}`}>
+            <Link
+              href={`/projects/${project.id}`}
+              onClick={() => {
+                dispatch(setProjectData({ id: project.id }));
+              }}
+            >
               {project.name}
               <br />
             </Link>
