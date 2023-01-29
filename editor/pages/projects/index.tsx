@@ -42,7 +42,7 @@ export default function () {
             <Link
               href={`/projects/${project.id}`}
               onClick={() => {
-                dispatch(setProjectData({ id: project.id }));
+                dispatch(setProjectData({ projectId: project.id }));
               }}
             >
               {project.name}

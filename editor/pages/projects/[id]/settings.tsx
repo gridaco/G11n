@@ -1,6 +1,8 @@
 import { useRouter } from "next/router";
 import React from "react";
 import Axios from "axios";
+import { useSelector, useDispatch } from "react-redux";
+import { setProjectData, RootState } from "core/store";
 
 const client = Axios.create({
   baseURL: "http://localhost:3307",
@@ -8,6 +10,8 @@ const client = Axios.create({
 export default function () {
   const router = useRouter();
   const { id } = router.query;
+  const project = useSelector((state: RootState) => state.editor.data);
+  const dispatch = useDispatch();
 
   const saveProject = (project: {
     id: string;
@@ -24,25 +28,15 @@ export default function () {
     });
   };
 
-  return (
-    <ProjectSettingView id={id} onSave={saveProject} onDelete={deleteProject} />
-  );
-}
-
-function ProjectSettingView({
-  id,
-  onSave: saveProject,
-  onDelete: deleteProject,
-}: {
-  id: string | string[];
-  onSave: (project: any) => void;
-  onDelete: (id: string) => void;
-}) {
-  const [project, setProject] = React.useState<any>({ name: "", locales: [] });
-
   React.useEffect(() => {
     client.get(`/projects/${id}`).then((res) => {
-      setProject(res.data);
+      dispatch(
+        setProjectData({
+          projectId: res.data.id,
+          projectName: res.data.name,
+          locales: res.data.locales,
+        })
+      );
     });
   }, []);
 
@@ -54,17 +48,23 @@ function ProjectSettingView({
         padding: 40,
       }}
     >
-      <h1>{project.name} Settings</h1>
+      <h1>{project?.projectName || ""} Settings</h1>
       Project Name:{" "}
       <input
         type="text"
-        onChange={(e) => setProject({ ...project, name: e.target.value })}
-        value={project.name || ""}
+        onChange={(e) =>
+          dispatch(
+            setProjectData({
+              projectName: e.target.value,
+            })
+          )
+        }
+        value={project?.projectName || ""}
       />
       <br />
       Locales:
       {locales.map((locale: string, i: number) => {
-        const isUsing = project.locales.includes(locale);
+        const isUsing = project?.locales.includes(locale) || false;
         return (
           <div key={i}>
             <input
@@ -73,17 +73,19 @@ function ProjectSettingView({
               value={locale}
               onChange={(e) => {
                 if (e.target.checked) {
-                  setProject({
-                    ...project,
-                    locales: [...project.locales, locale],
-                  });
+                  dispatch(
+                    setProjectData({
+                      locales: [...project.locales, locale],
+                    })
+                  );
                 } else {
-                  setProject({
-                    ...project,
-                    locales: project.locales.filter(
-                      (l: string) => l !== locale
-                    ),
-                  });
+                  dispatch(
+                    setProjectData({
+                      locales: project.locales.filter(
+                        (l: string) => l !== locale
+                      ),
+                    })
+                  );
                 }
               }}
               checked={isUsing}
@@ -92,14 +94,24 @@ function ProjectSettingView({
           </div>
         );
       })}
-      <button onClick={() => saveProject(project)}>save</button>
+      <button
+        onClick={() =>
+          saveProject({
+            id: project.projectId,
+            name: project.projectName,
+            locales: project.locales,
+          })
+        }
+      >
+        save
+      </button>
       <button
         style={{
           backgroundColor: "red",
           color: "lightyellow",
           marginLeft: 5,
         }}
-        onClick={() => deleteProject(project.id)}
+        onClick={() => deleteProject(project.projectId)}
       >
         delete project
       </button>

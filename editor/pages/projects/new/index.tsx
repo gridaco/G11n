@@ -3,6 +3,8 @@ import Axios from "axios";
 import { useRouter } from "next/router";
 import { Button, TextFormField } from "@editor-ui/console";
 import styled from "@emotion/styled";
+import { useSelector, useDispatch } from "react-redux";
+import { setNewProjectData, RootState } from "core/store";
 
 const client = Axios.create({
   baseURL: "http://localhost:3307",
@@ -40,19 +42,30 @@ const Comment = styled.p`
 `;
 
 export default function CreateProject() {
-  const [name, setName] = React.useState<string>("");
-  const [url, setUrl] = React.useState<string>("");
-  const [projectType, setProjectType] = React.useState<string>("aw");
+  const newProject = useSelector((state: RootState) => state.newProject.data);
+  const dispatch = useDispatch();
+
   const router = useRouter();
-  const onProjectCreate = () => {
-    const project = { name: name };
-    client.post("/projects", project).then((res) => {
-      router.push(`/projects/new/2/${res.data.id}`);
-    });
+  const submit = () => {
+    if (!newProject?.projectName) {
+      alert("Please enter a project name");
+      return;
+    } else if (!newProject?.baseUrl) {
+      alert("Please enter a Website URL");
+      return;
+    } else {
+      router.push(`/projects/new/2`);
+    }
   };
 
-  const onProjectTypeChange = (e: any) => {
-    setProjectType(e.target.name);
+  const setProjectName = (value: any) => {
+    dispatch(setNewProjectData({ projectName: value }));
+  };
+  const setProjectBaseUrl = (value: any) => {
+    dispatch(setNewProjectData({ baseUrl: value }));
+  };
+  const setProjectType = (e: any) => {
+    dispatch(setNewProjectData({ projectType: e.target.name }));
   };
 
   function ToggleBorderButton({
@@ -64,12 +77,13 @@ export default function CreateProject() {
   }) {
     return (
       <BorderButton
-        onClick={onProjectTypeChange}
+        onClick={setProjectType}
         name={name}
         style={{
           maxWidth: 110,
-          color: projectType === `${name}` ? "black" : "lightgray",
-          borderColor: projectType === `${name}` ? "black" : "lightgray",
+          color: newProject?.projectType === `${name}` ? "black" : "lightgray",
+          borderColor:
+            newProject?.projectType === `${name}` ? "black" : "lightgray",
         }}
       >
         {children}
@@ -95,20 +109,22 @@ export default function CreateProject() {
       <TextFormField
         placeholder="project name"
         label="Project name"
-        onChange={setName}
-      ></TextFormField>
+        onChange={setProjectName}
+        value={newProject?.projectName || ""}
+      />
       <div style={{ height: 20 }}></div>
       <TextFormField
         placeholder="https://acme.com, http://localhost:3000"
         label="Website URL"
-        onChange={setUrl}
-      ></TextFormField>
+        onChange={setProjectBaseUrl}
+        value={newProject?.baseUrl || ""}
+      />
       <Comment>
         We will parse some resources from your site to get started
       </Comment>
       <div style={{ height: 20 }}></div>
 
-      <Button onClick={onProjectCreate}>Next</Button>
+      <Button onClick={submit}>Next</Button>
       <div style={{ height: 30 }}></div>
 
       <Comment>💡 Not sure where to start?</Comment>

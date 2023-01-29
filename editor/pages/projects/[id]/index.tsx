@@ -15,6 +15,7 @@ export default function () {
   const project = useSelector((state: RootState) => state.editor.data);
   const dispatch = useDispatch();
 
+  console.log(project);
   const onDeleteKey = (id: string) => {
     client.delete(`/texts/${id}`).then((res) => {
       const keys = project.textSets.filter((k) => k.id !== id);
@@ -96,7 +97,7 @@ function KeyListView({ onDeleteKey }: { onDeleteKey: (id: string) => void }) {
     // 로케일 필요한가
     client
       .get(
-        `/texts/${project?.id || null}/locales/${
+        `/texts/${project?.projectId || null}/locales/${
           project?.selectedLocale || null
         }`
       )
@@ -107,36 +108,33 @@ function KeyListView({ onDeleteKey }: { onDeleteKey: (id: string) => void }) {
 
   return (
     <>
-      {project?.textSets?.length > 1
-        ? project.textSets.map((key, i) => {
-            return (
-              <p
-                style={{
-                  backgroundColor: "orange",
-                  display: "flex",
-                  justifyContent: "space-between",
-                }}
-                onClick={() => {
-                  dispatch(setProjectData({ selectedTextSet: key }));
-                }}
-                className="aa"
-                key={i}
-              >
-                key: {key.key}
-                <br />
-                value:{" "}
-                {key.value ? key.value[project.selectedLocale || null] : ""}
-                <button
-                  onClick={() => {
-                    onDeleteKey(key.id);
-                  }}
-                >
-                  delete
-                </button>
-              </p>
-            );
-          })
-        : null}
+      {project?.textSets?.map((key, i) => {
+        return (
+          <p
+            style={{
+              backgroundColor: "orange",
+              display: "flex",
+              justifyContent: "space-between",
+            }}
+            onClick={() => {
+              dispatch(setProjectData({ selectedTextSet: key }));
+            }}
+            className="aa"
+            key={i}
+          >
+            key: {key.key}
+            <br />
+            value: {key.value ? key.value[project.selectedLocale || null] : ""}
+            <button
+              onClick={() => {
+                onDeleteKey(key.id);
+              }}
+            >
+              delete
+            </button>
+          </p>
+        );
+      })}
     </>
   );
 }
@@ -146,7 +144,7 @@ function SetLocaleView() {
   const dispatch = useDispatch();
 
   React.useEffect(() => {
-    client.get(`/projects/${project?.id}`).then((res) => {
+    client.get(`/projects/${project?.projectId || ""}`).then((res) => {
       dispatch(setProjectData({ locales: res.data.locales || [] }));
     });
   }, []);
@@ -161,15 +159,13 @@ function SetLocaleView() {
         }
       >
         <option key={-1}></option>
-        {project?.locales
-          ? project.locales.map((locale, i) => {
-              return (
-                <option key={i} value={locale}>
-                  {locale}
-                </option>
-              );
-            })
-          : null}
+        {project?.locales?.map((locale, i) => {
+          return (
+            <option key={i} value={locale}>
+              {locale}
+            </option>
+          );
+        })}
       </select>
     </>
   );
@@ -211,48 +207,46 @@ function CreateKeyView({
           }}
         />
       </h2>
-      {project?.locales
-        ? project.locales.map((locale, i) => {
-            return (
-              <p key={i}>
-                {locale}:{" "}
-                <input
-                  value={
-                    project?.selectedTextSet?.value[locale] ||
-                    createKeyInput.value[locale] ||
-                    ""
-                  }
-                  placeholder={locale}
-                  onChange={(e) => {
-                    if (project.selectedTextSet?.id) {
-                      let selectedTextSet = {
-                        ...project.selectedTextSet,
-                        value: {
-                          ...project.selectedTextSet?.value,
-                          [locale]: e.target.value,
-                        },
-                      };
+      {project?.locales?.map((locale, i) => {
+        return (
+          <p key={i}>
+            {locale}:{" "}
+            <input
+              value={
+                project?.selectedTextSet?.value[locale] ||
+                createKeyInput.value[locale] ||
+                ""
+              }
+              placeholder={locale}
+              onChange={(e) => {
+                if (project.selectedTextSet?.id) {
+                  let selectedTextSet = {
+                    ...project.selectedTextSet,
+                    value: {
+                      ...project.selectedTextSet?.value,
+                      [locale]: e.target.value,
+                    },
+                  };
 
-                      dispatch(
-                        setProjectData({
-                          selectedTextSet,
-                        })
-                      );
-                    } else {
-                      setCreateKeyInput({
-                        ...createKeyInput,
-                        value: {
-                          ...createKeyInput.value,
-                          [locale]: e.target.value,
-                        },
-                      });
-                    }
-                  }}
-                />
-              </p>
-            );
-          })
-        : null}
+                  dispatch(
+                    setProjectData({
+                      selectedTextSet,
+                    })
+                  );
+                } else {
+                  setCreateKeyInput({
+                    ...createKeyInput,
+                    value: {
+                      ...createKeyInput.value,
+                      [locale]: e.target.value,
+                    },
+                  });
+                }
+              }}
+            />
+          </p>
+        );
+      })}
       <button
         onClick={() => {
           if (project.selectedTextSet?.id) {
