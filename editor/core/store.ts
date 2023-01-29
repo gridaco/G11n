@@ -9,7 +9,8 @@ import {
 import { useDispatch } from "react-redux";
 
 interface EditorData {
-  id?: string;
+  projectId?: string;
+  projectName?: string;
   locales?: string[];
   selectedLocale?: string;
   textSets?: TextSet[];
@@ -30,6 +31,28 @@ const editorInitialState: EditorState = {
   data: null,
 };
 
+interface NewProjectData {
+  projectId?: string;
+  projectName?: string;
+  projectType?: string;
+  baseUrl?: string;
+  urls?: string[];
+  locales?: string[];
+  defaultLocale?: string;
+}
+
+interface NewProjectState {
+  data: NewProjectData | null;
+}
+
+const newProjectInitialState: NewProjectState = {
+  data: {
+    projectType: "aw",
+    locales: [],
+    urls: [],
+  },
+};
+
 const editorPageSlice = createSlice({
   name: "editor",
   initialState: editorInitialState,
@@ -40,10 +63,21 @@ const editorPageSlice = createSlice({
   },
 });
 
+const newProjectPageSlice = createSlice({
+  name: "newProject",
+  initialState: newProjectInitialState,
+  reducers: {
+    setNewProjectData(state, action: PayloadAction<NewProjectData>) {
+      state.data = { ...state.data, ...action.payload };
+    },
+  },
+});
+
 const makeStore = () => {
   const store = configureStore({
     reducer: {
       editor: editorPageSlice.reducer,
+      newProject: newProjectPageSlice.reducer,
     },
     devTools: true,
   });
@@ -56,3 +90,4 @@ const store = makeStore();
 export default store;
 export type RootState = ReturnType<typeof store.getState>;
 export const { setProjectData } = editorPageSlice.actions;
+export const { setNewProjectData } = newProjectPageSlice.actions;
