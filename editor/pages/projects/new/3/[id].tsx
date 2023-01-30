@@ -3,8 +3,6 @@ import Axios from "axios";
 import { useRouter } from "next/router";
 import { Button, TextFormField } from "@editor-ui/console";
 import styled from "@emotion/styled";
-import { useSelector, useDispatch } from "react-redux";
-import { RootState, setNewProjectData } from "core/store";
 
 const Page = styled.div`
   display: flex;
@@ -57,26 +55,23 @@ const Comment = styled.p`
 `;
 
 export default function setStartPages() {
-  const newProject = useSelector((state: RootState) => state.newProject.data);
-  const dispatch = useDispatch();
   const router = useRouter();
+  const { id } = router.query;
+  const [urls, setUrls] = React.useState<string[]>([]);
   const [url, setUrl] = React.useState<string>("");
 
   const addUrl = (url: string) => {
-    if (!url || newProject?.urls.some((u) => u === url || u === "/" + url))
-      return;
+    if (!url || urls.some((u) => u === url || u === "/" + url)) return;
     if (url[0] !== "/") url = "/" + url;
-    dispatch(setNewProjectData({ urls: [...newProject?.urls, url] }));
+    setUrls([...urls, url]);
     setUrl("");
   };
 
   const onSaveClick = async () => {};
 
   const deleteUrl = (e: any) => {
-    const url = e.target.id;
-    dispatch(
-      setNewProjectData({ urls: newProject?.urls.filter((u) => u !== url) })
-    );
+    const url = e.target.innerText;
+    setUrls(urls.filter((u) => u !== url));
   };
 
   return (
@@ -95,9 +90,9 @@ export default function setStartPages() {
             value={url || ""}
           />
           <div style={{ height: 20 }}></div>
-          {newProject?.urls?.map((url, i) => {
+          {urls.map((url, i) => {
             return (
-              <Url id={url} key={i} onClick={(e) => deleteUrl(e)}>
+              <Url key={i} onClick={(e) => deleteUrl(e)}>
                 {url}
               </Url>
             );
@@ -123,7 +118,7 @@ export default function setStartPages() {
             flexWrap: "wrap",
           }}
         >
-          {newProject?.urls.map((url, i) => {
+          {urls.map((url, i) => {
             return <RenderedUrl key={i}>{url}</RenderedUrl>;
           })}
         </div>

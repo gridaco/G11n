@@ -3,8 +3,6 @@ import Axios from "axios";
 import { useRouter } from "next/router";
 import { Button, TextFormField } from "@editor-ui/console";
 import styled from "@emotion/styled";
-import { useSelector, useDispatch } from "react-redux";
-import { RootState, setNewProjectData } from "core/store";
 
 const client = Axios.create({
   baseURL: "http://localhost:3307",
@@ -38,7 +36,7 @@ const RenderPart = styled.div`
 `;
 
 const RenderingArea = styled.div`
-  background-color: lightgray;
+  background-color: orange;
   width: 100%;
   height: 95%;
 `;
@@ -78,40 +76,30 @@ const Comment = styled.p`
 `;
 
 export default function setLocales() {
-  const newProject = useSelector((state: RootState) => state.newProject.data);
-  const dispatch = useDispatch();
   const router = useRouter();
-
+  const { id } = router.query;
+  const [locales, setLocales] = React.useState<string[]>([]);
   const [locale, setLocale] = React.useState<string>("");
   const [input, setInput] = React.useState<string>("");
 
   const addLocale = (locale: any) => {
-    if (newProject?.locales?.includes(locale)) return;
-    dispatch(setNewProjectData({ locales: [...newProject?.locales, locale] }));
+    if (locales.includes(locale)) return;
+    setLocales([...locales, locale]);
     setInput("");
   };
 
   const deleteLocale = (e: any) => {
-    const locale = e.target.id;
-    const locales = newProject?.locales.filter((l) => l !== locale);
-    dispatch(
-      setNewProjectData({
-        locales,
-      })
-    );
+    const locale = e.target.innerText;
+    setLocales(locales.filter((l) => l !== locale));
   };
 
   const onSaveClick = async () => {
-    if (newProject?.locales?.length === 0) {
-      alert("Please add at least one locale");
-      return;
-    }
-    dispatch(setNewProjectData({ defaultLocale: newProject?.locales[0] }));
-    router.push(`/projects/new/3`);
+    await client.patch(`/projects/${id}/settings`, { locales });
+    router.push(`/projects/new/3/${id}`);
   };
 
   const onLocaleClick = (e: any) => {
-    const locale = e.target.id;
+    const locale = e.target.innerText;
     setLocale(locale);
   };
 
@@ -135,16 +123,10 @@ export default function setLocales() {
             💡 Drag & Drop to change default locale & preference
           </Comment>
           <LocaleContainer>
-            {newProject?.locales?.map((locale, i) => {
+            {locales.map((locale, i) => {
               return (
-                <Locale
-                  key={i}
-                  id={locale}
-                  draggable="true"
-                  onClick={deleteLocale}
-                >
+                <Locale key={i} draggable="true" onClick={deleteLocale}>
                   {locale}
-                  {i === 0 && " (default)"}
                 </Locale>
               );
             })}
@@ -164,7 +146,7 @@ export default function setLocales() {
       </FormPart>
       <RenderPart>
         <LocaleContainer>
-          {newProject?.locales?.map((locale, i) => {
+          {locales.map((locale, i) => {
             return (
               <Locale key={i} onClick={onLocaleClick}>
                 {locale}
