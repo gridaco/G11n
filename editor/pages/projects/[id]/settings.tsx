@@ -48,6 +48,7 @@ export default function () {
         padding: 40,
       }}
     >
+      <button onClick={() => router.back()}>back</button>
       <h1>{project?.projectName || ""} Settings</h1>
       Project Name:{" "}
       <input

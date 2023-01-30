@@ -58,6 +58,7 @@ export default function () {
         margin: 40,
       }}
     >
+      <button onClick={() => router.back()}>back</button>
       <h1>Project {id}</h1>
       <div
         style={{

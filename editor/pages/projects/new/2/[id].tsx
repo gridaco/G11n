@@ -89,7 +89,7 @@ export default function setLocales() {
   };
 
   const deleteLocale = (e: any) => {
-    const locale = e.target.innerText;
+    const locale = e.target.id;
     setLocales(locales.filter((l) => l !== locale));
   };
 
@@ -99,13 +99,15 @@ export default function setLocales() {
   };
 
   const onLocaleClick = (e: any) => {
-    const locale = e.target.innerText;
+    const locale = e.target.id;
     setLocale(locale);
   };
 
   return (
     <Page>
       <FormPart>
+        <button onClick={() => router.back()}>back</button>
+
         <h3>grida.co</h3>
         <div>
           <h2>Locales</h2>
@@ -125,8 +127,14 @@ export default function setLocales() {
           <LocaleContainer>
             {locales.map((locale, i) => {
               return (
-                <Locale key={i} draggable="true" onClick={deleteLocale}>
+                <Locale
+                  id={locale}
+                  key={i}
+                  draggable="true"
+                  onClick={deleteLocale}
+                >
                   {locale}
+                  {i === 0 && " (default)"}
                 </Locale>
               );
             })}

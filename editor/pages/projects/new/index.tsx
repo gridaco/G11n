@@ -56,6 +56,16 @@ export default function CreateProject() {
     setProjectType(e.target.name);
   };
 
+  // TODO: ??
+  const browseTemplate = () => {
+    window.alert("Not implemented yet");
+  };
+
+  // TODO: route demo project page
+  const openDemoProject = () => {
+    window.alert("Not implemented yet");
+  };
+
   function ToggleBorderButton({
     name,
     children,
@@ -80,6 +90,7 @@ export default function CreateProject() {
 
   return (
     <Page>
+      <button onClick={() => router.back()}>back</button>
       <h2>New Project</h2>
       <div
         style={{
@@ -120,10 +131,13 @@ export default function CreateProject() {
           width: "100%",
         }}
       >
-        <BorderButton style={{ flex: 1, marginBottom: 5 }}>
+        <BorderButton
+          style={{ flex: 1, marginBottom: 5 }}
+          onClick={browseTemplate}
+        >
           Browse Templates
         </BorderButton>
-        <BorderButton>Open demo project</BorderButton>
+        <BorderButton onClick={openDemoProject}>Open demo project</BorderButton>
       </div>
     </Page>
   );

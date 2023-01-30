@@ -1,9 +1,9 @@
-import { useRouter } from 'next/router';
-import React from 'react';
-import Axios from 'axios';
+import { useRouter } from "next/router";
+import React from "react";
+import Axios from "axios";
 
 const client = Axios.create({
-  baseURL: 'http://localhost:3307',
+  baseURL: "http://localhost:3307",
 });
 export default function () {
   const router = useRouter();
@@ -11,13 +11,13 @@ export default function () {
   const exportProjectToJson = (projectId: string) => {
     client
       .get(`/projects/${projectId}/export`, {
-        responseType: 'blob',
+        responseType: "blob",
       })
       .then((res) => {
         const href = URL.createObjectURL(res.data);
-        const link = document.createElement('a');
+        const link = document.createElement("a");
         link.href = href;
-        link.setAttribute('download', 'translations.zip');
+        link.setAttribute("download", "translations.zip");
         document.body.appendChild(link);
         link.click();
 
@@ -28,6 +28,7 @@ export default function () {
   const exportProjectToCsv = (projectId: string) => {};
   return (
     <div>
+      <button onClick={() => router.back()}>back</button>
       <h1>Download {id} </h1>
       <button onClick={() => exportProjectToJson(id as string)}>
         Download Json
