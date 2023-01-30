@@ -7,11 +7,13 @@ import { Provider } from "react-redux";
 
 const App = ({ Component, pageProps }) => {
   return (
-    <Provider store={store}>
-      <QueryParamProvider>
-        <Component {...pageProps} />
-      </QueryParamProvider>
-    </Provider>
+    <RecoilRoot>
+      <Provider store={store}>
+        <QueryParamProvider>
+          <Component {...pageProps} />
+        </QueryParamProvider>
+      </Provider>
+    </RecoilRoot>
   );
 };
 
