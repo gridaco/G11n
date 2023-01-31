@@ -3,6 +3,8 @@ import Axios from "axios";
 import { useRouter } from "next/router";
 import { Button, TextFormField } from "@editor-ui/console";
 import styled from "@emotion/styled";
+import langs from "langs";
+import Select from "react-select";
 
 const client = Axios.create({
   baseURL: "http://localhost:3307",
@@ -82,6 +84,10 @@ export default function setLocales() {
   const [locale, setLocale] = React.useState<string>("");
   const [input, setInput] = React.useState<string>("");
 
+  const langOptions = langs.all().map((l) => {
+    return { value: l.name, label: l.local };
+  });
+
   const addLocale = (locale: any) => {
     if (locales.includes(locale)) return;
     setLocales([...locales, locale]);
@@ -112,14 +118,21 @@ export default function setLocales() {
         <div>
           <h2>Locales</h2>
           <div style={{ height: 20 }}></div>
-          <TextFormField
+          {/* <TextFormField
             label="Search Locales to add"
             placeholder="English"
             onEnter={addLocale}
             onChange={setInput}
             value={input || ""}
           />
-          <div style={{ height: 20 }}></div>
+          <div style={{ height: 20 }}></div> */}
+
+          <Select
+            instanceId="langs"
+            options={langOptions}
+            closeMenuOnSelect={false}
+            isMulti
+          />
 
           <Comment>
             💡 Drag & Drop to change default locale & preference
