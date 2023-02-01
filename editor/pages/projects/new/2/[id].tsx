@@ -85,7 +85,7 @@ export default function setLocales() {
   const [input, setInput] = React.useState<string>("");
 
   const langOptions = langs.all().map((l) => {
-    return { value: l.name, label: l.local };
+    return { value: l[1], label: l.local };
   });
 
   const addLocale = (locale: any) => {
@@ -130,14 +130,23 @@ export default function setLocales() {
           <Select
             instanceId="langs"
             options={langOptions}
-            closeMenuOnSelect={false}
-            isMulti
+            onChange={(e) => {
+              addLocale(e.value);
+            }}
           />
 
           <Comment>
             💡 Drag & Drop to change default locale & preference
           </Comment>
-          <LocaleContainer>
+          <LocaleContainer
+            //TODO: Drag & Drop
+            onDrop={(e) => {
+              e.preventDefault();
+              const data = e.dataTransfer.getData("text/plain");
+
+              // setLocales(newLocales);
+            }}
+          >
             {locales.map((locale, i) => {
               return (
                 <Locale
@@ -145,9 +154,23 @@ export default function setLocales() {
                   key={i}
                   draggable="true"
                   onClick={deleteLocale}
+                  onDragStart={(e) => {
+                    e.dataTransfer.setData("text/plain", locale);
+                  }}
                 >
                   {locale}
-                  {i === 0 && " (default)"}
+                  {i === 0 && (
+                    <p
+                      style={{
+                        color: "rgba(0, 0, 0, 0.6)",
+                        fontSize: "11px",
+                        margin: "0 0 0 5px",
+                        zIndex: -1,
+                      }}
+                    >
+                      default
+                    </p>
+                  )}
                 </Locale>
               );
             })}
