@@ -3,10 +3,22 @@ import Axios from "axios";
 import Link from "next/link";
 import { useSelector, useDispatch } from "react-redux";
 import { setProjectData, RootState } from "core/store";
+import { Button, TextField } from "@editor-ui/console";
+import styled from "@emotion/styled";
 
 const client = Axios.create({
   baseURL: "http://localhost:3307",
 });
+
+const Page = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  max-width: 340px;
+  margin: auto;
+`;
 
 export default function () {
   const dispatch = useDispatch();
@@ -19,15 +31,9 @@ export default function () {
   }, []);
 
   return (
-    <div
-      style={{
-        padding: 40,
-      }}
-    >
+    <Page>
       <h1>My Projects</h1>
-      <button>
-        <Link href={`/projects/new`}>Create New Project</Link>
-      </button>
+
       {projects.map((project, i) => {
         return (
           <div
@@ -41,9 +47,9 @@ export default function () {
           >
             <Link
               href={`/projects/${project.id}`}
-              onClick={() => {
-                dispatch(setProjectData({ projectId: project.id }));
-              }}
+              // onClick={() => {
+              //   dispatch(setProjectData({ projectId: project.id }));
+              // }}
             >
               {project.name}
               <br />
@@ -59,6 +65,9 @@ export default function () {
           </div>
         );
       })}
-    </div>
+      <Button>
+        <Link href={`/projects/new`}>Create New Project</Link>
+      </Button>
+    </Page>
   );
 }

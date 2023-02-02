@@ -37,17 +37,19 @@ const Locale = styled.div`
 
 export default function () {
   const router = useRouter();
-  const { id } = router.query;
-
+  let id = "";
   const [project, setProject] = React.useState<any>({ name: "", locales: [] });
   const [locales, setLocales] = React.useState<string[]>([]);
 
   React.useEffect(() => {
-    client.get(`/projects/${id}`).then((res) => {
-      setProject(res.data);
-      setLocales(res.data.locales);
-    });
-  }, []);
+    if (router && router.query && router.query.id) {
+      id = router.query.id as string;
+      client.get(`/projects/${id}`).then((res) => {
+        setProject(res.data);
+        setLocales(res.data.locales);
+      });
+    }
+  }, [router]);
 
   const langOptions = langs.all().map((l) => {
     return { value: l[1], label: l.local };

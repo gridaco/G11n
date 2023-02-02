@@ -99,7 +99,11 @@ export default function setLocales() {
     setLocales(locales.filter((l) => l !== locale));
   };
 
-  const onSaveClick = async () => {
+  const save = async () => {
+    if (locales.length === 0) {
+      window.alert("Please add at least one locale");
+      return;
+    }
     await client.patch(`/projects/${id}/settings`, { locales });
     router.push(`/projects/new/3/${id}`);
   };
@@ -182,7 +186,7 @@ export default function setLocales() {
             justifyContent: "space-between",
           }}
         >
-          <Button width="165px" onClick={onSaveClick}>
+          <Button width="165px" onClick={save}>
             Save & Continue
           </Button>
           <Comment>1 of 3</Comment>

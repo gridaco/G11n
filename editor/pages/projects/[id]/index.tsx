@@ -4,6 +4,7 @@ import Axios from "axios";
 import Link from "next/link";
 import { useSelector, useDispatch } from "react-redux";
 import { setProjectData, RootState } from "core/store";
+import { Button, TextFormField } from "@editor-ui/console";
 
 const client = Axios.create({
   baseURL: "http://localhost:3307",
@@ -11,12 +12,16 @@ const client = Axios.create({
 
 export default function () {
   const router = useRouter();
-  const { id } = router.query;
   const project = useSelector((state: RootState) => state.editor.data);
   const dispatch = useDispatch();
 
-  console.log(project);
-  const onDeleteKey = (id: string) => {
+  React.useEffect(() => {
+    if (router && router.query) {
+      dispatch(setProjectData({ projectId: router.query.id }));
+    }
+  }, [router]);
+
+  const deleteKey = (id: string) => {
     client.delete(`/texts/${id}`).then((res) => {
       const keys = project.textSets.filter((k) => k.id !== id);
 
@@ -24,8 +29,12 @@ export default function () {
     });
   };
 
-  const onCreateNewKey = (key: any) => {
-    key.projectId = id;
+  const createNewKey = (key: any) => {
+    if (!key.key) {
+      alert("key is empty");
+      return;
+    }
+    key.projectId = project.projectId;
     const data = key;
     client.post("/texts", data).then((res) => {
       dispatch(
@@ -37,7 +46,7 @@ export default function () {
     });
   };
 
-  const onUpdateKey = (key: any) => {
+  const updateKey = (key: any) => {
     let data = { ...key };
     delete data.id;
     client.patch(`/texts/${key.id}`, data).then((res) => {
@@ -59,7 +68,7 @@ export default function () {
       }}
     >
       <button onClick={() => router.back()}>back</button>
-      <h1>Project {id}</h1>
+      <h1>Project {project?.projectId}</h1>
       <div
         style={{
           display: "flex",
@@ -72,9 +81,11 @@ export default function () {
           }}
         >
           <SetLocaleView />
-          <KeyListView onDeleteKey={onDeleteKey} />
+          <KeyListView deleteKey={deleteKey} />
           <button>
-            <Link href={`/projects/${id}/export`}>Download</Link>
+            <Link href={`/projects/${project?.projectId}/export`}>
+              Download
+            </Link>
           </button>
         </div>
         <div
@@ -83,18 +94,19 @@ export default function () {
             padding: 20,
           }}
         >
-          <CreateKeyView onCreate={onCreateNewKey} onUpdate={onUpdateKey} />
+          <CreateKeyView onCreate={createNewKey} onUpdate={updateKey} />
         </div>
       </div>
     </div>
   );
 }
 
-function KeyListView({ onDeleteKey }: { onDeleteKey: (id: string) => void }) {
+function KeyListView({ deleteKey }: { deleteKey: (id: string) => void }) {
   const project = useSelector((state: RootState) => state.editor.data);
   const dispatch = useDispatch();
 
   React.useEffect(() => {
+    if (!project?.projectId) return;
     // 로케일 필요한가
     client
       .get(
@@ -105,7 +117,7 @@ function KeyListView({ onDeleteKey }: { onDeleteKey: (id: string) => void }) {
       .then((res) => {
         dispatch(setProjectData({ textSets: res.data }));
       });
-  }, [project?.selectedLocale]);
+  }, [project?.projectId]);
 
   return (
     <>
@@ -128,7 +140,7 @@ function KeyListView({ onDeleteKey }: { onDeleteKey: (id: string) => void }) {
             value: {key.value ? key.value[project.selectedLocale || null] : ""}
             <button
               onClick={() => {
-                onDeleteKey(key.id);
+                deleteKey(key.id);
               }}
             >
               delete
@@ -145,10 +157,11 @@ function SetLocaleView() {
   const dispatch = useDispatch();
 
   React.useEffect(() => {
+    if (!project?.projectId) return;
     client.get(`/projects/${project?.projectId || ""}`).then((res) => {
       dispatch(setProjectData({ locales: res.data.locales || [] }));
     });
-  }, []);
+  }, [project?.projectId]);
 
   return (
     <>
@@ -210,8 +223,42 @@ function CreateKeyView({
       </h2>
       {project?.locales?.map((locale, i) => {
         return (
-          <p key={i}>
-            {locale}:{" "}
+          <div key={i}>
+            <TextFormField
+              label={locale}
+              value={
+                project?.selectedTextSet?.value[locale] ||
+                createKeyInput.value[locale] ||
+                ""
+              }
+              placeholder={locale}
+              onChange={(value) => {
+                if (project.selectedTextSet?.id) {
+                  let selectedTextSet = {
+                    ...project.selectedTextSet,
+                    value: {
+                      ...project.selectedTextSet?.value,
+                      [locale]: value,
+                    },
+                  };
+
+                  dispatch(
+                    setProjectData({
+                      selectedTextSet,
+                    })
+                  );
+                } else {
+                  setCreateKeyInput({
+                    ...createKeyInput,
+                    value: {
+                      ...createKeyInput.value,
+                      [locale]: value,
+                    },
+                  });
+                }
+              }}
+            />
+            {/* {locale}:{" "}
             <input
               value={
                 project?.selectedTextSet?.value[locale] ||
@@ -244,8 +291,8 @@ function CreateKeyView({
                   });
                 }
               }}
-            />
-          </p>
+            /> */}
+          </div>
         );
       })}
       <button

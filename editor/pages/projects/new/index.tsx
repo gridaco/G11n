@@ -45,7 +45,11 @@ export default function CreateProject() {
   const [projectType, setProjectType] = React.useState<string>("aw");
 
   const router = useRouter();
-  const onProjectCreate = () => {
+  const createProject = () => {
+    if (!name) {
+      window.alert("Please enter a project name");
+      return;
+    }
     const project = { name: name };
     client.post("/projects", project).then((res) => {
       router.push(`/projects/new/2/${res.data.id}`);
@@ -120,7 +124,7 @@ export default function CreateProject() {
       </Comment>
       <div style={{ height: 20 }}></div>
 
-      <Button onClick={onProjectCreate}>Next</Button>
+      <Button onClick={createProject}>Next</Button>
       <div style={{ height: 30 }}></div>
 
       <Comment>💡 Not sure where to start?</Comment>
