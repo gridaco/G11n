@@ -15,12 +15,18 @@ interface EditorData {
   selectedLocale?: string;
   textSets?: TextSet[];
   selectedTextSet?: TextSet;
+  targetLayer?: Layer;
 }
 
 interface TextSet {
   id?: string;
   key?: string;
   value?: { [locale: string]: string };
+}
+
+interface Layer {
+  id: string;
+  value?: string;
 }
 
 interface EditorState {

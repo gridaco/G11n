@@ -24,7 +24,7 @@ type SingleKeyEditorMode = "create-new" | "edit-existing" | "loading";
  * provides interface for editing focused single key. creating, and editing the key name and translations's value
  */
 export default function SingleKeyEditor(props: {
-  repository: DesignGlobalizationRepository;
+  repository?: DesignGlobalizationRepository;
 }) {
   const { repository } = props;
   const targetLayer = useRecoilValue(targetLayerSelector);
@@ -37,6 +37,7 @@ export default function SingleKeyEditor(props: {
   };
 
   useEffect(() => {
+    if (!repository) return;
     repository
       // FIXME: layerId type to 'string | undefined' (client-sdk)
       .fetchTranslation(targetLayer?.nodeId || "")

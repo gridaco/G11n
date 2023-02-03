@@ -27,7 +27,7 @@ export function InnerStaticAppEditorWorkspace(props: AppEditorProps) {
     return editorSwitch() ? (
       <SingleKeyEditor key={targetLayer?.nodeId} repository={repository} />
     ) : (
-      <SceneKeyEditor repository={repository} />
+      <SceneKeyEditor />
     );
   };
   return (

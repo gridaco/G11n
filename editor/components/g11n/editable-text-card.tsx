@@ -1,4 +1,6 @@
 import React, { useState, useMemo } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { setProjectData, RootState } from "core/store";
 import styled from "@emotion/styled";
 import { IGlobalizedKey } from "@base-sdk/g11n";
 import { assets } from "@base-sdk/base";
@@ -20,12 +22,18 @@ const EditableTextCard: React.FC<EditableTextCardProps> = ({
   onKeySubmit,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const project = useSelector((state: RootState) => state.editor.data);
+  const dispatch = useDispatch();
 
   const translations = useMemo(
     () => Object.keys(translation.translations),
     [translation.translations]
   );
 
+  const onClick = (keyId: string) => {
+    const selectedKey = project.textSets.find((k) => k.id === keyId);
+    dispatch(setProjectData({ selectedTextSet: selectedKey }));
+  };
   const defaultLocaleTranslationValue =
     (translation.translations as any)[locale]?.value ?? "no translation";
 
@@ -45,7 +53,12 @@ const EditableTextCard: React.FC<EditableTextCardProps> = ({
 
   return (
     <Container>
-      <Summary onClick={() => setIsOpen(!isOpen)}>
+      <Summary
+        onClick={() => {
+          onClick(translation.id);
+          setIsOpen(!isOpen);
+        }}
+      >
         <KeyInformation>
           <KeyName>{translation.key}</KeyName>
           <KeyTranslation>{defaultLocaleTranslationValue}</KeyTranslation>

@@ -10,6 +10,7 @@ import { Button, TextFormField } from "@editor-ui/console";
 import SceneKeyEditor from "scaffolds/scene-key-editor";
 import { InnerEditorWorkspace } from "scaffolds/editor/inner-editor-workspace";
 import CanvasStage from "components/canvas/stage";
+import SingleKeyEditor from "scaffolds/key-editor";
 
 export interface RawAsset {}
 
@@ -28,52 +29,48 @@ export default function () {
   const dispatch = useDispatch();
 
   React.useEffect(() => {
-    if (router && router.query) {
-      dispatch(setProjectData({ projectId: router.query.id }));
+    if (router && router.query && router.query.id) {
+      client.get(`/projects/${router.query.id}`).then((res) => {
+        dispatch(setProjectData(res.data));
+        client
+          .get(
+            `/texts/${router.query.id || null}/locales/${
+              project?.selectedLocale || null
+            }`
+          )
+          .then((res) => {
+            setTranslations(
+              res.data.map((x) => {
+                const translations = {};
+                for (let key in x.value) {
+                  translations[key] = {
+                    id: x.id,
+                    type: "TEXT",
+                    value: x.value[key],
+                  };
+                }
+                return {
+                  keyId: x.id,
+                  projectId: x.projectId,
+                  translation: {
+                    id: x.id,
+                    key: x.key,
+                    translations: translations,
+                  },
+                };
+              })
+            );
+
+            dispatch(
+              setProjectData({
+                textSets: res.data,
+                targetLayer: { value: res.data[0].value["en"] },
+              })
+            );
+          });
+      });
     }
   }, [router]);
-
-  React.useEffect(() => {
-    if (project?.projectId) {
-      client
-        .get(
-          `/texts/${project?.projectId || null}/locales/${
-            project?.selectedLocale || null
-          }`
-        )
-        .then((res) => {
-          setTranslations(
-            res.data.map((x) => {
-              const translations = {};
-              for (let key in x.value) {
-                translations[key] = {
-                  id: x.key.id,
-                  type: "TEXT",
-                  value: x.value[key],
-                };
-              }
-              return {
-                keyId: x.id,
-                projectId: x.id,
-                translation: {
-                  key: x.key,
-                  translations: translations,
-                },
-              };
-            })
-          );
-
-          dispatch(setProjectData({ textSets: res.data }));
-        });
-    }
-  }, [project?.projectId]);
-  const deleteKey = (id: string) => {
-    client.delete(`/texts/${id}`).then((res) => {
-      const keys = project.textSets.filter((k) => k.id !== id);
-
-      dispatch(setProjectData({ textSets: keys, selectedTextSet: null }));
-    });
-  };
 
   const createNewKey = (key: any) => {
     if (!key.key) {
@@ -107,12 +104,59 @@ export default function () {
     });
   };
 
-  const onKeyChange = () => {};
-  const onKeySubmit = () => {};
+  const onKeyChange = (locale: string, value: string) => {
+    dispatch(
+      setProjectData({
+        selectedTextSet: {
+          ...project.selectedTextSet,
+          value: { ...project.selectedTextSet.value, [locale]: value },
+        },
+      })
+    );
+  };
+  const onKeySubmit = () => {
+    let data = { ...project.selectedTextSet };
+    delete data.id;
+    client.patch(`/texts/${project.selectedTextSet.id}`, data).then((res) => {
+      const keys = project.textSets.map((k, i) => {
+        if (k.id === res.data.id) {
+          return res.data;
+        } else {
+          return k;
+        }
+      });
+      dispatch(setProjectData({ textSets: keys }));
+    });
+  };
+
+  console.log(project);
+  const SampleCanvas = () => {
+    return (
+      <div
+        onClick={(e) => {
+          console.log(e);
+          dispatch(setProjectData({ targetLayer: { value: e.target } }));
+        }}
+      >
+        {project?.targetLayer?.value}
+      </div>
+    );
+  };
+  const editorSwitch = (): boolean => {
+    return project?.targetLayer !== null;
+  };
+
+  const EditorBody = () => {
+    return editorSwitch() ? (
+      <SingleKeyEditor key={project.targetLayer?.value} />
+    ) : (
+      <SceneKeyEditor />
+    );
+  };
 
   return (
     <InnerEditorWorkspace
-      canvas={<CanvasStage />}
+      canvas={<SampleCanvas />}
       editor={
         <SceneKeyEditor
           onKeyChange={onKeyChange}
@@ -123,32 +167,6 @@ export default function () {
     ></InnerEditorWorkspace>
   );
 }
-
-// function KeyListView({ deleteKey }: { deleteKey: (id: string) => void }) {
-//   const project = useSelector((state: RootState) => state.editor.data);
-//   const [translations, setTranslations] = React.useState<ReadonlyArray<any>>(
-//     []
-//   );
-
-//   const [isOpen, setIsOpen] = useState(false);
-
-//   const dispatch = useDispatch();
-
-//   React.useEffect(() => {
-//     if (!project?.projectId) return;
-//     // 로케일 필요한가
-//   }, [project?.projectId]);
-
-//   const onKeyChange = (locale: string, value: string) => {
-//     console.log(value);
-//   };
-
-//   const onKeySubmit = (locale: string, value: string) => {
-//     console.log(value);
-//   };
-
-//   return <></>;
-// }
 
 function SetLocaleView() {
   const project = useSelector((state: RootState) => state.editor.data);

@@ -4,6 +4,8 @@ import styled from "@emotion/styled";
 import { DesignGlobalizationRepository } from "@base-sdk/g11n";
 import { LayerTranslation } from "@base-sdk/g11n";
 import { useQueryParam, NumberParam, withDefault } from "use-query-params";
+import { useSelector, useDispatch } from "react-redux";
+import { setProjectData, RootState } from "core/store";
 
 import Toolbar from "components/toolbar";
 import {
@@ -20,19 +22,19 @@ import { KeyboardIcon } from "@radix-ui/react-icons";
 import { currentTextEditValueAtom } from "states";
 
 interface ISceneKeyEditor {
-  repository?: DesignGlobalizationRepository;
   _translations?: any;
   onKeyChange?: (locale: string, value: string) => void;
   onKeySubmit?: (locale: string, value: string) => void;
 }
 
 const SceneKeyEditor: React.FC<ISceneKeyEditor> = ({
-  repository,
   _translations,
   onKeyChange,
   onKeySubmit,
 }) => {
   const [query, setQuery] = useState<string>("");
+  const project = useSelector((state: RootState) => state.editor.data);
+  const dispatch = useDispatch();
   const [isConfirmOpen, setIsConfirmOpen] = useState<boolean>(false);
   const [bottomBarChanges] = useQueryParam(
     "changes",
@@ -51,42 +53,9 @@ const SceneKeyEditor: React.FC<ISceneKeyEditor> = ({
   const handleLocaleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) =>
     setLocale(e.target.value);
 
-  const [, setCurrentEditTextValue] = useRecoilState(currentTextEditValueAtom);
-  const _onKeyChange = (_: string, value: string) => {
-    setCurrentEditTextValue(value);
-  };
-  const _onKeySubmit = (locale: string, value: string) => {
-    console.log("handleOnTranslationValueChange", locale, value);
-  };
-
-  let sceneName = "loading...";
-  if (repository) {
-    sceneName =
-      SceneRepositoryStore.find(repository.sceneId).scene.rawname ??
-      "no-named scene";
-  }
-
   useEffect(() => {
-    // let mounted = true;
-    if (repository) {
-      console.log("fetching translations under scene", repository.sceneId);
-      repository
-        .fetchTranslations()
-        .then((d) => {
-          console.log(
-            "fetched translations under scene",
-            repository.sceneId,
-            d
-          );
-          setTranslations(d);
-        })
-        .catch((e) => {
-          console.error(e);
-        });
-    } else if (!repository && _translations) {
-      setTranslations(_translations);
-    }
-  }, [repository, _translations]);
+    setTranslations(_translations);
+  }, [_translations]);
 
   const filteredTranslations = useMemo(() => {
     return translations.filter(({ translation: { key } }) =>
@@ -119,17 +88,19 @@ const SceneKeyEditor: React.FC<ISceneKeyEditor> = ({
         <KeyToolbar>
           <SearchInputBox value={query} onChange={handleQueryChange} />
           <Select value={locale} onChange={handleLocaleSelectChange}>
-            <option value="ko">Ko</option>
-            <option value="en">English</option>
-            <option value="ja">JP</option>
+            {project?.locales.map((locale) => (
+              <option key={locale} value={locale}>
+                {locale}
+              </option>
+            ))}
           </Select>
         </KeyToolbar>
         <TranslationList data-is-bottom-bar-open={isBottomBarOpen && "true"}>
           {filteredTranslations.map(({ translation }, i) => {
             return (
               <EditableTextCard
-                onKeySubmit={onKeySubmit ? onKeySubmit : _onKeySubmit}
-                onKeyChange={onKeyChange ? onKeyChange : _onKeyChange}
+                onKeySubmit={onKeySubmit}
+                onKeyChange={onKeyChange}
                 key={i}
                 translation={translation}
               />
