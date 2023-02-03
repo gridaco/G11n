@@ -2,20 +2,22 @@ import React, { useEffect, useState } from "react";
 import styled from "@emotion/styled";
 import { CircularProgress } from "@mui/material";
 import { targetLayerIdAtom, targetLayerSelector } from "states";
-import { useRecoilValue, useSetRecoilState } from "recoil";
-import {
-  StorableLayer,
-  StorableLayerType,
-  assets,
-} from "@base-sdk/base";
+import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
+import { currentEditorialLocaleAtom } from "states/editor-state";
+import { currentTextEditValueAtom } from "states";
+import { StorableLayer, StorableLayerType, assets } from "@base-sdk/base";
 
 import type { RenderedTextManifest } from "@reflect-ui/core";
 import { TranslationSetForKey } from "components/g11n/translation-set-for-key";
-import { IGlobalizedKey, Translations, DesignGlobalizationRepository } from "@base-sdk/g11n";
+import {
+  IGlobalizedKey,
+  Translations,
+  DesignGlobalizationRepository,
+} from "@base-sdk/g11n";
 import Header from "./header";
 import TextInput from "components/g11n/text-input";
 
-export { default as Header } from "./header"
+export { default as Header } from "./header";
 
 type SingleKeyEditorMode = "create-new" | "edit-existing" | "loading";
 /**
@@ -172,6 +174,9 @@ function SingleKeyEditorEditExistingState(props: {
 }) {
   const repository = props.repository;
 
+  const [editorialLoclae] = useRecoilState(currentEditorialLocaleAtom);
+  const [, setCurrentEditTextValue] = useRecoilState(currentTextEditValueAtom);
+
   const [translations, setTranslations] = useState<Translations>();
   // fetch initial translations
   useEffect(() => {
@@ -192,6 +197,10 @@ function SingleKeyEditorEditExistingState(props: {
     });
   };
 
+  const onKeyChange = (_: string, value: string) => {
+    setCurrentEditTextValue(value);
+  };
+
   return (
     <>
       <Header title="Rename Key" onClickBack={props.goBack} />
@@ -207,6 +216,7 @@ function SingleKeyEditorEditExistingState(props: {
               key={props.gkey.key}
               locales={repository.locales}
               onSubmit={handleTranslationUpdate}
+              onEdit={onKeyChange}
               translations={translations}
             />
           ) : (

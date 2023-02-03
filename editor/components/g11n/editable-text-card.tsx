@@ -1,29 +1,33 @@
 import React, { useState, useMemo } from "react";
-import { useRecoilState } from "recoil";
 import styled from "@emotion/styled";
-import { GlobalizedKey, IGlobalizedKey } from "@base-sdk/g11n";
+import { IGlobalizedKey } from "@base-sdk/g11n";
 import { assets } from "@base-sdk/base";
-
-import { currentEditorialLocaleAtom } from "states/editor-state";
 import { TranslationFieldRow } from "./translation-field";
 
 const availableLocales = ["ko", "en", "ja"];
 
-interface IEditableTextCard {
+export interface EditableTextCardProps {
   translation: IGlobalizedKey;
+  locale: string;
+  onKeyChange: (locale: string, value: string) => void;
+  onKeySubmit: (locale: string, value: string) => void;
 }
 
-const EditableTextCard: React.FC<IEditableTextCard> = ({ translation }) => {
+const EditableTextCard: React.FC<EditableTextCardProps> = ({
+  locale,
+  translation,
+  onKeyChange,
+  onKeySubmit,
+}) => {
   const [isOpen, setIsOpen] = useState(false);
 
-  const translations = useMemo(() => Object.keys(translation.translations), [
-    translation.translations,
-  ]);
+  const translations = useMemo(
+    () => Object.keys(translation.translations),
+    [translation.translations]
+  );
 
-  const [editorialLoclae] = useRecoilState(currentEditorialLocaleAtom);
   const defaultLocaleTranslationValue =
-    (translation.translations as any)[editorialLoclae]?.value ??
-    "no translation";
+    (translation.translations as any)[locale]?.value ?? "no translation";
 
   const handleOnTranslationValueChange = (locale: string, value: string) => {
     console.log("handleOnTranslationValueChange", locale, value);
@@ -72,7 +76,8 @@ const EditableTextCard: React.FC<IEditableTextCard> = ({ translation }) => {
                 key={keyId}
                 locale={localekey}
                 initialValue={localeTranslationValue}
-                onSubmit={handleOnTranslationValueChange}
+                onChange={onKeyChange}
+                onSubmit={onKeySubmit}
               />
             );
           })}

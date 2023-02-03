@@ -1,10 +1,15 @@
 import { useRouter } from "next/router";
-import React from "react";
+import React, { useState } from "react";
 import Axios from "axios";
 import Link from "next/link";
 import { useSelector, useDispatch } from "react-redux";
 import { setProjectData, RootState } from "core/store";
 import { Button, TextFormField } from "@editor-ui/console";
+import EditableTextCard from "components/g11n/editable-text-card";
+
+export interface RawAsset {}
+
+export declare type Translations = Map<string, RawAsset>;
 
 const client = Axios.create({
   baseURL: "http://localhost:3307",
@@ -103,6 +108,16 @@ export default function () {
 
 function KeyListView({ deleteKey }: { deleteKey: (id: string) => void }) {
   const project = useSelector((state: RootState) => state.editor.data);
+  const [translations, setTranslations] = React.useState<any>([
+    {
+      id: "aa",
+      key: "aa",
+      translations: {
+        en: "hello",
+        ko: "안녕",
+      },
+    },
+  ]);
   const dispatch = useDispatch();
 
   React.useEffect(() => {
@@ -115,13 +130,18 @@ function KeyListView({ deleteKey }: { deleteKey: (id: string) => void }) {
         }`
       )
       .then((res) => {
+        // setTranslations(
+        //   res.data.map(() => {
+        //     return { ...res.data, translations: res.data.value };
+        //   })
+        // );
         dispatch(setProjectData({ textSets: res.data }));
       });
   }, [project?.projectId]);
 
   return (
     <>
-      {project?.textSets?.map((key, i) => {
+      {/* {project?.textSets?.map((key, i) => {
         return (
           <p
             style={{
@@ -146,6 +166,15 @@ function KeyListView({ deleteKey }: { deleteKey: (id: string) => void }) {
               delete
             </button>
           </p>
+        );
+      })} */}
+      {translations?.map((translation, i) => {
+        return (
+          <EditableTextCard
+            locale="en" // TODO:
+            key={i}
+            translation={translation}
+          />
         );
       })}
     </>

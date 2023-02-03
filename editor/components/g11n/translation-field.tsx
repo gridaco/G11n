@@ -1,8 +1,6 @@
 import React from "react";
-import { useRecoilState } from "recoil";
 import styled from "@emotion/styled";
 import TextInput from "./text-input";
-import { currentTextEditValueAtom } from "states";
 
 /**
  * single field with translation compatability
@@ -37,21 +35,18 @@ export const TranslationFieldRow: React.FC<ITranslationFieldRow> = ({
 
 export const TranslationEditField = ({
   isAutoTranslate,
+  initialValue,
   ...props
 }: ITranslationFieldRow) => {
-  const [currentEditTextValue, setCurrentEditTextValue] = useRecoilState(
-    currentTextEditValueAtom
-  );
-
-  const handleEdit = (e: any) => {
-    setCurrentEditTextValue(e.target.value);
-    props.onChange?.(props.locale, e.target.value);
+  const handleOnChange = (e: any) => {
+    const _ = e.target.value;
+    props.onChange?.(props.locale, _);
   };
 
   // on key down, when enter key is pressed via keyboard or save button clicked.
   const handleOnSubmit = (e: any) => {
-    console.log("saving translation - ", currentEditTextValue);
-    props.onSubmit(props.locale, currentEditTextValue);
+    const _ = e.target.value;
+    props.onSubmit(props.locale, _);
   };
 
   return (
@@ -62,8 +57,8 @@ export const TranslationEditField = ({
           event.preventDefault();
         }
       }}
-      defaultValue={props.initialValue}
-      onChange={handleEdit}
+      defaultValue={initialValue}
+      onChange={handleOnChange}
       data-auto-translate={isAutoTranslate && "true"}
     />
   );

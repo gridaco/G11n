@@ -6,7 +6,10 @@ import { LayerTranslation } from "@base-sdk/g11n";
 import { useQueryParam, NumberParam, withDefault } from "use-query-params";
 
 import Toolbar from "components/toolbar";
-import EditableTextCard from "components/g11n/editable-text-card";
+import {
+  default as _EditableTextCard,
+  EditableTextCardProps,
+} from "components/g11n/editable-text-card";
 import SearchInputBox from "components/search/search-input-box";
 import { currentEditorialLocaleAtom } from "states/editor-state";
 import { SceneRepositoryStore } from "repositories";
@@ -14,6 +17,7 @@ import Select from "./select";
 import BottomBar from "./bottom-bar";
 import PublishModal from "components/modals/publish-modal";
 import { KeyboardIcon } from "@radix-ui/react-icons";
+import { currentTextEditValueAtom } from "states";
 
 interface ISceneKeyEditor {
   repository: DesignGlobalizationRepository;
@@ -97,8 +101,8 @@ const SceneKeyEditor: React.FC<ISceneKeyEditor> = ({ repository }) => {
           </Select>
         </KeyToolbar>
         <TranslationList data-is-bottom-bar-open={isBottomBarOpen && "true"}>
-          {filteredTranslations.map(({ translation }) => {
-            return <EditableTextCard translation={translation} />;
+          {filteredTranslations.map(({ translation }, i) => {
+            return <EditableTextCard key={i} translation={translation} />;
           })}
         </TranslationList>
       </KeyContainer>
@@ -120,6 +124,30 @@ const SceneKeyEditor: React.FC<ISceneKeyEditor> = ({ repository }) => {
 };
 
 export default SceneKeyEditor;
+
+function EditableTextCard(
+  props: Omit<EditableTextCardProps, "locale" | "onKeyChange" | "onKeySubmit">
+) {
+  const [editorialLoclae] = useRecoilState(currentEditorialLocaleAtom);
+  const [, setCurrentEditTextValue] = useRecoilState(currentTextEditValueAtom);
+
+  const onKeyChange = (_: string, value: string) => {
+    setCurrentEditTextValue(value);
+  };
+
+  const onKeySubmit = (locale: string, value: string) => {
+    console.log("handleOnTranslationValueChange", locale, value);
+  };
+
+  return (
+    <_EditableTextCard
+      onKeyChange={onKeyChange}
+      onKeySubmit={onKeySubmit}
+      locale={editorialLoclae}
+      {...props}
+    />
+  );
+}
 
 const Header = styled.div`
   display: flex;

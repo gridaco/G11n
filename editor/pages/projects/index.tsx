@@ -45,12 +45,7 @@ export default function () {
               justifyContent: "space-between",
             }}
           >
-            <Link
-              href={`/projects/${project.id}`}
-              // onClick={() => {
-              //   dispatch(setProjectData({ projectId: project.id }));
-              // }}
-            >
+            <Link href={`/projects/${project.id}`}>
               {project.name}
               <br />
             </Link>
