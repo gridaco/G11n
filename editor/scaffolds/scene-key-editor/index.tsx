@@ -20,10 +20,18 @@ import { KeyboardIcon } from "@radix-ui/react-icons";
 import { currentTextEditValueAtom } from "states";
 
 interface ISceneKeyEditor {
-  repository: DesignGlobalizationRepository;
+  repository?: DesignGlobalizationRepository;
+  _translations?: any;
+  onKeyChange?: (locale: string, value: string) => void;
+  onKeySubmit?: (locale: string, value: string) => void;
 }
 
-const SceneKeyEditor: React.FC<ISceneKeyEditor> = ({ repository }) => {
+const SceneKeyEditor: React.FC<ISceneKeyEditor> = ({
+  repository,
+  _translations,
+  onKeyChange,
+  onKeySubmit,
+}) => {
   const [query, setQuery] = useState<string>("");
   const [isConfirmOpen, setIsConfirmOpen] = useState<boolean>(false);
   const [bottomBarChanges] = useQueryParam(
@@ -43,6 +51,14 @@ const SceneKeyEditor: React.FC<ISceneKeyEditor> = ({ repository }) => {
   const handleLocaleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) =>
     setLocale(e.target.value);
 
+  const [, setCurrentEditTextValue] = useRecoilState(currentTextEditValueAtom);
+  const _onKeyChange = (_: string, value: string) => {
+    setCurrentEditTextValue(value);
+  };
+  const _onKeySubmit = (locale: string, value: string) => {
+    console.log("handleOnTranslationValueChange", locale, value);
+  };
+
   let sceneName = "loading...";
   if (repository) {
     sceneName =
@@ -52,17 +68,25 @@ const SceneKeyEditor: React.FC<ISceneKeyEditor> = ({ repository }) => {
 
   useEffect(() => {
     // let mounted = true;
-    console.log("fetching translations under scene", repository.sceneId);
-    repository
-      .fetchTranslations()
-      .then((d) => {
-        console.log("fetched translations under scene", repository.sceneId, d);
-        setTranslations(d);
-      })
-      .catch((e) => {
-        console.error(e);
-      });
-  }, []);
+    if (repository) {
+      console.log("fetching translations under scene", repository.sceneId);
+      repository
+        .fetchTranslations()
+        .then((d) => {
+          console.log(
+            "fetched translations under scene",
+            repository.sceneId,
+            d
+          );
+          setTranslations(d);
+        })
+        .catch((e) => {
+          console.error(e);
+        });
+    } else if (!repository && _translations) {
+      setTranslations(_translations);
+    }
+  }, [repository, _translations]);
 
   const filteredTranslations = useMemo(() => {
     return translations.filter(({ translation: { key } }) =>
@@ -102,7 +126,14 @@ const SceneKeyEditor: React.FC<ISceneKeyEditor> = ({ repository }) => {
         </KeyToolbar>
         <TranslationList data-is-bottom-bar-open={isBottomBarOpen && "true"}>
           {filteredTranslations.map(({ translation }, i) => {
-            return <EditableTextCard key={i} translation={translation} />;
+            return (
+              <EditableTextCard
+                onKeySubmit={onKeySubmit ? onKeySubmit : _onKeySubmit}
+                onKeyChange={onKeyChange ? onKeyChange : _onKeyChange}
+                key={i}
+                translation={translation}
+              />
+            );
           })}
         </TranslationList>
       </KeyContainer>
@@ -125,24 +156,13 @@ const SceneKeyEditor: React.FC<ISceneKeyEditor> = ({ repository }) => {
 
 export default SceneKeyEditor;
 
-function EditableTextCard(
-  props: Omit<EditableTextCardProps, "locale" | "onKeyChange" | "onKeySubmit">
-) {
+function EditableTextCard(props: Omit<EditableTextCardProps, "locale">) {
   const [editorialLoclae] = useRecoilState(currentEditorialLocaleAtom);
-  const [, setCurrentEditTextValue] = useRecoilState(currentTextEditValueAtom);
-
-  const onKeyChange = (_: string, value: string) => {
-    setCurrentEditTextValue(value);
-  };
-
-  const onKeySubmit = (locale: string, value: string) => {
-    console.log("handleOnTranslationValueChange", locale, value);
-  };
 
   return (
     <_EditableTextCard
-      onKeyChange={onKeyChange}
-      onKeySubmit={onKeySubmit}
+      onKeyChange={props.onKeyChange}
+      onKeySubmit={props.onKeySubmit}
       locale={editorialLoclae}
       {...props}
     />

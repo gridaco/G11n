@@ -1,11 +1,15 @@
 import { useRouter } from "next/router";
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
+import { assets } from "@base-sdk/base";
+import styled from "@emotion/styled";
 import Axios from "axios";
 import Link from "next/link";
 import { useSelector, useDispatch } from "react-redux";
 import { setProjectData, RootState } from "core/store";
 import { Button, TextFormField } from "@editor-ui/console";
-import EditableTextCard from "components/g11n/editable-text-card";
+import SceneKeyEditor from "scaffolds/scene-key-editor";
+import { InnerEditorWorkspace } from "scaffolds/editor/inner-editor-workspace";
+import CanvasStage from "components/canvas/stage";
 
 export interface RawAsset {}
 
@@ -18,6 +22,9 @@ const client = Axios.create({
 export default function () {
   const router = useRouter();
   const project = useSelector((state: RootState) => state.editor.data);
+  const [translations, setTranslations] = React.useState<ReadonlyArray<any>>(
+    []
+  );
   const dispatch = useDispatch();
 
   React.useEffect(() => {
@@ -26,6 +33,40 @@ export default function () {
     }
   }, [router]);
 
+  React.useEffect(() => {
+    if (project?.projectId) {
+      client
+        .get(
+          `/texts/${project?.projectId || null}/locales/${
+            project?.selectedLocale || null
+          }`
+        )
+        .then((res) => {
+          setTranslations(
+            res.data.map((x) => {
+              const translations = {};
+              for (let key in x.value) {
+                translations[key] = {
+                  id: x.key.id,
+                  type: "TEXT",
+                  value: x.value[key],
+                };
+              }
+              return {
+                keyId: x.id,
+                projectId: x.id,
+                translation: {
+                  key: x.key,
+                  translations: translations,
+                },
+              };
+            })
+          );
+
+          dispatch(setProjectData({ textSets: res.data }));
+        });
+    }
+  }, [project?.projectId]);
   const deleteKey = (id: string) => {
     client.delete(`/texts/${id}`).then((res) => {
       const keys = project.textSets.filter((k) => k.id !== id);
@@ -66,120 +107,48 @@ export default function () {
     });
   };
 
+  const onKeyChange = () => {};
+  const onKeySubmit = () => {};
+
   return (
-    <div
-      style={{
-        margin: 40,
-      }}
-    >
-      <button onClick={() => router.back()}>back</button>
-      <h1>Project {project?.projectId}</h1>
-      <div
-        style={{
-          display: "flex",
-        }}
-      >
-        <div
-          style={{
-            flex: 1,
-            padding: 20,
-          }}
-        >
-          <SetLocaleView />
-          <KeyListView deleteKey={deleteKey} />
-          <button>
-            <Link href={`/projects/${project?.projectId}/export`}>
-              Download
-            </Link>
-          </button>
-        </div>
-        <div
-          style={{
-            flex: 1,
-            padding: 20,
-          }}
-        >
-          <CreateKeyView onCreate={createNewKey} onUpdate={updateKey} />
-        </div>
-      </div>
-    </div>
+    <InnerEditorWorkspace
+      canvas={<CanvasStage />}
+      editor={
+        <SceneKeyEditor
+          onKeyChange={onKeyChange}
+          onKeySubmit={onKeySubmit}
+          _translations={translations}
+        />
+      }
+    ></InnerEditorWorkspace>
   );
 }
 
-function KeyListView({ deleteKey }: { deleteKey: (id: string) => void }) {
-  const project = useSelector((state: RootState) => state.editor.data);
-  const [translations, setTranslations] = React.useState<any>([
-    {
-      id: "aa",
-      key: "aa",
-      translations: {
-        en: "hello",
-        ko: "안녕",
-      },
-    },
-  ]);
-  const dispatch = useDispatch();
+// function KeyListView({ deleteKey }: { deleteKey: (id: string) => void }) {
+//   const project = useSelector((state: RootState) => state.editor.data);
+//   const [translations, setTranslations] = React.useState<ReadonlyArray<any>>(
+//     []
+//   );
 
-  React.useEffect(() => {
-    if (!project?.projectId) return;
-    // 로케일 필요한가
-    client
-      .get(
-        `/texts/${project?.projectId || null}/locales/${
-          project?.selectedLocale || null
-        }`
-      )
-      .then((res) => {
-        // setTranslations(
-        //   res.data.map(() => {
-        //     return { ...res.data, translations: res.data.value };
-        //   })
-        // );
-        dispatch(setProjectData({ textSets: res.data }));
-      });
-  }, [project?.projectId]);
+//   const [isOpen, setIsOpen] = useState(false);
 
-  return (
-    <>
-      {/* {project?.textSets?.map((key, i) => {
-        return (
-          <p
-            style={{
-              backgroundColor: "orange",
-              display: "flex",
-              justifyContent: "space-between",
-            }}
-            onClick={() => {
-              dispatch(setProjectData({ selectedTextSet: key }));
-            }}
-            className="aa"
-            key={i}
-          >
-            key: {key.key}
-            <br />
-            value: {key.value ? key.value[project.selectedLocale || null] : ""}
-            <button
-              onClick={() => {
-                deleteKey(key.id);
-              }}
-            >
-              delete
-            </button>
-          </p>
-        );
-      })} */}
-      {translations?.map((translation, i) => {
-        return (
-          <EditableTextCard
-            locale="en" // TODO:
-            key={i}
-            translation={translation}
-          />
-        );
-      })}
-    </>
-  );
-}
+//   const dispatch = useDispatch();
+
+//   React.useEffect(() => {
+//     if (!project?.projectId) return;
+//     // 로케일 필요한가
+//   }, [project?.projectId]);
+
+//   const onKeyChange = (locale: string, value: string) => {
+//     console.log(value);
+//   };
+
+//   const onKeySubmit = (locale: string, value: string) => {
+//     console.log(value);
+//   };
+
+//   return <></>;
+// }
 
 function SetLocaleView() {
   const project = useSelector((state: RootState) => state.editor.data);
