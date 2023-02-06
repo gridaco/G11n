@@ -1,10 +1,11 @@
 import { useRouter } from "next/router";
 import React, { useState, useMemo } from "react";
-import { assets } from "@base-sdk/base";
-import styled from "@emotion/styled";
 import Axios from "axios";
 import Link from "next/link";
+import styled from "@emotion/styled";
 import { useSelector, useDispatch } from "react-redux";
+
+import { assets } from "@base-sdk/base";
 import { setProjectData, RootState } from "core/store";
 import { Button, TextFormField } from "@editor-ui/console";
 import SceneKeyEditor from "scaffolds/scene-key-editor";
@@ -39,6 +40,7 @@ export default function () {
 
   React.useEffect(() => {
     if (router && router.query?.id) {
+      console.log("aaa");
       client.get(`/projects/${router.query.id}`).then((res) => {
         dispatch(setProjectData({ ...res.data, projectId: res.data.id }));
       });
@@ -113,17 +115,7 @@ export default function () {
     });
   };
 
-  const onKeyChange = (locale: string, value: string) => {
-    dispatch(
-      setProjectData({
-        selectedTextSet: {
-          ...project.selectedTextSet,
-          value: { ...project.selectedTextSet.value, [locale]: value },
-        },
-        // targetLayer: { value: value },
-      })
-    );
-  };
+  const onKeyChange = (locale: string, value: string) => {};
   const onKeySubmit = () => {
     let data = { ...project.selectedTextSet };
     delete data.id;
@@ -137,6 +129,9 @@ export default function () {
       });
       dispatch(setProjectData({ textSets: keys }));
     });
+  };
+  const onKeyClick = (key: any) => {
+    dispatch(setProjectData({ selectedTextSet: key }));
   };
 
   const SampleCanvas = () => {
@@ -207,7 +202,11 @@ function CreatNewKey({ goBack, layer: any }) {
   const [keyValue, setkeyValue] = useState<any>();
   const initialTranslations = new Map<string, assets.NestedAssetPutRequest>();
 
-  const handleCreateKeyClick = (e: any) => {
+  const onKeyEdit = (locale: string, value: string) => {
+    setkeyValue({ ...keyValue, [locale]: value });
+  };
+
+  const onKeySubmit = () => {
     if (!keyname) return;
 
     let data = {
@@ -216,26 +215,8 @@ function CreatNewKey({ goBack, layer: any }) {
       value: keyValue,
     };
     client.post("/texts", data).then((res) => {
-      dispatch(setProjectData({ targetLayer: null }));
+      goBack();
     });
-    goBack();
-  };
-
-  const handleInitialTranslationChange = (locale: string, value: string) => {
-    initialTranslations.set(locale, {
-      value,
-    });
-  };
-
-  const onKeyEdit = (locale: string, value: string) => {
-    setkeyValue({ ...keyValue, [locale]: value });
-  };
-
-  const onKeySubmit = (locale: string, value: string) => {
-    if (project?.targetLayer) {
-      let data = { ...project.selectedTextSet, projectId: project.projectId };
-      client.post(`/texts`, data).then((res) => {});
-    }
   };
 
   const handleKeyNameEdit = (e: any) => {
@@ -246,7 +227,7 @@ function CreatNewKey({ goBack, layer: any }) {
   return (
     <>
       <Header title="Add Key" onClickBack={goBack}>
-        <Button onClick={handleCreateKeyClick}>
+        <Button onClick={onKeySubmit}>
           <span>+ Add Key</span>
         </Button>
       </Header>
