@@ -1,6 +1,6 @@
 ![](./branding/g11n-cover-shaed.png)
 
-# G11n
+# G11n (Under development)
 
 G11n, i18n, l10n support for Grida's internal system and as supporting other products of their own on Grida ecosystem
 
