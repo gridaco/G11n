@@ -30,9 +30,8 @@ const EditableTextCard: React.FC<EditableTextCardProps> = ({
     [translation.translations]
   );
 
-  const onClick = (keyId: string) => {
-    const selectedKey = project.textSets.find((k) => k.id === keyId);
-    dispatch(setProjectData({ selectedTextSet: selectedKey }));
+  const onClick = () => {
+    dispatch(setProjectData({ selectedTextSet: translation }));
   };
   const defaultLocaleTranslationValue =
     (translation.translations as any)[locale]?.value ?? "no translation";
@@ -55,7 +54,7 @@ const EditableTextCard: React.FC<EditableTextCardProps> = ({
     <Container>
       <Summary
         onClick={() => {
-          onClick(translation.id);
+          onClick();
           setIsOpen(!isOpen);
         }}
       >
@@ -77,8 +76,8 @@ const EditableTextCard: React.FC<EditableTextCardProps> = ({
       </Summary>
       {isOpen && (
         <KeyList>
-          {translations.map((key) => {
-            const keyId = translation.id;
+          {translations.map((key, i) => {
+            const keyId = translation.id + i;
             const localekey = key;
             const localeTranslationAsset = (translation.translations as any)[
               localekey

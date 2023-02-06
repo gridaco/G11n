@@ -25,7 +25,7 @@ interface TextSet {
 }
 
 interface Layer {
-  id: string;
+  id?: string;
   value?: string;
 }
 

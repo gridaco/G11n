@@ -25,12 +25,14 @@ interface ISceneKeyEditor {
   _translations?: any;
   onKeyChange?: (locale: string, value: string) => void;
   onKeySubmit?: (locale: string, value: string) => void;
+  onClickAddKey?: () => void;
 }
 
 const SceneKeyEditor: React.FC<ISceneKeyEditor> = ({
   _translations,
   onKeyChange,
   onKeySubmit,
+  onClickAddKey,
 }) => {
   const [query, setQuery] = useState<string>("");
   const project = useSelector((state: RootState) => state.editor.data);
@@ -77,7 +79,7 @@ const SceneKeyEditor: React.FC<ISceneKeyEditor> = ({
           <OutlineButton style={{ marginRight: 12 }}>
             <span>Select</span>
           </OutlineButton>
-          <Button>
+          <Button onClick={onClickAddKey}>
             <KeyboardIcon color="white" />
             <span style={{ width: 8 }} />
             <span>Add Key</span>
@@ -88,7 +90,7 @@ const SceneKeyEditor: React.FC<ISceneKeyEditor> = ({
         <KeyToolbar>
           <SearchInputBox value={query} onChange={handleQueryChange} />
           <Select value={locale} onChange={handleLocaleSelectChange}>
-            {project?.locales.map((locale) => (
+            {project?.locales?.map((locale) => (
               <option key={locale} value={locale}>
                 {locale}
               </option>

@@ -11,6 +11,9 @@ import SceneKeyEditor from "scaffolds/scene-key-editor";
 import { InnerEditorWorkspace } from "scaffolds/editor/inner-editor-workspace";
 import CanvasStage from "components/canvas/stage";
 import SingleKeyEditor from "scaffolds/key-editor";
+import Header from "scaffolds/key-editor/header";
+import TextInput from "components/g11n/text-input";
+import { TranslationSetForKey } from "components/g11n/translation-set-for-key";
 
 export interface RawAsset {}
 
@@ -20,57 +23,63 @@ const client = Axios.create({
   baseURL: "http://localhost:3307",
 });
 
+const PAGE_TYPE = {
+  SCENE: "scene",
+  SINGLE: "single",
+};
+
 export default function () {
   const router = useRouter();
   const project = useSelector((state: RootState) => state.editor.data);
   const [translations, setTranslations] = React.useState<ReadonlyArray<any>>(
     []
   );
+  const [pageType, setPageType] = React.useState<string>(PAGE_TYPE.SCENE);
   const dispatch = useDispatch();
 
   React.useEffect(() => {
-    if (router && router.query && router.query.id) {
+    if (router && router.query?.id) {
       client.get(`/projects/${router.query.id}`).then((res) => {
-        dispatch(setProjectData(res.data));
-        client
-          .get(
-            `/texts/${router.query.id || null}/locales/${
-              project?.selectedLocale || null
-            }`
-          )
-          .then((res) => {
-            setTranslations(
-              res.data.map((x) => {
-                const translations = {};
-                for (let key in x.value) {
-                  translations[key] = {
-                    id: x.id,
-                    type: "TEXT",
-                    value: x.value[key],
-                  };
-                }
-                return {
-                  keyId: x.id,
-                  projectId: x.projectId,
-                  translation: {
-                    id: x.id,
-                    key: x.key,
-                    translations: translations,
-                  },
-                };
-              })
-            );
-
-            dispatch(
-              setProjectData({
-                textSets: res.data,
-                targetLayer: { value: res.data[0].value["en"] },
-              })
-            );
-          });
+        dispatch(setProjectData({ ...res.data, projectId: res.data.id }));
       });
+      client
+        .get(
+          `/texts/${router.query.id || null}/locales/${
+            project?.selectedLocale || null
+          }`
+        )
+        // set translations for prop in <editable-text-card />
+        .then((res) => {
+          setTranslations(
+            res.data.map((x) => {
+              const translations = {};
+              for (let key in x.value) {
+                translations[key] = {
+                  id: x.id,
+                  type: "TEXT",
+                  value: x.value[key],
+                };
+              }
+              return {
+                keyId: x.id,
+                projectId: x.projectId,
+                translation: {
+                  id: x.id,
+                  key: x.key,
+                  translations: translations,
+                },
+              };
+            })
+          );
+
+          dispatch(
+            setProjectData({
+              textSets: res.data,
+            })
+          );
+        });
     }
-  }, [router]);
+  }, [router, pageType]);
 
   const createNewKey = (key: any) => {
     if (!key.key) {
@@ -111,6 +120,7 @@ export default function () {
           ...project.selectedTextSet,
           value: { ...project.selectedTextSet.value, [locale]: value },
         },
+        // targetLayer: { value: value },
       })
     );
   };
@@ -129,7 +139,6 @@ export default function () {
     });
   };
 
-  console.log(project);
   const SampleCanvas = () => {
     return (
       <div
@@ -143,196 +152,149 @@ export default function () {
     );
   };
   const editorSwitch = (): boolean => {
-    return project?.targetLayer !== null;
+    return pageType === PAGE_TYPE.SINGLE;
   };
-
   const EditorBody = () => {
     return editorSwitch() ? (
-      <SingleKeyEditor key={project.targetLayer?.value} />
+      <_SingleKeyEditor
+        setPageType={setPageType}
+        key={project?.targetLayer?.value}
+      />
     ) : (
-      <SceneKeyEditor />
+      <SceneKeyEditor
+        onKeyChange={onKeyChange}
+        onKeySubmit={onKeySubmit}
+        _translations={translations}
+        onClickAddKey={() => {
+          setPageType(PAGE_TYPE.SINGLE);
+        }}
+      />
     );
   };
 
   return (
     <InnerEditorWorkspace
       canvas={<SampleCanvas />}
-      editor={
-        <SceneKeyEditor
-          onKeyChange={onKeyChange}
-          onKeySubmit={onKeySubmit}
-          _translations={translations}
-        />
-      }
+      editor={<EditorBody />}
     ></InnerEditorWorkspace>
   );
 }
 
-function SetLocaleView() {
-  const project = useSelector((state: RootState) => state.editor.data);
-  const dispatch = useDispatch();
-
-  React.useEffect(() => {
-    if (!project?.projectId) return;
-    client.get(`/projects/${project?.projectId || ""}`).then((res) => {
-      dispatch(setProjectData({ locales: res.data.locales || [] }));
-    });
-  }, [project?.projectId]);
-
-  return (
-    <>
-      LOCALE:{" "}
-      <select
-        value={project?.selectedLocale || ""}
-        onChange={(e) =>
-          dispatch(setProjectData({ selectedLocale: e.target.value }))
-        }
-      >
-        <option key={-1}></option>
-        {project?.locales?.map((locale, i) => {
-          return (
-            <option key={i} value={locale}>
-              {locale}
-            </option>
-          );
-        })}
-      </select>
-    </>
-  );
-}
-
-function CreateKeyView({
-  onCreate,
-  onUpdate,
+function _SingleKeyEditor({
+  setPageType,
 }: {
-  onCreate: (key: any) => void;
-  onUpdate: (key: any) => void;
+  setPageType: (pageType: string) => void;
 }) {
+  type SingleKeyEditorMode = "create-new" | "edit-existing" | "loading";
+  const [mode, setMode] = useState<SingleKeyEditorMode>("loading");
   const project = useSelector((state: RootState) => state.editor.data);
   const dispatch = useDispatch();
-  const [createKeyInput, setCreateKeyInput] = React.useState({
-    key: "",
-    value: {},
-  });
+
+  const goBack = () => {
+    setPageType(PAGE_TYPE.SCENE);
+  };
+
+  if (!project?.targetLayer) {
+    return <CreatNewKey goBack={goBack} layer={project?.targetLayer} />;
+  }
+}
+
+function CreatNewKey({ goBack, layer: any }) {
+  const project = useSelector((state: RootState) => state.editor.data);
+  const dispatch = useDispatch();
+  const [state, setState] = useState<string>("loaded");
+  const [keyname, setkeyname] = useState<string>("");
+  const [keyValue, setkeyValue] = useState<any>();
+  const initialTranslations = new Map<string, assets.NestedAssetPutRequest>();
+
+  const handleCreateKeyClick = (e: any) => {
+    if (!keyname) return;
+
+    let data = {
+      projectId: project.projectId,
+      key: keyname,
+      value: keyValue,
+    };
+    client.post("/texts", data).then((res) => {
+      dispatch(setProjectData({ targetLayer: null }));
+    });
+    goBack();
+  };
+
+  const handleInitialTranslationChange = (locale: string, value: string) => {
+    initialTranslations.set(locale, {
+      value,
+    });
+  };
+
+  const onKeyEdit = (locale: string, value: string) => {
+    setkeyValue({ ...keyValue, [locale]: value });
+  };
+
+  const onKeySubmit = (locale: string, value: string) => {
+    if (project?.targetLayer) {
+      let data = { ...project.selectedTextSet, projectId: project.projectId };
+      client.post(`/texts`, data).then((res) => {});
+    }
+  };
+
+  const handleKeyNameEdit = (e: any) => {
+    const v = e.target.value;
+    setkeyname(v);
+  };
+
   return (
     <>
-      <h2>
-        Key:{" "}
-        <input
-          value={project?.selectedTextSet?.key || createKeyInput.key}
-          placeholder="key"
-          onChange={(e) => {
-            if (project.selectedTextSet?.id) {
-              dispatch(
-                setProjectData({
-                  selectedTextSet: {
-                    ...project.selectedTextSet,
-                    key: e.target.value,
-                  },
-                })
-              );
-            } else {
-              setCreateKeyInput({ ...createKeyInput, key: e.target.value });
-            }
-          }}
-        />
-      </h2>
-      {project?.locales?.map((locale, i) => {
-        return (
-          <div key={i}>
-            <TextFormField
-              label={locale}
-              value={
-                project?.selectedTextSet?.value[locale] ||
-                createKeyInput.value[locale] ||
-                ""
-              }
-              placeholder={locale}
-              onChange={(value) => {
-                if (project.selectedTextSet?.id) {
-                  let selectedTextSet = {
-                    ...project.selectedTextSet,
-                    value: {
-                      ...project.selectedTextSet?.value,
-                      [locale]: value,
-                    },
-                  };
-
-                  dispatch(
-                    setProjectData({
-                      selectedTextSet,
-                    })
-                  );
-                } else {
-                  setCreateKeyInput({
-                    ...createKeyInput,
-                    value: {
-                      ...createKeyInput.value,
-                      [locale]: value,
-                    },
-                  });
-                }
-              }}
-            />
-            {/* {locale}:{" "}
-            <input
-              value={
-                project?.selectedTextSet?.value[locale] ||
-                createKeyInput.value[locale] ||
-                ""
-              }
-              placeholder={locale}
-              onChange={(e) => {
-                if (project.selectedTextSet?.id) {
-                  let selectedTextSet = {
-                    ...project.selectedTextSet,
-                    value: {
-                      ...project.selectedTextSet?.value,
-                      [locale]: e.target.value,
-                    },
-                  };
-
-                  dispatch(
-                    setProjectData({
-                      selectedTextSet,
-                    })
-                  );
-                } else {
-                  setCreateKeyInput({
-                    ...createKeyInput,
-                    value: {
-                      ...createKeyInput.value,
-                      [locale]: e.target.value,
-                    },
-                  });
-                }
-              }}
-            /> */}
-          </div>
-        );
-      })}
-      <button
-        onClick={() => {
-          if (project.selectedTextSet?.id) {
-            onUpdate(project.selectedTextSet);
-          } else {
-            onCreate(createKeyInput);
-          }
-        }}
-      >
-        {project?.selectedTextSet?.id ? "update" : "create"}
-      </button>
-      <button
-        onClick={() => {
-          if (project.selectedTextSet?.id) {
-            dispatch(setProjectData({ selectedTextSet: null }));
-          } else {
-            setCreateKeyInput({ key: "", value: {} });
-          }
-        }}
-      >
-        New Key
-      </button>
+      <Header title="Add Key" onClickBack={goBack}>
+        <Button onClick={handleCreateKeyClick}>
+          <span>+ Add Key</span>
+        </Button>
+      </Header>
+      <EditorContent>
+        {/*
+          no key is set for selected layer "{textValue}"
+          STATE: {state}
+        */}
+        <FieldWrapper>
+          <InputField>Key Name</InputField>
+          <TextInput onChange={handleKeyNameEdit} />
+        </FieldWrapper>
+        <FieldWrapper>
+          <InputField>Value</InputField>
+          <TranslationSetForKey
+            key={keyname}
+            locales={project?.locales}
+            onEdit={onKeyEdit}
+            onSubmit={onKeySubmit}
+          />
+        </FieldWrapper>
+      </EditorContent>
     </>
   );
 }
+
+const ProgressContainer = styled.div`
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+const EditorContent = styled.div`
+  padding: 24px 32px;
+`;
+
+const FieldWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 32px;
+`;
+
+const InputField = styled.h2`
+  margin: 0;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 1.2;
+  color: #888888;
+  margin-bottom: 16px;
+`;
