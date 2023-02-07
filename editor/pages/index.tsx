@@ -1,19 +1,20 @@
-import { createElement } from 'react';
-import React from 'react';
-import Axios from 'axios';
+import { createElement } from "react";
+import React from "react";
+import Axios from "axios";
 
 const client = Axios.create({
-  baseURL: 'http://localhost:3307',
+  baseURL: "http://localhost:3307",
 });
 
 export default function () {
   const [projects, setProjects] = React.useState<any[]>([]);
 
   React.useEffect(() => {
-    client.get('/projects').then((res) => {
+    client.get("/projects").then((res) => {
       setProjects(res.data);
     });
-  });
+  }, []);
+
   return (
     <div
       style={{
@@ -25,7 +26,7 @@ export default function () {
         return (
           <p
             style={{
-              backgroundColor: 'lightgray',
+              backgroundColor: "lightgray",
             }}
             key={project.id}
           >
