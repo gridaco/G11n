@@ -6,10 +6,10 @@ import TextInput from "./text-input";
  * single field with translation compatability
  */
 interface ITranslationFieldRow {
-  key: string;
+  keyId: string;
   locale: string;
   initialValue?: string;
-  onSubmit: (locale: string, value: string) => void;
+  onSubmit: (keyId: string, locale: string, value: string) => void;
   onChange?: (locale: string, value: string) => void;
   isAutoTranslate?: boolean;
 }
@@ -46,7 +46,7 @@ export const TranslationEditField = ({
   // on key down, when enter key is pressed via keyboard or save button clicked.
   const handleOnSubmit = (e: any) => {
     const _ = e.target.value;
-    props.onSubmit(props.locale, _);
+    props.onSubmit(props.keyId, props.locale, _);
   };
 
   return (

@@ -40,7 +40,6 @@ export default function () {
 
   React.useEffect(() => {
     if (router && router.query?.id) {
-      console.log("aaa");
       client.get(`/projects/${router.query.id}`).then((res) => {
         dispatch(setProjectData({ ...res.data, projectId: res.data.id }));
       });
@@ -102,7 +101,6 @@ export default function () {
 
   const updateKey = (key: any) => {
     let data = { ...key };
-    delete data.id;
     client.patch(`/texts/${key.id}`, data).then((res) => {
       const keys = project.textSets.map((k, i) => {
         if (k.id === res.data.id) {
@@ -116,19 +114,29 @@ export default function () {
   };
 
   const onKeyChange = (locale: string, value: string) => {};
-  const onKeySubmit = () => {
-    let data = { ...project.selectedTextSet };
-    delete data.id;
-    client.patch(`/texts/${project.selectedTextSet.id}`, data).then((res) => {
-      const keys = project.textSets.map((k, i) => {
-        if (k.id === res.data.id) {
-          return res.data;
-        } else {
-          return k;
-        }
+  const onKeySubmit = (keyId: string, locale: string, value: string) => {
+    let data = project.textSets.find((x) => x.id === keyId);
+
+    client
+      .patch(`/texts/${keyId}`, {
+        key: data.key,
+        value: {
+          ...data.value,
+          [locale]: value,
+        },
+      })
+      .then((res) => {
+        const keys = [];
+        project.textSets.forEach((k, i) => {
+          if (k.id === res.data.id) {
+            keys.push(res.data);
+          } else {
+            keys.push(k);
+          }
+        });
+        dispatch(setProjectData({ textSets: keys }));
+        setPageType("");
       });
-      dispatch(setProjectData({ textSets: keys }));
-    });
   };
   const onKeyClick = (key: any) => {
     dispatch(setProjectData({ selectedTextSet: key }));

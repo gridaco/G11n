@@ -24,7 +24,7 @@ import { currentTextEditValueAtom } from "states";
 interface ISceneKeyEditor {
   _translations?: any;
   onKeyChange?: (locale: string, value: string) => void;
-  onKeySubmit?: (locale: string, value: string) => void;
+  onKeySubmit?: (keyId: string, locale: string, value: string) => void;
   onClickAddKey?: () => void;
 }
 

@@ -1,6 +1,4 @@
 import React, { useState, useMemo } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { setProjectData, RootState } from "core/store";
 import styled from "@emotion/styled";
 import { IGlobalizedKey } from "@base-sdk/g11n";
 import { assets } from "@base-sdk/base";
@@ -12,7 +10,7 @@ export interface EditableTextCardProps {
   translation: IGlobalizedKey;
   locale: string;
   onKeyChange: (locale: string, value: string) => void;
-  onKeySubmit: (locale: string, value: string) => void;
+  onKeySubmit: (keyId: string, locale: string, value: string) => void;
 }
 
 const EditableTextCard: React.FC<EditableTextCardProps> = ({
@@ -22,17 +20,12 @@ const EditableTextCard: React.FC<EditableTextCardProps> = ({
   onKeySubmit,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const project = useSelector((state: RootState) => state.editor.data);
-  const dispatch = useDispatch();
 
   const translations = useMemo(
     () => Object.keys(translation.translations),
     [translation.translations]
   );
 
-  const onClick = () => {
-    dispatch(setProjectData({ selectedTextSet: translation }));
-  };
   const defaultLocaleTranslationValue =
     (translation.translations as any)[locale]?.value ?? "no translation";
 
@@ -54,7 +47,6 @@ const EditableTextCard: React.FC<EditableTextCardProps> = ({
     <Container>
       <Summary
         onClick={() => {
-          onClick();
           setIsOpen(!isOpen);
         }}
       >
@@ -77,7 +69,7 @@ const EditableTextCard: React.FC<EditableTextCardProps> = ({
       {isOpen && (
         <KeyList>
           {translations.map((key, i) => {
-            const keyId = translation.id + i;
+            const keyId = translation.id;
             const localekey = key;
             const localeTranslationAsset = (translation.translations as any)[
               localekey
@@ -85,7 +77,8 @@ const EditableTextCard: React.FC<EditableTextCardProps> = ({
             const localeTranslationValue = localeTranslationAsset.value;
             return (
               <TranslationFieldRow
-                key={keyId}
+                keyId={keyId}
+                key={keyId + i}
                 locale={localekey}
                 initialValue={localeTranslationValue}
                 onChange={onKeyChange}
