@@ -52,7 +52,7 @@ export default function () {
   }, [router]);
 
   const langOptions = langs.all().map((l) => {
-    return { value: l[1], label: `${l.name} (${l.local})` };
+    return { value: l[1], label: `${l.local} (${l.name} / ${l[1]})` };
   });
 
   const addLocale = (locale: any) => {
