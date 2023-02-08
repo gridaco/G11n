@@ -94,7 +94,7 @@ export default function CreateProject() {
 
   return (
     <Page>
-      <button onClick={() => router.back()}>back</button>
+      <button onClick={() => router.push(`/projects`)}>back</button>
       <h2>New Project</h2>
       <div
         style={{

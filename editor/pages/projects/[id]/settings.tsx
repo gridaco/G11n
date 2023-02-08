@@ -52,7 +52,7 @@ export default function () {
   }, [router]);
 
   const langOptions = langs.all().map((l) => {
-    return { value: l[1], label: l.local };
+    return { value: l[1], label: `${l.name} (${l.local})` };
   });
 
   const addLocale = (locale: any) => {
@@ -87,7 +87,7 @@ export default function () {
         padding: 40,
       }}
     >
-      <button onClick={() => router.back()}>back</button>
+      <button onClick={() => router.push(`/projects`)}>back</button>
       <h1>{project.name} Settings</h1>
       Project Name:{" "}
       <input

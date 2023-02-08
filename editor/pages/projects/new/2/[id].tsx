@@ -85,7 +85,7 @@ export default function setLocales() {
   const [input, setInput] = React.useState<string>("");
 
   const langOptions = langs.all().map((l) => {
-    return { value: l[1], label: l.local };
+    return { value: l[1], label: `${l.name} (${l.local})` };
   });
 
   const addLocale = (locale: any) => {
@@ -116,7 +116,7 @@ export default function setLocales() {
   return (
     <Page>
       <FormPart>
-        <button onClick={() => router.back()}>back</button>
+        <button onClick={() => router.push(`/projects/new`)}>back</button>
 
         <h3>grida.co</h3>
         <div>

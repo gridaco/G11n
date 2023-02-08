@@ -77,7 +77,7 @@ export default function setStartPages() {
   return (
     <Page>
       <FormPart>
-        <button onClick={() => router.back()}>back</button>
+        <button onClick={() => router.push(`/projects/2/${id}`)}>back</button>
 
         <h3>grida.co</h3>
         <div>
