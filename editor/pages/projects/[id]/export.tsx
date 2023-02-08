@@ -28,7 +28,7 @@ export default function () {
   const exportProjectToCsv = (projectId: string) => {};
   return (
     <div>
-      <button onClick={() => router.back()}>back</button>
+      <button onClick={() => router.push(`/projects`)}>back</button>
       <h1>Download {id} </h1>
       <button onClick={() => exportProjectToJson(id as string)}>
         Download Json

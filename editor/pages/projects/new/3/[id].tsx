@@ -77,7 +77,9 @@ export default function setStartPages() {
   return (
     <Page>
       <FormPart>
-        <button onClick={() => router.push(`/projects/2/${id}`)}>back</button>
+        <button onClick={() => router.push(`/projects/new/2/${id}`)}>
+          back
+        </button>
 
         <h3>grida.co</h3>
         <div>
@@ -109,7 +111,7 @@ export default function setStartPages() {
           <Button width="165px" onClick={onSaveClick}>
             Save & Continue
           </Button>
-          <Comment>2 of 3</Comment>
+          <Comment>3 of 3</Comment>
         </div>
       </FormPart>
       <RenderPart>
