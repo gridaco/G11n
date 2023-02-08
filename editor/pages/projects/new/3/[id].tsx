@@ -67,7 +67,9 @@ export default function setStartPages() {
     setUrl("");
   };
 
-  const onSaveClick = async () => {};
+  const onSaveClick = async () => {
+    router.push(`/projects`);
+  };
 
   const deleteUrl = (e: any) => {
     const url = e.target.innerText;
