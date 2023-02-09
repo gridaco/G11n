@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useMemo } from "react";
 import { useRecoilState } from "recoil";
+import { useRouter } from "next/router";
 import styled from "@emotion/styled";
 import { DesignGlobalizationRepository } from "@base-sdk/g11n";
 import { LayerTranslation } from "@base-sdk/g11n";
@@ -35,6 +36,7 @@ const SceneKeyEditor: React.FC<ISceneKeyEditor> = ({
   onClickAddKey,
 }) => {
   const [query, setQuery] = useState<string>("");
+  const router = useRouter();
   const project = useSelector((state: RootState) => state.editor.data);
   const dispatch = useDispatch();
   const [isConfirmOpen, setIsConfirmOpen] = useState<boolean>(false);
@@ -67,7 +69,11 @@ const SceneKeyEditor: React.FC<ISceneKeyEditor> = ({
 
   return (
     <>
-      <Toolbar />
+      <ToolbarWrapper>
+        <Toolbar />
+        <button onClick={() => router.push(`/projects`)}>back</button>
+      </ToolbarWrapper>
+
       <Header>
         <TitleWrapper>
           <Title>Key List</Title>
@@ -141,6 +147,12 @@ function EditableTextCard(props: Omit<EditableTextCardProps, "locale">) {
     />
   );
 }
+
+const ToolbarWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+  padding-right: 32px;
+`;
 
 const Header = styled.div`
   display: flex;

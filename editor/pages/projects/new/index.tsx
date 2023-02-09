@@ -74,6 +74,10 @@ export default function CreateProject() {
     showToast("Not implemented yet");
   };
 
+  const onEnter = () => {
+    createProject();
+  };
+
   function ToggleBorderButton({
     name,
     children,
@@ -122,6 +126,7 @@ export default function CreateProject() {
         placeholder="https://acme.com, http://localhost:3000"
         label="Website URL"
         onChange={setUrl}
+        onEnter={onEnter}
       />
       <Comment>
         We will parse some resources from your site to get started

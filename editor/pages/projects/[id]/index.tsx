@@ -82,37 +82,6 @@ export default function () {
     }
   }, [router, pageType]);
 
-  const createNewKey = (key: any) => {
-    if (!key.key) {
-      alert("key is empty");
-      return;
-    }
-    key.projectId = project.projectId;
-    const data = key;
-    client.post("/texts", data).then((res) => {
-      dispatch(
-        setProjectData({
-          textSets: [...project.textSets, res.data],
-          selectedTextSet: res.data,
-        })
-      );
-    });
-  };
-
-  const updateKey = (key: any) => {
-    let data = { ...key };
-    client.patch(`/texts/${key.id}`, data).then((res) => {
-      const keys = project.textSets.map((k, i) => {
-        if (k.id === res.data.id) {
-          return res.data;
-        } else {
-          return k;
-        }
-      });
-      dispatch(setProjectData({ textSets: keys }));
-    });
-  };
-
   const onKeyChange = (locale: string, value: string) => {};
   const onKeySubmit = (keyId: string, locale: string, value: string) => {
     let data = project.textSets.find((x) => x.id === keyId);
@@ -261,13 +230,6 @@ function CreatNewKey({ goBack, layer: any }) {
     </>
   );
 }
-
-const ProgressContainer = styled.div`
-  flex: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;
 
 const EditorContent = styled.div`
   padding: 24px 32px;
