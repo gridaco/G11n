@@ -36,6 +36,7 @@ export default function () {
     []
   );
   const [pageType, setPageType] = React.useState<string>(PAGE_TYPE.SCENE);
+  const [fetchHandler, setFetchHandler] = React.useState<boolean>(false);
   const dispatch = useDispatch();
 
   React.useEffect(() => {
@@ -80,35 +81,23 @@ export default function () {
           );
         });
     }
-  }, [router, pageType]);
+  }, [router, pageType, fetchHandler]);
 
   const onKeyChange = (locale: string, value: string) => {};
   const onKeySubmit = (keyId: string, locale: string, value: string) => {
     let data = project.textSets.find((x) => x.id === keyId);
 
-    client
-      .patch(`/texts/${keyId}`, {
-        key: data.key,
-        value: {
-          ...data.value,
-          [locale]: value,
-        },
-      })
-      .then((res) => {
-        const keys = [];
-        project.textSets.forEach((k, i) => {
-          if (k.id === res.data.id) {
-            keys.push(res.data);
-          } else {
-            keys.push(k);
-          }
-        });
-        dispatch(setProjectData({ textSets: keys }));
-        setPageType("");
-      });
+    client.patch(`/texts/${keyId}`, {
+      key: data.key,
+      value: {
+        ...data.value,
+        [locale]: value,
+      },
+    });
   };
-  const onKeyClick = (key: any) => {
-    dispatch(setProjectData({ selectedTextSet: key }));
+
+  const onKeyClose = (isOpen: boolean) => {
+    setFetchHandler(!fetchHandler);
   };
 
   const SampleCanvas = () => {
@@ -123,9 +112,11 @@ export default function () {
       </div>
     );
   };
+
   const editorSwitch = (): boolean => {
     return pageType === PAGE_TYPE.SINGLE;
   };
+
   const EditorBody = () => {
     return editorSwitch() ? (
       <_SingleKeyEditor
@@ -140,6 +131,7 @@ export default function () {
         onClickAddKey={() => {
           setPageType(PAGE_TYPE.SINGLE);
         }}
+        onKeyClose={onKeyClose}
       />
     );
   };

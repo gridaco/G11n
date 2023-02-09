@@ -11,6 +11,7 @@ export interface EditableTextCardProps {
   locale: string;
   onKeyChange: (locale: string, value: string) => void;
   onKeySubmit: (keyId: string, locale: string, value: string) => void;
+  onKeyClose: (isOpen: boolean) => void;
 }
 
 const EditableTextCard: React.FC<EditableTextCardProps> = ({
@@ -18,6 +19,7 @@ const EditableTextCard: React.FC<EditableTextCardProps> = ({
   translation,
   onKeyChange,
   onKeySubmit,
+  onKeyClose,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -47,6 +49,9 @@ const EditableTextCard: React.FC<EditableTextCardProps> = ({
     <Container>
       <Summary
         onClick={() => {
+          if (isOpen) {
+            onKeyClose(!isOpen);
+          }
           setIsOpen(!isOpen);
         }}
       >

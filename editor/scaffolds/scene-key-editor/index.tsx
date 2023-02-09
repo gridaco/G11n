@@ -27,6 +27,7 @@ interface ISceneKeyEditor {
   onKeyChange?: (locale: string, value: string) => void;
   onKeySubmit?: (keyId: string, locale: string, value: string) => void;
   onClickAddKey?: () => void;
+  onKeyClose?: (isOpen: boolean) => void;
 }
 
 const SceneKeyEditor: React.FC<ISceneKeyEditor> = ({
@@ -34,6 +35,7 @@ const SceneKeyEditor: React.FC<ISceneKeyEditor> = ({
   onKeyChange,
   onKeySubmit,
   onClickAddKey,
+  onKeyClose,
 }) => {
   const [query, setQuery] = useState<string>("");
   const router = useRouter();
@@ -109,6 +111,7 @@ const SceneKeyEditor: React.FC<ISceneKeyEditor> = ({
               <EditableTextCard
                 onKeySubmit={onKeySubmit}
                 onKeyChange={onKeyChange}
+                onKeyClose={onKeyClose}
                 key={i}
                 translation={translation}
               />
