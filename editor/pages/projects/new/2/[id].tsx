@@ -56,14 +56,36 @@ export default function setLocales() {
 
   return (
     <Page>
-      <FormPart>
-        <button onClick={() => router.push(`/projects/new`)}>back</button>
-
-        <h3>grida.co</h3>
-        <div>
-          <h2>Locales</h2>
-          <div style={{ height: 20 }}></div>
-          {/* <TextFormField
+      <Toolbar style={{ width: "100%" }}>
+        <svg
+          width="40"
+          height="40"
+          viewBox="0 0 15 15"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          onClick={() => router.push(`/projects/new`)}
+          style={{
+            cursor: "pointer",
+            backgroundColor: "white",
+            border: "1px solid black",
+            borderRadius: 3,
+          }}
+        >
+          <path
+            d="M6.85355 3.14645C7.04882 3.34171 7.04882 3.65829 6.85355 3.85355L3.70711 7H12.5C12.7761 7 13 7.22386 13 7.5C13 7.77614 12.7761 8 12.5 8H3.70711L6.85355 11.1464C7.04882 11.3417 7.04882 11.6583 6.85355 11.8536C6.65829 12.0488 6.34171 12.0488 6.14645 11.8536L2.14645 7.85355C1.95118 7.65829 1.95118 7.34171 2.14645 7.14645L6.14645 3.14645C6.34171 2.95118 6.65829 2.95118 6.85355 3.14645Z"
+            fill="currentColor"
+            fillRule="evenodd"
+            clipRule="evenodd"
+          ></path>
+        </svg>{" "}
+      </Toolbar>
+      <Body>
+        <FormPart>
+          <h3>grida.co</h3>
+          <div>
+            <h2>Locales</h2>
+            <div style={{ height: 20 }}></div>
+            {/* <TextFormField
             label="Search Locales to add"
             placeholder="English"
             onEnter={addLocale}
@@ -72,79 +94,80 @@ export default function setLocales() {
           />
           <div style={{ height: 20 }}></div> */}
 
-          <Select
-            instanceId="langs"
-            options={langOptions}
-            onChange={(e) => {
-              addLocale(e.value);
-            }}
-          />
+            <Select
+              instanceId="langs"
+              options={langOptions}
+              onChange={(e) => {
+                addLocale(e.value);
+              }}
+            />
 
-          <Comment>
-            💡 Drag & Drop to change default locale & preference
-          </Comment>
-          <LocaleContainer
-            //TODO: Drag & Drop
-            onDrop={(e) => {
-              e.preventDefault();
-              const data = e.dataTransfer.getData("text/plain");
+            <Comment>
+              💡 Drag & Drop to change default locale & preference
+            </Comment>
+            <LocaleContainer
+              //TODO: Drag & Drop
+              onDrop={(e) => {
+                e.preventDefault();
+                const data = e.dataTransfer.getData("text/plain");
 
-              // setLocales(newLocales);
+                // setLocales(newLocales);
+              }}
+            >
+              {locales.map((locale, i) => {
+                return (
+                  <Locale
+                    id={locale}
+                    key={i}
+                    draggable="true"
+                    onClick={deleteLocale}
+                    onDragStart={(e) => {
+                      e.dataTransfer.setData("text/plain", locale);
+                    }}
+                  >
+                    {locale}
+                    {i === 0 && (
+                      <p
+                        style={{
+                          color: "rgba(0, 0, 0, 0.6)",
+                          fontSize: "11px",
+                          margin: "0 0 0 5px",
+                          zIndex: -1,
+                        }}
+                      >
+                        default
+                      </p>
+                    )}
+                  </Locale>
+                );
+              })}
+            </LocaleContainer>
+          </div>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
             }}
           >
+            <Button width="165px" onClick={save}>
+              Save & Continue
+            </Button>
+            <Comment>2 of 3</Comment>
+          </div>
+        </FormPart>
+        <RenderPart>
+          <LocaleContainer>
             {locales.map((locale, i) => {
               return (
-                <Locale
-                  id={locale}
-                  key={i}
-                  draggable="true"
-                  onClick={deleteLocale}
-                  onDragStart={(e) => {
-                    e.dataTransfer.setData("text/plain", locale);
-                  }}
-                >
+                <Locale key={i} onClick={onLocaleClick}>
                   {locale}
-                  {i === 0 && (
-                    <p
-                      style={{
-                        color: "rgba(0, 0, 0, 0.6)",
-                        fontSize: "11px",
-                        margin: "0 0 0 5px",
-                        zIndex: -1,
-                      }}
-                    >
-                      default
-                    </p>
-                  )}
                 </Locale>
               );
             })}
           </LocaleContainer>
-        </div>
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-          }}
-        >
-          <Button width="165px" onClick={save}>
-            Save & Continue
-          </Button>
-          <Comment>2 of 3</Comment>
-        </div>
-      </FormPart>
-      <RenderPart>
-        <LocaleContainer>
-          {locales.map((locale, i) => {
-            return (
-              <Locale key={i} onClick={onLocaleClick}>
-                {locale}
-              </Locale>
-            );
-          })}
-        </LocaleContainer>
-        <RenderingArea>Rendering area</RenderingArea>
-      </RenderPart>
+          <RenderingArea>Rendering area</RenderingArea>
+        </RenderPart>
+      </Body>
       <Toaster />
     </Page>
   );
@@ -152,11 +175,21 @@ export default function setLocales() {
 
 const Page = styled.div`
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   height: 100vh;
   margin: auto;
   max-width: 850px;
+`;
+
+const Toolbar = styled.div``;
+
+const Body = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
 `;
 
 const FormPart = styled.div`

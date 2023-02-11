@@ -4,13 +4,123 @@ import { useRouter } from "next/router";
 import { Button, TextFormField } from "@editor-ui/console";
 import styled from "@emotion/styled";
 
+export default function setStartPages() {
+  const router = useRouter();
+  const { id } = router.query;
+  const [urls, setUrls] = React.useState<string[]>([]);
+  const [url, setUrl] = React.useState<string>("");
+
+  const addUrl = (url: string) => {
+    if (!url || urls.some((u) => u === url || u === "/" + url)) return;
+    if (url[0] !== "/") url = "/" + url;
+    setUrls([...urls, url]);
+    setUrl("");
+  };
+
+  const onSaveClick = async () => {
+    router.push(`/projects`);
+  };
+
+  const deleteUrl = (e: any) => {
+    const url = e.target.innerText;
+    setUrls(urls.filter((u) => u !== url));
+  };
+
+  return (
+    <Page>
+      <Toolbar style={{ width: "100%" }}>
+        <svg
+          width="40"
+          height="40"
+          viewBox="0 0 15 15"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          onClick={() => router.push(`/projects/new/2/${id}`)}
+          style={{
+            cursor: "pointer",
+            backgroundColor: "white",
+            border: "1px solid black",
+            borderRadius: 3,
+          }}
+        >
+          <path
+            d="M6.85355 3.14645C7.04882 3.34171 7.04882 3.65829 6.85355 3.85355L3.70711 7H12.5C12.7761 7 13 7.22386 13 7.5C13 7.77614 12.7761 8 12.5 8H3.70711L6.85355 11.1464C7.04882 11.3417 7.04882 11.6583 6.85355 11.8536C6.65829 12.0488 6.34171 12.0488 6.14645 11.8536L2.14645 7.85355C1.95118 7.65829 1.95118 7.34171 2.14645 7.14645L6.14645 3.14645C6.34171 2.95118 6.65829 2.95118 6.85355 3.14645Z"
+            fill="currentColor"
+            fillRule="evenodd"
+            clipRule="evenodd"
+          ></path>
+        </svg>{" "}
+      </Toolbar>
+      <Body>
+        <FormPart>
+          <h3>grida.co</h3>
+          <div>
+            <h2>Pages to get started with</h2>
+            <Comment>💡 Pro tip: start small, expand later. </Comment>
+            <div style={{ height: 30 }}></div>
+            <TextFormField
+              label="Search URL"
+              placeholder="/about"
+              onEnter={addUrl}
+              onChange={setUrl}
+              value={url || ""}
+            />
+            <div style={{ height: 20 }}></div>
+            {urls.map((url, i) => {
+              return (
+                <Url key={i} onClick={(e) => deleteUrl(e)}>
+                  {url}
+                </Url>
+              );
+            })}
+          </div>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+            }}
+          >
+            <Button width="165px" onClick={onSaveClick}>
+              Save & Continue
+            </Button>
+            <Comment>3 of 3</Comment>
+          </div>
+        </FormPart>
+        <RenderPart>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "flex-start",
+              flexWrap: "wrap",
+            }}
+          >
+            {urls.map((url, i) => {
+              return <RenderedUrl key={i}>{url}</RenderedUrl>;
+            })}
+          </div>
+        </RenderPart>
+      </Body>
+    </Page>
+  );
+}
+
 const Page = styled.div`
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   height: 100vh;
   margin: auto;
   max-width: 850px;
+`;
+
+const Toolbar = styled.div``;
+
+const Body = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
 `;
 
 const FormPart = styled.div`
@@ -53,82 +163,3 @@ const Comment = styled.p`
   font-weight: 400;
   margin: 10px 0 10px 0;
 `;
-
-export default function setStartPages() {
-  const router = useRouter();
-  const { id } = router.query;
-  const [urls, setUrls] = React.useState<string[]>([]);
-  const [url, setUrl] = React.useState<string>("");
-
-  const addUrl = (url: string) => {
-    if (!url || urls.some((u) => u === url || u === "/" + url)) return;
-    if (url[0] !== "/") url = "/" + url;
-    setUrls([...urls, url]);
-    setUrl("");
-  };
-
-  const onSaveClick = async () => {
-    router.push(`/projects`);
-  };
-
-  const deleteUrl = (e: any) => {
-    const url = e.target.innerText;
-    setUrls(urls.filter((u) => u !== url));
-  };
-
-  return (
-    <Page>
-      <FormPart>
-        <button onClick={() => router.push(`/projects/new/2/${id}`)}>
-          back
-        </button>
-
-        <h3>grida.co</h3>
-        <div>
-          <h2>Pages to get started with</h2>
-          <Comment>💡 Pro tip: start small, expand later. </Comment>
-          <div style={{ height: 30 }}></div>
-          <TextFormField
-            label="Search URL"
-            placeholder="/about"
-            onEnter={addUrl}
-            onChange={setUrl}
-            value={url || ""}
-          />
-          <div style={{ height: 20 }}></div>
-          {urls.map((url, i) => {
-            return (
-              <Url key={i} onClick={(e) => deleteUrl(e)}>
-                {url}
-              </Url>
-            );
-          })}
-        </div>
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-          }}
-        >
-          <Button width="165px" onClick={onSaveClick}>
-            Save & Continue
-          </Button>
-          <Comment>3 of 3</Comment>
-        </div>
-      </FormPart>
-      <RenderPart>
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "flex-start",
-            flexWrap: "wrap",
-          }}
-        >
-          {urls.map((url, i) => {
-            return <RenderedUrl key={i}>{url}</RenderedUrl>;
-          })}
-        </div>
-      </RenderPart>
-    </Page>
-  );
-}
