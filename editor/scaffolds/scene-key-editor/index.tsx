@@ -7,6 +7,7 @@ import { LayerTranslation } from "@base-sdk/g11n";
 import { useQueryParam, NumberParam, withDefault } from "use-query-params";
 import { useSelector, useDispatch } from "react-redux";
 import { setProjectData, RootState } from "core/store";
+import localeEmoji from "locale-emoji";
 
 import Toolbar from "components/toolbar";
 import {
@@ -95,7 +96,7 @@ const SceneKeyEditor: React.FC<ISceneKeyEditor> = ({
           <Select value={locale} onChange={handleLocaleSelectChange}>
             {project?.locales?.map((locale) => (
               <option key={locale} value={locale}>
-                {locale}
+                {locale} {localeEmoji(locale)}
               </option>
             ))}
           </Select>

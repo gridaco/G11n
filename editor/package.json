@@ -25,6 +25,7 @@
     "konva": "^7.2.1",
     "langs": "^2.0.0",
     "linaria": "^4.1.11",
+    "locale-emoji": "^0.3.0",
     "next": "^13.1.4",
     "next-linaria": "^0.11.0",
     "query-string": "^7.0.0",

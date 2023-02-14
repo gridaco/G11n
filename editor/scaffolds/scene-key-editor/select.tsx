@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "@emotion/styled";
+import { ChevronDownIcon } from "@radix-ui/react-icons";
 
 interface ISelect extends React.SelectHTMLAttributes<HTMLSelectElement> {}
 
@@ -8,7 +9,9 @@ const Select: React.FC<ISelect> = ({ children, ...props }) => {
     <SelectContainer>
       <LargeSelect {...props}>{children}</LargeSelect>
       <SelectIconWrapper>
-        <SelectIconImage src="/assets/icons/mdi_keyboard_arrow_down.svg" />
+        <ChevronDownIcon
+          style={{ color: "white", width: 24, height: 24 }}
+        ></ChevronDownIcon>
       </SelectIconWrapper>
     </SelectContainer>
   );
