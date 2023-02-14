@@ -71,10 +71,6 @@ const SceneKeyEditor: React.FC<ISceneKeyEditor> = ({
 
   return (
     <>
-      <ToolbarWrapper>
-        <Toolbar />
-      </ToolbarWrapper>
-
       <Header>
         <TitleWrapper>
           <Title>Key List</Title>
